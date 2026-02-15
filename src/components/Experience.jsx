@@ -10,7 +10,7 @@ const experiences = [
     duration: "Product Build",
     link: "https://dakshaa.ksrct.ac.in",
     points: [
-      "Developed a full-stack web application for Dakshaa T26, a national-level technical symposium, to digitally manage 10,000+ registrations and event operations end-to-end",
+      "Developed a full-stack web application for Dakshaa T26, a national-level technical symposium, to digitally manage 10,000+ users and event operations end-to-end",
       "Built a high-performance, responsive frontend using React, delivering a seamless registration and event experience across all devices",
       "Engineered robust backend services with Express.js and RESTful APIs to handle concurrent user loads during peak registration traffic with zero downtime",
       "Implemented Supabase for secure database management, real-time data sync, and user authentication across the platform",
