@@ -7,7 +7,7 @@ const experiences = [
     role: "Full-Stack Developer",
     company: "Dakshaa T26 — National-Level Technical Symposium",
     period: "2025 – 2026",
-    duration: "Product Build",
+    duration: "Product Development",
     link: "https://dakshaa.ksrct.ac.in",
     points: [
       "Developed a full-stack web application for Dakshaa T26, a national-level technical symposium, to digitally manage 10,000+ users and event operations end-to-end",
@@ -19,8 +19,8 @@ const experiences = [
     ],
   },
   {
-    role: "AIML Virtual Internship",
-    company: "Virtual Program",
+    role: "AI/ML Virtual Intern",
+    company: "Google via EduSkills",
     period: "April 2025 – June 2025",
     duration: "10 Weeks",
     points: [

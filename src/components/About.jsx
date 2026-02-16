@@ -88,10 +88,14 @@ export default function About() {
               </div>
             </div>
 
-            <p className="text-gray-400 leading-relaxed mb-8 text-base">
+            <p className="text-gray-400 leading-relaxed mb-4 text-base">
               I'm a hands-on engineer who loves turning ideas into real products. 
               From payment integrations to AI-powered dashboards, I build end-to-end 
               solutions that solve real-world problems. Currently pursuing B.Tech in AI & DS.
+            </p>
+
+            <p className="text-cyan-400/80 font-mono text-sm mb-8 px-4 py-3 bg-cyan-500/5 border border-cyan-500/20 rounded-lg">
+              🚀 Currently open to Full-Stack or Backend Engineering roles starting July 2026.
             </p>
 
             {/* Highlight chips */}
