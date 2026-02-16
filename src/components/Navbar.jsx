@@ -19,6 +19,7 @@ export default function Navbar() {
     { name: "Skills", to: "skills" },
     { name: "Projects", to: "projects" },
     { name: "Experience", to: "experience" },
+    { name: "Hobbies", to: "hobbies" },
     { name: "Contact", to: "contact" },
   ];
 
@@ -45,7 +46,7 @@ export default function Navbar() {
               <Terminal size={18} className="text-cyan-400" />
             </motion.div>
             <span className="font-mono text-white">
-              vikas<span className="text-cyan-400">.dev</span>
+              vikast<span className="text-cyan-400">.dev</span>
             </span>
           </Link>
         </motion.div>

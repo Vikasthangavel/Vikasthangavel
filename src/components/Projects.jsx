@@ -86,6 +86,15 @@ const projects = [
     links: [{ label: "Live Demo", url: "https://pashuthalam-vertinary.onrender.com" }],
     featured: true,
   },
+  {
+    title: "Time2Bus",
+    subtitle: "Real-Time Bus Tracking — Web App + IoT Hardware",
+    description: "A smart transportation system combining a web app with IoT hardware devices. Users can track live bus locations in real-time via the app. Hardware devices installed on buses share GPS coordinates and auto-announce the next stop using predefined route data — enhancing the commuter experience with accurate, hands-free updates.",
+    tech: ["IoT", "GPS", "Web App", "Hardware", "Real-Time"],
+    links: [],
+    featured: true,
+    underDev: true,
+  },
 ];
 
 export default function Projects() {
@@ -136,9 +145,16 @@ export default function Projects() {
               {/* Card Body */}
               <div className="p-6 flex flex-col flex-1">
                 <div className="mb-4">
-                  <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors font-mono">
-                    {project.title}
-                  </h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors font-mono">
+                      {project.title}
+                    </h3>
+                    {project.underDev && (
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 font-mono animate-pulse">
+                        In Dev
+                      </span>
+                    )}
+                  </div>
                   <p className="text-cyan-500/60 text-xs font-mono mt-0.5">{project.subtitle}</p>
                 </div>
 
