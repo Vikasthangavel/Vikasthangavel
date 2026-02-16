@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, Linkedin, Mail, FileText, ArrowDown, Terminal, ChevronRight, Download, Sparkles } from "lucide-react";
 import { Link } from "react-scroll";
 import resume from "../VIKAS_T.pdf";
+import FloatingShape from "./FloatingShape";
 
 const roles = [
   "Software Engineer",
@@ -46,6 +47,11 @@ export default function Hero() {
       id="hero"
       className="min-h-screen flex items-center justify-center relative overflow-hidden grid-bg"
     >
+      {/* 3D Floating Geometric Shape */}
+      <Suspense fallback={null}>
+        <FloatingShape />
+      </Suspense>
+
       {/* Animated background orbs */}
       <div className="absolute top-20 left-[10%] w-72 h-72 bg-cyan-500/10 rounded-full blur-[120px] animate-float"></div>
       <div className="absolute bottom-20 right-[10%] w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] animate-float-delay"></div>

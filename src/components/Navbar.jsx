@@ -39,14 +39,14 @@ export default function Navbar() {
             className="cursor-pointer font-bold text-xl flex items-center gap-2.5 group"
           >
             <motion.div
-              whileHover={{ rotate: 360 }}
+              whileHover={{ rotate: 360, scale: 1.1 }}
               transition={{ duration: 0.5 }}
-              className="p-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20 group-hover:border-cyan-400/50 group-hover:bg-cyan-500/20 transition-all"
+              className="p-1.5 rounded-lg bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-cyan-500/30 group-hover:border-cyan-400/60 group-hover:from-cyan-500/30 group-hover:to-purple-500/30 transition-all shadow-lg shadow-cyan-500/10"
             >
-              <Terminal size={18} className="text-cyan-400" />
+              <Terminal size={18} className="text-cyan-400 group-hover:text-cyan-300 transition-colors" />
             </motion.div>
-            <span className="font-mono text-white">
-              vikast<span className="text-cyan-400">.dev</span>
+            <span className="font-mono font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent group-hover:from-cyan-300 group-hover:via-blue-300 group-hover:to-purple-400 transition-all">
+              vikast<span className="text-white/90">.dev</span>
             </span>
           </Link>
         </motion.div>
