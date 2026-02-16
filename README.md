@@ -4,6 +4,13 @@
 
 ---
 
+## 🌐 Portfolio  
+
+🚀 Check out my personal portfolio website:  
+👉 **https://vikast.me/**  
+
+---
+
 ## 👨‍💻 About Me  
 
 - 🎓 B.Tech in Artificial Intelligence & Data Science (CGPA: 8.2)  
