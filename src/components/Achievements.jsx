@@ -22,17 +22,7 @@ const achievements = [
     glow: "shadow-cyan-500/20",
     borderColor: "border-cyan-500/30",
     iconBg: "bg-cyan-500/10 text-cyan-400",
-  },
-  {
-    icon: <Award size={24} />,
-    title: "CGPA 8.2 – Academic Excellence",
-    org: "KSRCT",
-    description: "Consistently high academic performance throughout B.Tech in AI & Data Science.",
-    gradient: "from-purple-500 to-pink-500",
-    glow: "shadow-purple-500/20",
-    borderColor: "border-purple-500/30",
-    iconBg: "bg-purple-500/10 text-purple-400",
-  },
+  }
 ];
 
 export default function Achievements() {

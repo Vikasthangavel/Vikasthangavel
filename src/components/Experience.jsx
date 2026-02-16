@@ -6,7 +6,7 @@ const experiences = [
   {
     role: "Full-Stack Developer",
     company: "Dakshaa T26 — National-Level Technical Symposium",
-    period: "2024 – 2025",
+    period: "2025 – 2026",
     duration: "Product Build",
     link: "https://dakshaa.ksrct.ac.in",
     points: [

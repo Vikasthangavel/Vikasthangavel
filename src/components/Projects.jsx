@@ -62,6 +62,30 @@ const projects = [
     links: [{ label: "Live", url: "https://tinyurl.com/2026ctc" }],
     featured: true,
   },
+  {
+    title: "AutoRevive",
+    subtitle: "Online Vehicle Auction Platform — Client Project",
+    description: "Built an interactive online auction portal revolutionizing how vehicles are bought and sold. Features seamless bidding at users' convenience, a wide selection of thousands of vehicles at competitive prices, and a trustworthy marketplace with flexible offers for every budget.",
+    tech: ["Web App", "Auction System", "E-Commerce", "Client Project"],
+    links: [{ label: "autorevives.com", url: "https://autorevives.com/" }],
+    featured: true,
+  },
+  {
+    title: "ProPic",
+    subtitle: "E-Commerce Store — Client Project",
+    description: "Developed a full-featured e-commerce platform for a house cleaning products brand. Enables customers to browse, order, and purchase cleaning essentials online with a smooth shopping experience, secure checkout, and product catalog management.",
+    tech: ["E-Commerce", "Web App", "Product Catalog", "Client Project"],
+    links: [{ label: "propic.in", url: "https://propic.in/" }],
+    featured: true,
+  },
+  {
+    title: "Pashuthalam",
+    subtitle: "Veterinary Digital Prescription Platform — SIH",
+    description: "Built for Smart India Hackathon to combat Antimicrobial Resistance (AMR) through structured digital prescriptions. Ensures farmers can only purchase veterinary medication with a valid digital prescription. Integrated Twilio & WhatsApp API to send medication reminders, collect farmer responses, and store feedback in DB to verify correct medicine administration.",
+    tech: ["SIH", "Twilio", "WhatsApp API", "Healthcare", "Full-Stack"],
+    links: [{ label: "Live Demo", url: "https://pashuthalam-vertinary.onrender.com" }],
+    featured: true,
+  },
 ];
 
 export default function Projects() {

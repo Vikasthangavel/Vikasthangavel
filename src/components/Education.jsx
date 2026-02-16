@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { GraduationCap, Calendar, BookOpen } from "lucide-react";
+import { GraduationCap, Calendar, BookOpen, School } from "lucide-react";
 
 export default function Education() {
   return (
@@ -61,7 +61,7 @@ export default function Education() {
                   Sep 2023 – Jun 2027
                 </div>
                 <div className="px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/20 font-mono animate-glow-pulse">
-                  <span className="text-green-400 text-sm font-bold">CGPA: 8.2</span>
+                  <span className="text-green-400 text-sm font-bold">CGPA: 7.84</span>
                 </div>
               </div>
             </div>
@@ -83,6 +83,60 @@ export default function Education() {
                       {course}
                     </motion.span>
                   ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* 12th Standard */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="terminal-card card-shine mt-8"
+        >
+          <div className="terminal-header">
+            <span className="terminal-dot bg-red-500"></span>
+            <span className="terminal-dot bg-yellow-500"></span>
+            <span className="terminal-dot bg-green-500"></span>
+            <span className="ml-3 text-xs text-gray-500 font-mono flex items-center gap-1.5">
+              <BookOpen size={12} /> school.md
+            </span>
+          </div>
+          <div className="p-8">
+            <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+              <div className="flex items-start gap-4">
+                <motion.div
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                  className="p-3 bg-cyan-500/10 rounded-xl border border-cyan-500/20 shrink-0"
+                >
+                  <School size={28} className="text-cyan-400" />
+                </motion.div>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
+                    HSC — 12th Standard
+                  </h3>
+                  <p className="text-cyan-400 font-mono text-sm">
+                    SPB Matriculation Higher Secondary School
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-start md:items-end gap-2 shrink-0">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-cyan-500/5 border border-cyan-500/15 text-gray-400 text-xs font-mono">
+                  <Calendar size={13} />
+                  Graduated 2023
+                </div>
+                <div className="flex gap-2">
+                  <div className="px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/20 font-mono animate-glow-pulse">
+                    <span className="text-green-400 text-sm font-bold">89%</span>
+                  </div>
+                  <div className="px-3 py-1.5 rounded-lg bg-purple-500/10 border border-purple-500/20 font-mono">
+                    <span className="text-purple-400 text-sm font-bold">Cutoff: 173</span>
+                  </div>
                 </div>
               </div>
             </div>
