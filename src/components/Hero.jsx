@@ -144,7 +144,7 @@ export default function Hero() {
             transition={{ delay: 0.7, duration: 0.5 }}
             className="text-base md:text-lg text-gray-400 font-medium mb-6 tracking-wide"
           >
-            Software Engineer <span className="text-cyan-500 animate-pulse">|</span> Python + React Developer <span className="text-cyan-500 animate-pulse">|</span> AI & Product Builder
+            Full Stack Developer <span className="text-cyan-500 animate-pulse">|</span> Python + React Developer <span className="text-cyan-500 animate-pulse">|</span> AI & Product Builder
           </motion.p>
 
           {/* Typing role */}

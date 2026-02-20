@@ -126,7 +126,7 @@ export default function About() {
               className="flex items-center gap-2 text-gray-500 font-mono text-sm cursor-default"
             >
               <MapPin size={16} className="text-cyan-500 animate-pulse"/>
-              <span>{">> "}open_to_relocation = <span className="text-green-400">True</span></span>
+              <span>{">> "}is_open_to_relocation = <span className="text-green-400">True</span></span>
             </motion.div>
           </motion.div>
         </div>

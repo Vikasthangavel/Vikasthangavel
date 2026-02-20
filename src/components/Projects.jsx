@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, GitBranch, Folder, Star } from "lucide-react";
+import { ExternalLink, GitBranch, Folder, Star, Download } from "lucide-react";
 
 const projects = [
   {
@@ -35,7 +35,7 @@ const projects = [
     subtitle: "Power BI Dashboard",
     description: "Interactive Power BI dashboard analyzing IPL match data from 2008–2024 using DAX queries for deep statistical insights.",
     tech: ["Power BI", "DAX", "Analytics"],
-    links: [],
+    links: [{ label: "Download Report", url: "/IPL 2008-2024 Dashboard.pptx", download: true }],
     featured: false,
   },
   {
@@ -56,7 +56,7 @@ const projects = [
   },
   {
     title: "CTC Digital",
-    subtitle: "Tuition Centre Management Web App",
+    subtitle: "Tuition Centre Management - Client Project",
     description: "Digitalized a tuition centre's entire workflow — student enrollment, attendance tracking, fee management, and performance reports. Replaced manual processes with an intuitive web app to save time and reduce errors.",
     tech: ["Web App", "Dashboard", "Management", "Automation"],
     links: [{ label: "Live", url: "https://tinyurl.com/2026ctc" }],
@@ -84,6 +84,14 @@ const projects = [
     description: "Built for Smart India Hackathon to combat Antimicrobial Resistance (AMR) through structured digital prescriptions. Ensures farmers can only purchase veterinary medication with a valid digital prescription. Integrated Twilio & WhatsApp API to send medication reminders, collect farmer responses, and store feedback in DB to verify correct medicine administration.",
     tech: ["SIH", "Twilio", "WhatsApp API", "Healthcare", "Full-Stack"],
     links: [{ label: "Live Demo", url: "https://pashuthalam-vertinary.onrender.com" }],
+    featured: true,
+  },
+  {
+    title: "QR Code Scanner",
+    subtitle: "for DaKshaa T25",
+    description: "A web-based QR code scanner that captures and processes QR codes to extract mobile numbers and event names, updating them via a server endpoint. Features: Scans QR codes using device camera, extracts mobile number and event name, supports 'Old QR' and 'New QR' scanning, and sends data to a server for updates.",
+    tech: ["jsQR", "JavaScript", "HTML5"],
+    links: [{ label: "GitHub", url: "https://github.com/Vikasthangavel/assignQR" }],
     featured: true,
   },
   {
@@ -183,9 +191,10 @@ export default function Projects() {
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
+                          download={link.download}
                           className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-cyan-400 transition-all font-mono group/link hover:translate-x-1 duration-300"
                         >
-                          <ExternalLink size={12} className="group-hover/link:text-cyan-400" />
+                          {link.download ? <Download size={12} /> : <ExternalLink size={12} className="group-hover/link:text-cyan-400" />}
                           {link.label}
                         </a>
                       ))
