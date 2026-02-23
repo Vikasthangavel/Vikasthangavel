@@ -137,9 +137,6 @@ export default function Projects() {
             >
               {/* Card Header - Terminal Chrome */}
               <div className="terminal-header">
-                <span className="terminal-dot bg-red-500"></span>
-                <span className="terminal-dot bg-yellow-500"></span>
-                <span className="terminal-dot bg-green-500"></span>
                 <div className="ml-auto flex items-center gap-2">
                   {project.featured && (
                     <motion.div animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}>
