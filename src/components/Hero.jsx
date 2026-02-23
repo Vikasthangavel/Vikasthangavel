@@ -174,7 +174,7 @@ export default function Hero() {
             >
               <p className="text-gray-500 font-mono text-sm mb-2 tracking-wider">{"// hello world"}</p>
               <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-2 leading-[0.95] tracking-tight">
-                <span className="text-white block">I'm</span>
+                <span className="text-white block">I am</span>
                 <span className="gradient-text text-glow-amber animate-gradient-text block mt-1">Vikas T</span>
               </h1>
             </motion.div>
