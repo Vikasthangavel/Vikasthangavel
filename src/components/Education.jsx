@@ -28,9 +28,6 @@ export default function Education() {
           className="terminal-card card-shine"
         >
           <div className="terminal-header">
-            <span className="terminal-dot bg-red-500"></span>
-            <span className="terminal-dot bg-yellow-500"></span>
-            <span className="terminal-dot bg-green-500"></span>
             <span className="ml-3 text-xs text-gray-500 font-mono flex items-center gap-1.5">
               <BookOpen size={12} /> education.md
             </span>
@@ -98,9 +95,6 @@ export default function Education() {
           className="terminal-card card-shine mt-8"
         >
           <div className="terminal-header">
-            <span className="terminal-dot bg-red-500"></span>
-            <span className="terminal-dot bg-yellow-500"></span>
-            <span className="terminal-dot bg-green-500"></span>
             <span className="ml-3 text-xs text-gray-500 font-mono flex items-center gap-1.5">
               <BookOpen size={12} /> school.md
             </span>

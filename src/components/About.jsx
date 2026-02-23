@@ -69,9 +69,6 @@ export default function About() {
             {/* Terminal-style about card */}
             <div className="terminal-card mb-8">
               <div className="terminal-header">
-                <span className="terminal-dot bg-red-500"></span>
-                <span className="terminal-dot bg-yellow-500"></span>
-                <span className="terminal-dot bg-green-500"></span>
                 <span className="ml-3 text-xs text-gray-500 font-mono">about.js</span>
               </div>
               <div className="p-6 font-mono text-sm leading-relaxed">

@@ -61,9 +61,6 @@ export default function Contact() {
           >
             <div className="terminal-card mb-8 card-shine">
               <div className="terminal-header">
-                <span className="terminal-dot bg-red-500"></span>
-                <span className="terminal-dot bg-yellow-500"></span>
-                <span className="terminal-dot bg-green-500"></span>
                 <span className="ml-3 text-xs text-gray-500 font-mono flex items-center gap-1.5">
                   <MessageSquare size={12} /> connect.sh
                 </span>

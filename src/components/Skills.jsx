@@ -56,9 +56,6 @@ export default function Skills() {
             className="lg:col-span-2 terminal-card card-shine"
           >
             <div className="terminal-header">
-              <span className="terminal-dot bg-red-500"></span>
-              <span className="terminal-dot bg-yellow-500"></span>
-              <span className="terminal-dot bg-green-500"></span>
               <span className="ml-3 text-xs text-gray-500 font-mono flex items-center gap-1.5">
                 <Braces size={12} /> skills.config
               </span>
@@ -111,9 +108,6 @@ export default function Skills() {
               className="terminal-card"
             >
               <div className="terminal-header">
-                <span className="terminal-dot bg-red-500"></span>
-                <span className="terminal-dot bg-yellow-500"></span>
-                <span className="terminal-dot bg-green-500"></span>
                 <span className="ml-3 text-xs text-gray-500 font-mono flex items-center gap-1.5">
                   <Brain size={12} /> strengths.md
                 </span>
@@ -144,9 +138,7 @@ export default function Skills() {
               className="terminal-card"
             >
               <div className="terminal-header">
-                <span className="terminal-dot bg-red-500"></span>
-                <span className="terminal-dot bg-yellow-500"></span>
-                <span className="terminal-dot bg-green-500"></span>
+
                 <span className="ml-3 text-xs text-gray-500 font-mono flex items-center gap-1.5">
                   <Languages size={12} /> languages.json
                 </span>
