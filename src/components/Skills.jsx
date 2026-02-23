@@ -40,7 +40,7 @@ export default function Skills() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyan-500 text-sm tracking-wider mb-3 block">{"// tech-stack"}</span>
+          <span className="font-mono text-amber-500 text-sm tracking-wider mb-3 block">{"// tech-stack"}</span>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             My <span className="gradient-text animate-gradient-text">Skills</span>
           </h2>
@@ -75,13 +75,13 @@ export default function Skills() {
                   className="group/skill cursor-default"
                 >
                   <div className="flex justify-between mb-1.5">
-                    <span className="text-sm font-mono text-gray-300 group-hover/skill:text-cyan-300 transition-colors">{skill.name}</span>
+                    <span className="text-sm font-mono text-gray-300 group-hover/skill:text-amber-300 transition-colors">{skill.name}</span>
                     <motion.span
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.5 + i * 0.05 }}
-                      className="text-xs font-mono text-cyan-400"
+                      className="text-xs font-mono text-amber-400"
                     >{skill.level}%</motion.span>
                   </div>
                   <div className="h-2 bg-gray-800 rounded-full overflow-hidden group-hover/skill:bg-gray-700 transition-colors">
@@ -90,7 +90,7 @@ export default function Skills() {
                       whileInView={{ width: `${skill.level}%` }}
                       viewport={{ once: true }}
                       transition={{ duration: 1.2, delay: i * 0.08, ease: "easeOut" }}
-                      className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 group-hover/skill:from-cyan-400 group-hover/skill:to-purple-500 transition-all relative"
+                      className="h-full rounded-full bg-gradient-to-r from-amber-500 to-rose-500 group-hover/skill:from-amber-400 group-hover/skill:to-purple-500 transition-all relative"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer rounded-full"></div>
                     </motion.div>

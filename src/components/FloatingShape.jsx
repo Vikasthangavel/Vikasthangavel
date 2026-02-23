@@ -25,7 +25,7 @@ function AnimatedShape() {
         {/* Main glowing shape */}
         <Icosahedron ref={meshRef} args={[1.2, 1]} position={[0, 0, 0]}>
           <MeshDistortMaterial
-            color="#06b6d4"
+            color="#f59e0b"
             attach="material"
             distort={0.3}
             speed={2}
@@ -49,7 +49,7 @@ function AnimatedShape() {
         {/* Inner glow core */}
         <mesh position={[0, 0, 0]}>
           <sphereGeometry args={[0.4, 32, 32]} />
-          <meshBasicMaterial color="#22d3ee" transparent opacity={0.8} />
+          <meshBasicMaterial color="#fbbf24" transparent opacity={0.8} />
         </mesh>
       </group>
     </Float>
@@ -91,7 +91,7 @@ function ParticleRing() {
         />
       </bufferGeometry>
       <pointsMaterial
-        color="#06b6d4"
+        color="#f59e0b"
         size={0.03}
         transparent
         opacity={0.6}
@@ -103,14 +103,14 @@ function ParticleRing() {
 
 export default function FloatingShape() {
   return (
-    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] opacity-80 pointer-events-none hidden md:block">
+    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[350px] h-[350px] md:w-[500px] md:h-[500px] lg:w-[650px] lg:h-[650px] opacity-60 pointer-events-none hidden md:block -mr-10 lg:mr-0">
       <Canvas
         camera={{ position: [0, 0, 5], fov: 45 }}
         style={{ background: "transparent" }}
         gl={{ alpha: true, antialias: true }}
       >
         <ambientLight intensity={0.3} />
-        <pointLight position={[10, 10, 10]} intensity={1} color="#06b6d4" />
+        <pointLight position={[10, 10, 10]} intensity={1} color="#f59e0b" />
         <pointLight position={[-10, -10, -10]} intensity={0.5} color="#a855f7" />
         <AnimatedShape />
         <ParticleRing />

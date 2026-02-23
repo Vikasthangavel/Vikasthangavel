@@ -17,12 +17,12 @@ export default function Footer() {
             <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.5 }}
-              className="p-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20 group-hover:border-cyan-400/50 transition-colors"
+              className="p-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 group-hover:border-amber-400/50 transition-colors"
             >
-              <Terminal size={16} className="text-cyan-400" />
+              <Terminal size={16} className="text-amber-400" />
             </motion.div>
             <span className="font-mono text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
-              vikas<span className="text-cyan-400">.dev</span>
+              vikas<span className="text-amber-400">.dev</span>
             </span>
           </motion.div>
 
@@ -46,7 +46,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 whileHover={{ y: -3, scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.05] text-gray-500 hover:text-cyan-400 hover:border-cyan-500/20 hover:bg-cyan-500/5 transition-all"
+                className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.05] text-gray-500 hover:text-amber-400 hover:border-amber-500/20 hover:bg-amber-500/5 transition-all"
                 aria-label={link.label}
               >
                 {link.icon}

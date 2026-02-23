@@ -4,9 +4,9 @@ import { MapPin, Code, Cpu, Database, Cloud, Zap } from "lucide-react";
 import vikasImage from "../Vikas.jpg";
 
 const highlights = [
-  { icon: <Code size={20} />, label: "Full-Stack Apps", color: "cyan" },
+  { icon: <Code size={20} />, label: "Full-Stack Apps", color: "amber" },
   { icon: <Cpu size={20} />, label: "AI / ML", color: "purple" },
-  { icon: <Database size={20} />, label: "Database Design", color: "blue" },
+  { icon: <Database size={20} />, label: "Database Design", color: "rose" },
   { icon: <Cloud size={20} />, label: "Cloud Deploy", color: "green" },
 ];
 
@@ -22,7 +22,7 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyan-500 text-sm tracking-wider mb-3 block">{"/∕ about-me"}</span>
+          <span className="font-mono text-amber-500 text-sm tracking-wider mb-3 block">{"/∕ about-me"}</span>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             About <span className="gradient-text animate-gradient-text">Me</span>
           </h2>
@@ -39,10 +39,10 @@ export default function About() {
           >
             <div className="relative group">
               {/* Glow ring */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-md opacity-20 group-hover:opacity-50 transition duration-700"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 via-rose-500 to-purple-500 rounded-2xl blur-md opacity-20 group-hover:opacity-50 transition duration-700"></div>
               
               {/* Image container */}
-              <div className="relative w-72 h-72 md:w-[340px] md:h-[340px] rounded-2xl overflow-hidden border-2 border-gray-800 group-hover:border-cyan-500/30 transition-all duration-500 tilt-hover">
+              <div className="relative w-72 h-72 md:w-[340px] md:h-[340px] rounded-2xl overflow-hidden border-2 border-gray-800 group-hover:border-amber-500/30 transition-all duration-500 tilt-hover">
                 <img src={vikasImage} alt="Vikas T" className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" />
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f]/80 via-transparent to-transparent group-hover:from-[#0a0a0f]/60 transition-all duration-500"></div>
@@ -52,7 +52,7 @@ export default function About() {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -bottom-4 -right-4 px-4 py-2 bg-[#0d1117] border border-cyan-500/30 rounded-xl font-mono text-sm text-cyan-400 glow-cyan"
+                className="absolute -bottom-4 -right-4 px-4 py-2 bg-[#0d1117] border border-amber-500/30 rounded-xl font-mono text-sm text-amber-400 glow-amber"
               >
                 <span className="text-gray-500">const</span> status = <span className="text-green-400">"building"</span>
               </motion.div>
@@ -78,12 +78,12 @@ export default function About() {
                 <p className="text-gray-500">{"// Who am I?"}</p>
                 <p className="mt-2">
                   <span className="text-purple-400">const</span>{" "}
-                  <span className="text-cyan-400">vikas</span> = {"{"}
+                  <span className="text-amber-400">vikas</span> = {"{"}
                 </p>
-                <p className="ml-4"><span className="text-blue-300">role</span>: <span className="text-green-400">"Software Engineer"</span>,</p>
-                <p className="ml-4"><span className="text-blue-300">location</span>: <span className="text-green-400">"Erode, TN"</span>,</p>
-                <p className="ml-4"><span className="text-blue-300">passion</span>: <span className="text-green-400">"Building products that matter"</span>,</p>
-                <p className="ml-4"><span className="text-blue-300">stack</span>: [<span className="text-yellow-300">"Python"</span>, <span className="text-yellow-300">"React"</span>, <span className="text-yellow-300">"SQL"</span>, <span className="text-yellow-300">"AI"</span>],</p>
+                <p className="ml-4"><span className="text-orange-300">role</span>: <span className="text-green-400">"Software Engineer"</span>,</p>
+                <p className="ml-4"><span className="text-orange-300">location</span>: <span className="text-green-400">"Erode, TN"</span>,</p>
+                <p className="ml-4"><span className="text-orange-300">passion</span>: <span className="text-green-400">"Building products that matter"</span>,</p>
+                <p className="ml-4"><span className="text-orange-300">stack</span>: [<span className="text-yellow-300">"Python"</span>, <span className="text-yellow-300">"React"</span>, <span className="text-yellow-300">"SQL"</span>, <span className="text-yellow-300">"AI"</span>],</p>
                 <p>{"}"}</p>
               </div>
             </div>
@@ -94,7 +94,7 @@ export default function About() {
               solutions that solve real-world problems. Currently pursuing B.Tech in AI & DS.
             </p>
 
-            <p className="text-cyan-400/80 font-mono text-sm mb-8 px-4 py-3 bg-cyan-500/5 border border-cyan-500/20 rounded-lg">
+            <p className="text-amber-400/80 font-mono text-sm mb-8 px-4 py-3 bg-amber-500/5 border border-amber-500/20 rounded-lg">
               🚀 Currently open to Full-Stack or Backend Engineering roles starting July 2026.
             </p>
 
@@ -109,9 +109,9 @@ export default function About() {
                     transition={{ delay: i * 0.1 }}
                     whileHover={{ scale: 1.05, y: -3 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-cyan-500/20 hover:bg-cyan-500/5 transition-all group cursor-default"
+                    className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-amber-500/20 hover:bg-amber-500/5 transition-all group cursor-default"
                 >
-                  <div className="text-cyan-400 group-hover:text-cyan-300 transition-colors">{item.icon}</div>
+                  <div className="text-amber-400 group-hover:text-amber-300 transition-colors">{item.icon}</div>
                   <span className="text-sm text-gray-300 font-medium">{item.label}</span>
                 </motion.div>
               ))}
@@ -125,7 +125,7 @@ export default function About() {
               whileHover={{ x: 5 }}
               className="flex items-center gap-2 text-gray-500 font-mono text-sm cursor-default"
             >
-              <MapPin size={16} className="text-cyan-500 animate-pulse"/>
+              <MapPin size={16} className="text-amber-500 animate-pulse"/>
               <span>{">> "}is_open_to_relocation = <span className="text-green-400">True</span></span>
             </motion.div>
           </motion.div>

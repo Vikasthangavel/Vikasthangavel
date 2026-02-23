@@ -117,7 +117,7 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyan-500 text-sm tracking-wider mb-3 block">{"// projects"}</span>
+          <span className="font-mono text-amber-500 text-sm tracking-wider mb-3 block">{"// projects"}</span>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Featured <span className="gradient-text animate-gradient-text">Projects</span>
           </h2>
@@ -146,7 +146,7 @@ export default function Projects() {
                       <Star size={12} className="text-yellow-500 fill-yellow-500" />
                     </motion.div>
                   )}
-                  <Folder size={12} className="text-gray-600 group-hover:text-cyan-500 transition-colors" />
+                  <Folder size={12} className="text-gray-600 group-hover:text-amber-500 transition-colors" />
                 </div>
               </div>
 
@@ -154,7 +154,7 @@ export default function Projects() {
               <div className="p-6 flex flex-col flex-1">
                 <div className="mb-4">
                   <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors font-mono">
+                    <h3 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors font-mono">
                       {project.title}
                     </h3>
                     {project.underDev && (
@@ -163,7 +163,7 @@ export default function Projects() {
                       </span>
                     )}
                   </div>
-                  <p className="text-cyan-500/60 text-xs font-mono mt-0.5">{project.subtitle}</p>
+                  <p className="text-amber-500/60 text-xs font-mono mt-0.5">{project.subtitle}</p>
                 </div>
 
                 <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-1">{project.description}</p>
@@ -175,7 +175,7 @@ export default function Projects() {
                       <motion.span
                         key={i}
                         whileHover={{ scale: 1.1, y: -2 }}
-                        className="text-[11px] px-2.5 py-1 bg-cyan-500/5 text-cyan-400/80 rounded-md font-mono border border-cyan-500/10 hover:bg-cyan-500/15 hover:border-cyan-500/30 transition-all cursor-default inline-block"
+                        className="text-[11px] px-2.5 py-1 bg-amber-500/5 text-amber-400/80 rounded-md font-mono border border-amber-500/10 hover:bg-amber-500/15 hover:border-amber-500/30 transition-all cursor-default inline-block"
                       >
                         {t}
                       </motion.span>
@@ -192,9 +192,9 @@ export default function Projects() {
                           target="_blank"
                           rel="noopener noreferrer"
                           download={link.download}
-                          className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-cyan-400 transition-all font-mono group/link hover:translate-x-1 duration-300"
+                          className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-amber-400 transition-all font-mono group/link hover:translate-x-1 duration-300"
                         >
-                          {link.download ? <Download size={12} /> : <ExternalLink size={12} className="group-hover/link:text-cyan-400" />}
+                          {link.download ? <Download size={12} /> : <ExternalLink size={12} className="group-hover/link:text-amber-400" />}
                           {link.label}
                         </a>
                       ))

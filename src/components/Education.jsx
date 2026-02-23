@@ -14,7 +14,7 @@ export default function Education() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyan-500 text-sm tracking-wider mb-3 block">{"// education"}</span>
+          <span className="font-mono text-amber-500 text-sm tracking-wider mb-3 block">{"// education"}</span>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             <span className="gradient-text animate-gradient-text">Education</span>
           </h2>
@@ -49,14 +49,14 @@ export default function Education() {
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
                     B.Tech in AI & Data Science
                   </h3>
-                  <p className="text-cyan-400 font-mono text-sm">
+                  <p className="text-amber-400 font-mono text-sm">
                     K.S.Rangasamy College of Technology
                   </p>
                 </div>
               </div>
 
               <div className="flex flex-col items-start md:items-end gap-2 shrink-0">
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-cyan-500/5 border border-cyan-500/15 text-gray-400 text-xs font-mono">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-500/5 border border-amber-500/15 text-gray-400 text-xs font-mono">
                   <Calendar size={13} />
                   Sep 2023 – Jun 2027
                 </div>
@@ -111,22 +111,22 @@ export default function Education() {
                 <motion.div
                   animate={{ y: [0, -5, 0] }}
                   transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                  className="p-3 bg-cyan-500/10 rounded-xl border border-cyan-500/20 shrink-0"
+                  className="p-3 bg-amber-500/10 rounded-xl border border-amber-500/20 shrink-0"
                 >
-                  <School size={28} className="text-cyan-400" />
+                  <School size={28} className="text-amber-400" />
                 </motion.div>
                 <div>
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
                     HSC — 12th Standard
                   </h3>
-                  <p className="text-cyan-400 font-mono text-sm">
+                  <p className="text-amber-400 font-mono text-sm">
                     SPB Matriculation Higher Secondary School
                   </p>
                 </div>
               </div>
 
               <div className="flex flex-col items-start md:items-end gap-2 shrink-0">
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-cyan-500/5 border border-cyan-500/15 text-gray-400 text-xs font-mono">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-500/5 border border-amber-500/15 text-gray-400 text-xs font-mono">
                   <Calendar size={13} />
                   Graduated 2023
                 </div>

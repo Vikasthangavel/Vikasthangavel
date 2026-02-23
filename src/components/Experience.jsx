@@ -44,7 +44,7 @@ export default function Experience() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-cyan-500 text-sm tracking-wider mb-3 block">{"// experience"}</span>
+          <span className="font-mono text-amber-500 text-sm tracking-wider mb-3 block">{"// experience"}</span>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Work <span className="gradient-text animate-gradient-text">Experience</span>
           </h2>
@@ -57,7 +57,7 @@ export default function Experience() {
             whileInView={{ height: "100%" }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="absolute left-4 md:left-6 top-0 w-px bg-gradient-to-b from-cyan-500/50 via-blue-500/30 to-transparent"
+            className="absolute left-4 md:left-6 top-0 w-px bg-gradient-to-b from-amber-500/50 via-rose-500/30 to-transparent"
           ></motion.div>
 
           <div className="space-y-12">
@@ -76,7 +76,7 @@ export default function Experience() {
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.2, type: "spring", stiffness: 300 }}
-                  className="absolute left-2.5 md:left-4 top-2 w-4 h-4 rounded-full bg-cyan-500 ring-4 ring-[#0a0a0f] glow-cyan animate-glow-pulse"
+                  className="absolute left-2.5 md:left-4 top-2 w-4 h-4 rounded-full bg-amber-500 ring-4 ring-[#0a0a0f] glow-amber animate-glow-pulse"
                 ></motion.div>
 
                 <div className="terminal-card card-shine">
@@ -90,21 +90,21 @@ export default function Experience() {
                     <div className="flex flex-col md:flex-row md:items-start justify-between mb-5 gap-3">
                       <div>
                         <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                          <Briefcase size={18} className="text-cyan-400" />
+                          <Briefcase size={18} className="text-amber-400" />
                           {exp.role}
                         </h3>
-                        <span className="text-cyan-400/70 font-mono text-sm mt-1 block">{exp.company}</span>
+                        <span className="text-amber-400/70 font-mono text-sm mt-1 block">{exp.company}</span>
                         {exp.link && (
-                          <a href={exp.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-1.5 text-xs font-mono text-cyan-400 hover:text-cyan-300 transition-colors">
+                          <a href={exp.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-1.5 text-xs font-mono text-amber-400 hover:text-amber-300 transition-colors">
                             <ExternalLink size={12} />
                             {exp.link.replace('https://', '')}
                           </a>
                         )}
                       </div>
-                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-cyan-500/5 border border-cyan-500/15 text-gray-400 text-xs font-mono shrink-0">
+                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-500/5 border border-amber-500/15 text-gray-400 text-xs font-mono shrink-0">
                         <Calendar size={13} />
                         <span>{exp.period}</span>
-                        <span className="text-cyan-400">({exp.duration})</span>
+                        <span className="text-amber-400">({exp.duration})</span>
                       </div>
                     </div>
 

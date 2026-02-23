@@ -41,11 +41,11 @@ export default function Navbar() {
             <motion.div
               whileHover={{ rotate: 360, scale: 1.1 }}
               transition={{ duration: 0.5 }}
-              className="p-1.5 rounded-lg bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-cyan-500/30 group-hover:border-cyan-400/60 group-hover:from-cyan-500/30 group-hover:to-purple-500/30 transition-all shadow-lg shadow-cyan-500/10"
+              className="p-1.5 rounded-lg bg-gradient-to-br from-amber-500/20 to-purple-500/20 border border-amber-500/30 group-hover:border-amber-400/60 group-hover:from-amber-500/30 group-hover:to-purple-500/30 transition-all shadow-lg shadow-amber-500/10"
             >
-              <Terminal size={18} className="text-cyan-400 group-hover:text-cyan-300 transition-colors" />
+              <Terminal size={18} className="text-amber-400 group-hover:text-amber-300 transition-colors" />
             </motion.div>
-            <span className="font-mono font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent group-hover:from-cyan-300 group-hover:via-blue-300 group-hover:to-purple-400 transition-all">
+            <span className="font-mono font-bold bg-gradient-to-r from-amber-400 via-rose-400 to-purple-500 bg-clip-text text-transparent group-hover:from-amber-300 group-hover:via-rose-300 group-hover:to-purple-400 transition-all">
               vikast<span className="text-white/90">.dev</span>
             </span>
           </Link>
@@ -67,14 +67,14 @@ export default function Navbar() {
               spy={true}
               offset={-70}
               onSetActive={() => setActiveSection(link.to)}
-              className="relative px-4 py-2 text-sm text-gray-400 hover:text-cyan-400 cursor-pointer transition-all font-medium rounded-lg hover:bg-white/[0.03] group"
+              className="relative px-4 py-2 text-sm text-gray-400 hover:text-amber-400 cursor-pointer transition-all font-medium rounded-lg hover:bg-white/[0.03] group"
             >
-              <span className="text-cyan-500/0 group-hover:text-cyan-500/80 transition-colors font-mono mr-1">/</span>
+              <span className="text-amber-500/0 group-hover:text-amber-500/80 transition-colors font-mono mr-1">/</span>
               {link.name}
               {activeSection === link.to && (
                 <motion.div
                   layoutId="activeSection"
-                  className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
+                  className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-amber-500 to-rose-500 rounded-full"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
@@ -116,9 +116,9 @@ export default function Navbar() {
                     smooth={true}
                     duration={500}
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-2 text-gray-300 hover:text-cyan-400 font-medium text-base cursor-pointer py-3 px-4 rounded-lg hover:bg-white/[0.03] transition-all"
+                    className="flex items-center gap-2 text-gray-300 hover:text-amber-400 font-medium text-base cursor-pointer py-3 px-4 rounded-lg hover:bg-white/[0.03] transition-all"
                   >
-                    <span className="text-cyan-500/50 font-mono text-sm">0{i + 1}.</span>
+                    <span className="text-amber-500/50 font-mono text-sm">0{i + 1}.</span>
                     {link.name}
                   </Link>
                 </motion.div>
