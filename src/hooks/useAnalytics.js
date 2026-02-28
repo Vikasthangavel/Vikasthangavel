@@ -21,11 +21,42 @@ export const useAnalytics = () => {
 
         const logVisit = async () => {
             try {
+                let location = { city: "Unknown", region: "Unknown", country: "Unknown" };
+                const fetchLocation = async () => {
+                    const apis = [
+                        "https://api.db-ip.com/v2/free/self",
+                        "https://ipwho.is/",
+                        "https://ipapi.co/json/",
+                        "https://geolocation-db.com/json/"
+                    ];
+
+                    for (const url of apis) {
+                        try {
+                            const res = await fetch(url);
+                            if (!res.ok) continue;
+                            const data = await res.json();
+
+                            // Handle different response formats accurately
+                            return {
+                                city: data.city || data.city_name || "Unknown",
+                                region: data.region || data.region_name || data.state_prov || data.stateProv || data.state || "Unknown",
+                                country: data.country || data.country_name || data.countryName || "Unknown"
+                            };
+                        } catch (e) {
+                            // Silently try the next fallback if blocked by browser
+                        }
+                    }
+                    return location;
+                };
+
+                location = await fetchLocation();
+
                 const visitData = {
                     sessionId: sessionId.current,
                     startTime: serverTimestamp(),
                     userAgent: navigator.userAgent,
                     platform: navigator.platform,
+                    location,
                     pagesViewed: {},
                     totalTime: 0,
                 };

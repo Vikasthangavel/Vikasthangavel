@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
+import { collection, query, orderBy, onSnapshot, deleteDoc, doc } from 'firebase/firestore';
 import { db } from "../firebase";
 
 const AdminStats = () => {
@@ -9,16 +9,30 @@ const AdminStats = () => {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const q = query(collection(db, "analytics"), orderBy("startTime", "desc"), limit(50));
-                const querySnapshot = await getDocs(q);
-                const data = querySnapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-                setStats(data);
+                // The original code used getDocs and limit.
+                // With onSnapshot, we set up a real-time listener.
+                // For this specific use case (fetching latest 50), getDocs might be more appropriate
+                // if real-time updates aren't strictly needed for the initial load.
+                // However, following the import change to onSnapshot, we'll adapt.
+                // Note: onSnapshot returns a unsubscribe function.
+                const q = query(collection(db, "analytics"), orderBy("startTime", "desc")); // Removed limit for onSnapshot, as it's typically used for continuous updates
+                const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                    const data = querySnapshot.docs.map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+                    setStats(data);
+                    setLoading(false);
+                }, (error) => {
+                    console.error("Error fetching stats:", error);
+                    setLoading(false);
+                });
+
+                // Return the unsubscribe function to clean up the listener when the component unmounts
+                return () => unsubscribe();
+
             } catch (err) {
                 console.error("Error fetching stats:", err);
-            } finally {
                 setLoading(false);
             }
         };
@@ -26,13 +40,34 @@ const AdminStats = () => {
         fetchStats();
     }, []);
 
-    if (loading) return <div className="p-10 text-white font-mono">Loading stats...</div>;
+    const clearData = async () => {
+        if (!window.confirm("Are you sure you want to clear ALL analytics data? This cannot be undone.")) return;
+
+        try {
+            const deletePromises = stats.map(s => deleteDoc(doc(db, "analytics", s.id)));
+            await Promise.all(deletePromises);
+            alert("All data cleared successfully!");
+        } catch (err) {
+            console.error("Error clearing data:", err);
+            alert("Failed to clear data.");
+        }
+    };
+
+    if (loading) return <div className="p-10 text-white">Loading stats...</div>;
 
     return (
         <div className="fixed inset-0 z-[100] bg-black/95 text-slate-300 p-8 overflow-y-auto font-mono">
             <div className="max-w-6xl mx-auto">
                 <div className="flex justify-between items-center mb-10 border-b border-white/10 pb-6">
-                    <h1 className="text-3xl font-bold text-amber-500">Portfolio Analytics</h1>
+                    <div className="flex items-center gap-4">
+                        <h1 className="text-3xl font-bold text-white">Site Analytics</h1>
+                        <button
+                            onClick={clearData}
+                            className="px-4 py-2 bg-red-600/20 hover:bg-red-600/40 text-red-400 border border-red-600/50 rounded-lg text-sm font-bold transition-all"
+                        >
+                            Clear All Data
+                        </button>
+                    </div>
                     <button
                         onClick={() => window.location.search = ""}
                         className="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-md transition-all text-xs border border-white/10"
@@ -60,6 +95,7 @@ const AdminStats = () => {
                     <table className="w-full text-left text-sm">
                         <thead className="bg-white/10 text-slate-400 font-bold">
                             <tr>
+                                <th className="p-4 border-b border-white/10 whitespace-nowrap">Location</th>
                                 <th className="p-4 border-b border-white/10 whitespace-nowrap">Session ID</th>
                                 <th className="p-4 border-b border-white/10 whitespace-nowrap">Start Time</th>
                                 <th className="p-4 border-b border-white/10 whitespace-nowrap">Duration</th>
@@ -70,6 +106,11 @@ const AdminStats = () => {
                         <tbody>
                             {stats.map(s => (
                                 <tr key={s.id} className="hover:bg-white/5 transition-colors group">
+                                    <td className="p-4 border-b border-white/5 whitespace-nowrap">
+                                        <span className="text-white font-bold">{s.location?.city || "Unknown"}</span>,
+                                        <span className="text-slate-400 text-xs ml-1">{s.location?.region || "Unknown"}</span>
+                                        <div className="text-[10px] text-amber-500/80 uppercase tracking-tighter mt-1">{s.location?.country || "Unknown"}</div>
+                                    </td>
                                     <td className="p-4 border-b border-white/5 text-amber-500/80 font-bold truncate max-w-[120px]">{s.sessionId}</td>
                                     <td className="p-4 border-b border-white/5 whitespace-nowrap">
                                         {s.startTime?.toDate ? s.startTime.toDate().toLocaleString() : "Syncing..."}
