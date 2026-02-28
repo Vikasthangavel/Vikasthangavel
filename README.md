@@ -57,6 +57,11 @@ Presented to Namakkal Cyber Cell for pilot consideration.
 Interactive dashboard analyzing IPL match data (2008–2024).  
 **Tech:** Power BI, DAX  
 
+### 🔹 The Astro Technologies – RO System Portfolio & Product Catalog
+Designed and developed a professional portfolio and product catalog for an RO System company based in Vellore. Features a dynamic product listing, high-quality image storage using Cloudinary, and a seamless user experience built with React and Firebase.  
+**Tech:** React, Firebase, Cloudinary, Product Catalog  
+🌐 [theastrotechnologies.in](https://theastro.pages.dev/)
+
 ---
 
 ## 🎯 Achievements  

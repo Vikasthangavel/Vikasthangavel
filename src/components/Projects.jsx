@@ -103,6 +103,14 @@ const projects = [
     featured: true,
     underDev: true,
   },
+  {
+    title: "The Astro Technologies",
+    subtitle: "RO System Portfolio & Product Catalog - Client Project",
+    description: "Designed and developed a professional portfolio and product catalog for an RO System company based in Vellore. Features a dynamic product listing, high-quality image storage using Cloudinary, and a seamless user experience built with React and Firebase.",
+    tech: ["React", "Firebase", "Cloudinary", "Product Catalog"],
+    links: [{ label: "theastrotechnologies.in", url: "https://theastro.pages.dev/" }],
+    featured: true,
+  },
 ];
 
 export default function Projects() {

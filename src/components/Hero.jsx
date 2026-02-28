@@ -14,7 +14,7 @@ const roles = [
 
 const stats = [
   { value: "10+", label: "Projects Shipped" },
-  { value: "3+", label: "Client Products" },
+  { value: "4+", label: "Client Products" },
   { value: "10K+", label: "Users Served" },
 ];
 
