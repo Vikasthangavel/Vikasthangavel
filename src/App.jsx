@@ -10,10 +10,17 @@ import Achievements from "./components/Achievements";
 import Hobbies from "./components/Hobbies";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import { useAnalytics } from "./hooks/useAnalytics";
+import AdminStats from "./components/AdminStats";
+
 
 function App() {
+  useAnalytics();
+  const showStats = new URLSearchParams(window.location.search).get("view") === "stats";
+
   return (
     <div className="bg-[#0a0a0f] min-h-screen text-slate-100 font-sans selection:bg-amber-500 selection:text-black">
+      {showStats && <AdminStats />}
       <Navbar />
       <Hero />
       <About />

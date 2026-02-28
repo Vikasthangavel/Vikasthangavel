@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-three/drei": "^9.96.1",
     "@react-three/fiber": "^8.15.19",
+    "firebase": "^12.10.0",
     "framer-motion": "^11.0.8",
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",
