@@ -13,6 +13,7 @@ const projects = [
       { label: "time2orders.shop", url: "https://time2orders.shop" },
     ],
     featured: true,
+    category: "personal",
   },
   {
     title: "Time2Due",
@@ -21,6 +22,7 @@ const projects = [
     tech: ["Web Dev", "Dashboard", "Payments"],
     links: [{ label: "time2due.com", url: "https://time2due.com" }],
     featured: true,
+    category: "personal",
   },
   {
     title: "Time2Farm",
@@ -29,6 +31,7 @@ const projects = [
     tech: ["AI", "Gemini API", "Finance"],
     links: [],
     featured: false,
+    category: "personal",
   },
   {
     title: "IPL Analysis",
@@ -37,6 +40,7 @@ const projects = [
     tech: ["Power BI", "DAX", "Analytics"],
     links: [{ label: "Download Report", url: "/IPL 2008-2024 Dashboard.pptx", download: true }],
     featured: false,
+    category: "personal",
   },
   {
     title: "Dakshaa T26",
@@ -45,6 +49,7 @@ const projects = [
     tech: ["React", "Express", "Supabase", "Cloudflare"],
     links: [{ label: "dakshaa.ksrct.ac.in", url: "https://dakshaa.ksrct.ac.in" }],
     featured: true,
+    category: "personal",
   },
   {
     title: "TrueSight AI",
@@ -53,30 +58,34 @@ const projects = [
     tech: ["Roboflow", "Flask", "AI/ML", "Forensics"],
     links: [{ label: "Cyber Cell Report", url: "https://tinyurl.com/cybernamakkal" }],
     featured: true,
+    category: "personal",
   },
   {
     title: "CTC Digital",
-    subtitle: "Tuition Centre Management - Client Project",
+    subtitle: "Tuition Centre Management",
     description: "Digitalized a tuition centre's entire workflow — student enrollment, attendance tracking, fee management, and performance reports. Replaced manual processes with an intuitive web app to save time and reduce errors.",
     tech: ["Web App", "Dashboard", "Management", "Automation"],
     links: [{ label: "Live", url: "https://tinyurl.com/2026ctc" }],
     featured: true,
+    category: "client",
   },
   {
     title: "AutoRevive",
-    subtitle: "Online Vehicle Auction Platform — Client Project",
+    subtitle: "Online Vehicle Auction Platform",
     description: "Built an interactive online auction portal revolutionizing how vehicles are bought and sold. Features seamless bidding at users' convenience, a wide selection of thousands of vehicles at competitive prices, and a trustworthy marketplace with flexible offers for every budget.",
     tech: ["Web App", "Auction System", "E-Commerce", "Client Project"],
     links: [{ label: "autorevives.com", url: "https://autorevives.com/" }],
     featured: true,
+    category: "client",
   },
   {
     title: "ProPic",
-    subtitle: "E-Commerce Store — Client Project",
+    subtitle: "E-Commerce Store",
     description: "Developed a full-featured e-commerce platform for a house cleaning products brand. Enables customers to browse, order, and purchase cleaning essentials online with a smooth shopping experience, secure checkout, and product catalog management.",
     tech: ["E-Commerce", "Web App", "Product Catalog", "Client Project"],
     links: [{ label: "propic.in", url: "https://propic.in/" }],
     featured: true,
+    category: "client",
   },
   {
     title: "Pashuthalam",
@@ -85,6 +94,7 @@ const projects = [
     tech: ["SIH", "Twilio", "WhatsApp API", "Healthcare", "Full-Stack"],
     links: [{ label: "Live Demo", url: "https://pashuthalam-vertinary.onrender.com" }],
     featured: true,
+    category: "personal",
   },
   {
     title: "QR Code Scanner",
@@ -93,6 +103,7 @@ const projects = [
     tech: ["jsQR", "JavaScript", "HTML5"],
     links: [{ label: "GitHub", url: "https://github.com/Vikasthangavel/assignQR" }],
     featured: true,
+    category: "personal",
   },
   {
     title: "Time2Bus",
@@ -102,18 +113,104 @@ const projects = [
     links: [],
     featured: true,
     underDev: true,
+    category: "personal",
   },
   {
     title: "The Astro Technologies",
-    subtitle: "RO System Portfolio & Product Catalog - Client Project",
+    subtitle: "RO System Portfolio & Product Catalog",
     description: "Designed and developed a professional portfolio and product catalog for an RO System company based in Vellore. Features a dynamic product listing, high-quality image storage using Cloudinary, and a seamless user experience built with React and Firebase.",
     tech: ["React", "Firebase", "Cloudinary", "Product Catalog"],
     links: [{ label: "theastrotechnologies.in", url: "https://theastro.pages.dev/" }],
     featured: true,
+    category: "client",
   },
 ];
 
+const ProjectCard = ({ project, index }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: index * 0.08 }}
+    whileHover={{ y: -8, scale: 1.02 }}
+    whileTap={{ scale: 0.98 }}
+    className="terminal-card flex flex-col h-full group card-shine cursor-default"
+  >
+    {/* Card Header - Terminal Chrome */}
+    <div className="terminal-header">
+      <div className="ml-auto flex items-center gap-2">
+        {project.featured && (
+          <motion.div animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}>
+            <Star size={12} className="text-yellow-500 fill-yellow-500" />
+          </motion.div>
+        )}
+        <Folder size={12} className="text-gray-600 group-hover:text-amber-500 transition-colors" />
+      </div>
+    </div>
+
+    {/* Card Body */}
+    <div className="p-6 flex flex-col flex-1">
+      <div className="mb-4">
+        <div className="flex items-center gap-2">
+          <h3 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors font-mono">
+            {project.title}
+          </h3>
+          {project.underDev && (
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 font-mono animate-pulse">
+              In Dev
+            </span>
+          )}
+        </div>
+        <p className="text-amber-500/60 text-xs font-mono mt-0.5">{project.subtitle}</p>
+      </div>
+
+      <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-1">{project.description}</p>
+
+      <div className="mt-auto">
+        {/* Tech Tags */}
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          {project.tech.map((t, i) => (
+            <motion.span
+              key={i}
+              whileHover={{ scale: 1.1, y: -2 }}
+              className="text-[11px] px-2.5 py-1 bg-amber-500/5 text-amber-400/80 rounded-md font-mono border border-amber-500/10 hover:bg-amber-500/15 hover:border-amber-500/30 transition-all cursor-default inline-block"
+            >
+              {t}
+            </motion.span>
+          ))}
+        </div>
+
+        {/* Links */}
+        <div className="flex gap-4 pt-4 border-t border-gray-800">
+          {project.links.length > 0 ? (
+            project.links.map((link, i) => (
+              <a
+                key={i}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                download={link.download}
+                className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-amber-400 transition-all font-mono group/link hover:translate-x-1 duration-300"
+              >
+                {link.download ? <Download size={12} /> : <ExternalLink size={12} className="group-hover/link:text-amber-400" />}
+                {link.label}
+              </a>
+            ))
+          ) : (
+            <span className="text-gray-600 text-xs font-mono italic flex items-center gap-1.5">
+              <GitBranch size={12} /> private / offline
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  </motion.div>
+);
+
 export default function Projects() {
+  const clientProjects = projects.filter(p => p.category === "client");
+  const personalProjects = projects.filter(p => p.category === "personal");
+
   return (
     <section id="projects" className="py-24 relative">
       <div className="section-divider mb-24"></div>
@@ -127,92 +224,38 @@ export default function Projects() {
         >
           <span className="font-mono text-amber-500 text-sm tracking-wider mb-3 block">{"// projects"}</span>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            Featured <span className="gradient-text animate-gradient-text">Projects</span>
+            Featured <span className="gradient-text animate-gradient-text">Work</span>
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="terminal-card flex flex-col h-full group card-shine cursor-default"
-            >
-              {/* Card Header - Terminal Chrome */}
-              <div className="terminal-header">
-                <div className="ml-auto flex items-center gap-2">
-                  {project.featured && (
-                    <motion.div animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}>
-                      <Star size={12} className="text-yellow-500 fill-yellow-500" />
-                    </motion.div>
-                  )}
-                  <Folder size={12} className="text-gray-600 group-hover:text-amber-500 transition-colors" />
-                </div>
-              </div>
+        {/* Client Projects Section */}
+        <div className="mb-20">
+          <div className="flex items-center gap-4 mb-8">
+            <h3 className="text-xl md:text-2xl font-bold text-white font-mono flex items-center gap-2">
+              <span className="text-amber-500">01.</span> Client Projects
+            </h3>
+            <div className="h-px flex-1 bg-gradient-to-r from-amber-500/30 to-transparent"></div>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {clientProjects.map((project, index) => (
+              <ProjectCard key={project.title} project={project} index={index} />
+            ))}
+          </div>
+        </div>
 
-              {/* Card Body */}
-              <div className="p-6 flex flex-col flex-1">
-                <div className="mb-4">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors font-mono">
-                      {project.title}
-                    </h3>
-                    {project.underDev && (
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 font-mono animate-pulse">
-                        In Dev
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-amber-500/60 text-xs font-mono mt-0.5">{project.subtitle}</p>
-                </div>
-
-                <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-1">{project.description}</p>
-
-                <div className="mt-auto">
-                  {/* Tech Tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-5">
-                    {project.tech.map((t, i) => (
-                      <motion.span
-                        key={i}
-                        whileHover={{ scale: 1.1, y: -2 }}
-                        className="text-[11px] px-2.5 py-1 bg-amber-500/5 text-amber-400/80 rounded-md font-mono border border-amber-500/10 hover:bg-amber-500/15 hover:border-amber-500/30 transition-all cursor-default inline-block"
-                      >
-                        {t}
-                      </motion.span>
-                    ))}
-                  </div>
-
-                  {/* Links */}
-                  <div className="flex gap-4 pt-4 border-t border-gray-800">
-                    {project.links.length > 0 ? (
-                      project.links.map((link, i) => (
-                        <a
-                          key={i}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          download={link.download}
-                          className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-amber-400 transition-all font-mono group/link hover:translate-x-1 duration-300"
-                        >
-                          {link.download ? <Download size={12} /> : <ExternalLink size={12} className="group-hover/link:text-amber-400" />}
-                          {link.label}
-                        </a>
-                      ))
-                    ) : (
-                      <span className="text-gray-600 text-xs font-mono italic flex items-center gap-1.5">
-                        <GitBranch size={12} /> private / offline
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        {/* Personal Projects Section */}
+        <div>
+          <div className="flex items-center gap-4 mb-8">
+            <h3 className="text-xl md:text-2xl font-bold text-white font-mono flex items-center gap-2">
+              <span className="text-amber-500">02.</span> Personal Projects
+            </h3>
+            <div className="h-px flex-1 bg-gradient-to-r from-amber-500/30 to-transparent"></div>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {personalProjects.map((project, index) => (
+              <ProjectCard key={project.title} project={project} index={index} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
