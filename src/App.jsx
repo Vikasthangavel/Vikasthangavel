@@ -12,6 +12,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { useAnalytics } from "./hooks/useAnalytics";
 import AdminStats from "./components/AdminStats";
+import Chatbot from "./components/Chatbot";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
       <Hobbies />
       <Contact />
       <Footer />
+      <Chatbot />
     </div>
   );
 }

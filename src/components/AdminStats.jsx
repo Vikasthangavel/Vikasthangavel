@@ -4,6 +4,7 @@ import { db } from "../firebase";
 
 const AdminStats = () => {
     const [stats, setStats] = useState([]);
+    const [chatbotStats, setChatbotStats] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -36,8 +37,33 @@ const AdminStats = () => {
                 setLoading(false);
             }
         };
+        const fetchChatbotStats = async () => {
+            try {
+                const q = query(collection(db, "chatbotQueries"), orderBy("timestamp", "desc"));
+                const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                    const data = querySnapshot.docs.map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+                    setChatbotStats(data);
+                }, (error) => {
+                    console.error("Error fetching chatbot stats:", error);
+                });
+                return () => unsubscribe();
+            } catch (err) {
+                console.error("Error fetching chatbot stats:", err);
+            }
+        };
 
-        fetchStats();
+        const unsubStats = fetchStats();
+        const unsubChatbot = fetchChatbotStats();
+
+        // Cleanup both listeners on unmount
+        // Note: fetchStats/fetchChatbotStats are async and return promises of the unsubscribe functions
+        return () => {
+            unsubStats.then(unsub => { if (unsub) unsub(); });
+            unsubChatbot.then(unsub => { if (unsub) unsub(); });
+        };
     }, []);
 
     const clearData = async () => {
@@ -50,6 +76,19 @@ const AdminStats = () => {
         } catch (err) {
             console.error("Error clearing data:", err);
             alert("Failed to clear data.");
+        }
+    };
+
+    const clearChatbotData = async () => {
+        if (!window.confirm("Are you sure you want to clear ALL chatbot queries? This cannot be undone.")) return;
+
+        try {
+            const deletePromises = chatbotStats.map(s => deleteDoc(doc(db, "chatbotQueries", s.id)));
+            await Promise.all(deletePromises);
+            alert("All chatbot queries cleared successfully!");
+        } catch (err) {
+            console.error("Error clearing chatbot queries:", err);
+            alert("Failed to clear chatbot queries.");
         }
     };
 
@@ -91,7 +130,10 @@ const AdminStats = () => {
                     </div>
                 </div>
 
-                <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden overflow-x-auto">
+                <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden overflow-x-auto mb-12">
+                    <div className="p-4 border-b border-white/10 bg-white/5">
+                        <h2 className="text-lg font-bold text-white">Visitor Sessions</h2>
+                    </div>
                     <table className="w-full text-left text-sm">
                         <thead className="bg-white/10 text-slate-400 font-bold">
                             <tr>
@@ -124,6 +166,54 @@ const AdminStats = () => {
                                     </td>
                                 </tr>
                             ))}
+                            {stats.length === 0 && (
+                                <tr><td colSpan="6" className="p-8 text-center text-slate-500">No sessions recorded yet.</td></tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+
+                {/* Chatbot Queries Section */}
+                <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden overflow-x-auto">
+                    <div className="flex justify-between items-center p-4 border-b border-white/10 bg-white/5">
+                        <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+                            Chatbot Queries
+                        </h2>
+                        <button
+                            onClick={clearChatbotData}
+                            className="px-3 py-1.5 bg-red-600/10 hover:bg-red-600/20 text-red-400 border border-red-600/30 rounded-lg text-xs font-bold transition-all"
+                        >
+                            Clear Queries
+                        </button>
+                    </div>
+                    <table className="w-full text-left text-sm">
+                        <thead className="bg-white/10 text-slate-400 font-bold">
+                            <tr>
+                                <th className="p-4 border-b border-white/10 whitespace-nowrap w-[200px]">Time</th>
+                                <th className="p-4 border-b border-white/10 w-[40%]">Question</th>
+                                <th className="p-4 border-b border-white/10">Chatbot Summary/Answer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {chatbotStats.map(s => (
+                                <tr key={s.id} className="hover:bg-white/5 transition-colors group">
+                                    <td className="p-4 border-b border-white/5 whitespace-nowrap text-xs text-slate-400 align-top">
+                                        {s.timestamp?.toDate ? s.timestamp.toDate().toLocaleString() : "Syncing..."}
+                                    </td>
+                                    <td className="p-4 border-b border-white/5 text-slate-200 font-medium align-top">
+                                        "{s.question}"
+                                    </td>
+                                    <td className="p-4 border-b border-white/5 text-slate-400 text-xs leading-relaxed align-top">
+                                        <div className="line-clamp-3 hover:line-clamp-none transition-all duration-300">
+                                            {s.answer}
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                            {chatbotStats.length === 0 && (
+                                <tr><td colSpan="3" className="p-8 text-center text-slate-500">No chatbot queries recorded yet.</td></tr>
+                            )}
                         </tbody>
                     </table>
                 </div>
