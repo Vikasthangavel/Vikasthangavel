@@ -128,7 +128,7 @@ export default function Chatbot() {
         } catch {
             setMessages(prev => [...prev, {
                 role: "assistant",
-                text: "⚠️ Couldn't reach the chatbot server. Make sure the Python backend is running on port 5000."
+                text: "Oops! Coffee break for our chat robot ☕. Give it 2–5 minutes and try again!"
             }]);
         } finally {
             setLoading(false);
