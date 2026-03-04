@@ -11,3 +11,4 @@ chromadb==0.5.23
 sentence-transformers==3.3.1
 tokenizers==0.20.3
 reportlab
+gunicorn
