@@ -1,25 +1,16 @@
 import os
+import numpy as np
 from dotenv import load_dotenv
 
 load_dotenv()
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_community.vectorstores import Chroma
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough
-from langchain_core.messages import HumanMessage, AIMessage
-from langchain.chains import create_history_aware_retriever, create_retrieval_chain
-from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain_core.documents import Document
-from langchain_core.caches import BaseCache
+from google import genai
+from google.genai import types
 
-# Fix for Pydantic v2 issue with ChatGoogleGenerativeAI
-ChatGoogleGenerativeAI.model_rebuild()
+# ── Configure Gemini ───────────────────────────────────────────────────────────
+client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
 
 app = Flask(__name__)
 CORS(app)
@@ -97,59 +88,58 @@ Languages
 English, Tamil
 """
 
-# ── Build RAG pipeline on startup ─────────────────────────────────────────────
-print("🔧 Building RAG pipeline...")
+# ── Build in-memory vector store on startup ────────────────────────────────────
+print("🔧 Building vector store...")
 
-# Split portfolio content into chunks
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
-chunks = text_splitter.split_text(PORTFOLIO_CONTENT)
-docs = [Document(page_content=chunk) for chunk in chunks]
+def chunk_text(text, size=500, overlap=100):
+    words = text.split()
+    chunks, i = [], 0
+    while i < len(words):
+        chunks.append(" ".join(words[i:i + size]))
+        i += size - overlap
+    return chunks
 
-# Create embeddings (downloads model once, cached locally)
-print("📦 Loading embedding model (first run may take ~30s)...")
-embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+def embed_docs(texts):
+    """Embed a list of document chunks."""
+    if isinstance(texts, str):
+        texts = [texts]
+    result = client.models.embed_content(
+        model="models/gemini-embedding-001",
+        contents=texts,
+        config=types.EmbedContentConfig(task_type="RETRIEVAL_DOCUMENT"),
+    )
+    return np.array([e.values for e in result.embeddings], dtype=np.float32)
 
-# Build in-memory vector store
-vectorstore = Chroma.from_documents(docs, embeddings)
-retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
+def embed_query(text):
+    """Embed a single query string."""
+    result = client.models.embed_content(
+        model="models/gemini-embedding-001",
+        contents=[text],
+        config=types.EmbedContentConfig(task_type="RETRIEVAL_QUERY"),
+    )
+    return np.array(result.embeddings[0].values, dtype=np.float32)
 
-# LLM
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.3)
+chunks = chunk_text(PORTFOLIO_CONTENT)
+print(f"📦 Embedding {len(chunks)} chunks...")
+chunk_embeddings = embed_docs(chunks)   # shape: (n_chunks, dim)
+print("✅ Vector store ready!")
 
-# ── RAG Pipeline Setup ────────────────────────────────────────────────────────
+def retrieve(query, k=4):
+    q_emb = embed_query(query)   # shape: (dim,)
+    # normalise for cosine similarity via dot product
+    norms = np.linalg.norm(chunk_embeddings, axis=1, keepdims=True)
+    normed = chunk_embeddings / np.where(norms == 0, 1, norms)
+    q_norm = q_emb / (np.linalg.norm(q_emb) or 1)
+    scores = normed @ q_norm
+    top_idx = np.argsort(scores)[::-1][:k]
+    return "\n\n".join(chunks[i] for i in top_idx)
 
-# 1. Provide Context to answer
-qa_system_prompt = """You are a helpful AI assistant on Vikas T's portfolio website.
-Answer questions about Vikas based only on the context provided below.
-Be friendly, concise, and professional. If the question is not about Vikas, 
-politely redirect the conversation back to Vikas's portfolio.
-
-Context:
-{context}"""
-qa_prompt = ChatPromptTemplate.from_messages([
-    ("system", qa_system_prompt),
-    MessagesPlaceholder("chat_history"),
-    ("human", "{input}"),
-])
-
-# 2. Rephrase question based on history
-contextualize_q_system_prompt = """Given a chat history and the latest user question 
-which might reference context in the chat history, formulate a standalone question 
-which can be understood without the chat history. Do NOT answer the question, 
-just reformulate it if needed and otherwise return it as is."""
-
-contextualize_q_prompt = ChatPromptTemplate.from_messages([
-    ("system", contextualize_q_system_prompt),
-    MessagesPlaceholder("chat_history"),
-    ("human", "{input}"),
-])
-
-# 3. Create chains
-history_aware_retriever = create_history_aware_retriever(llm, retriever, contextualize_q_prompt)
-question_answer_chain = create_stuff_documents_chain(llm, qa_prompt)
-rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
-
-print("✅ RAG pipeline ready!")
+SYSTEM_PROMPT = (
+    "You are a helpful AI assistant on Vikas T's portfolio website. "
+    "Answer questions about Vikas based only on the context provided below. "
+    "Be friendly, concise, and professional. If the question is not about Vikas, "
+    "politely redirect the conversation back to Vikas's portfolio.\n\nContext:\n{context}"
+)
 
 # ── Routes ─────────────────────────────────────────────────────────────────────
 @app.route("/chat", methods=["POST"])
@@ -163,22 +153,32 @@ def chat():
         return jsonify({"error": "Empty message"}), 400
 
     try:
-        # Parse history
-        chat_history = []
-        for msg in data.get("history", []):
-            if msg.get("role") == "user":
-                chat_history.append(HumanMessage(content=msg.get("content", "")))
-            elif msg.get("role") == "assistant":
-                chat_history.append(AIMessage(content=msg.get("content", "")))
-
-        # Invoke the chain
-        response = rag_chain.invoke({"input": message, "chat_history": chat_history})
-        answer = response["answer"]
-        return jsonify({"answer": answer})
+        context = retrieve(message)
+        prompt = SYSTEM_PROMPT.format(context=context) + f"\n\nQuestion: {message}"
+        
+        from langchain_openai import ChatOpenAI
+        llm = ChatOpenAI(
+            model="openai/gpt-4o-mini",
+            base_url="https://openrouter.ai/api/v1",
+            api_key=os.environ.get("OPENROUTER_API_KEY", "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"),
+        )
+        
+        for attempt in range(2):
+            try:
+                response = llm.invoke(prompt)
+                return jsonify({"answer": response.content})
+            except Exception as inner_e:
+                if "429" in str(inner_e) and attempt == 0:
+                    import time
+                    time.sleep(20)
+                else:
+                    raise
     except Exception as e:
         import traceback
         traceback.print_exc()
-        return jsonify({"error": "Something went wrong. Please try again."}), 500
+        if "429" in str(e):
+            return jsonify({"error": "I'm a bit busy right now — please try again in a moment! ⏳"}), 429
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route("/health", methods=["GET"])

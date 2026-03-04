@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 
-const API_URL = "https://vikasthangavel.onrender.com/chat";
+const API_URL = "http://localhost:5000/chat";
 
 const BotIcon = () => (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -96,18 +96,13 @@ export default function Chatbot() {
         setLoading(true);
 
         try {
-            // Determine history to send, excluding the welcome message
-            const history = messages
-                .filter(m => m.text !== WAKING && m.text !== WELCOME)
-                .map(m => ({ role: m.role, content: m.text }));
-
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
 
             const res = await fetch(API_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: text, history: history }),
+                body: JSON.stringify({ message: text }),
                 signal: controller.signal
             });
             clearTimeout(timeoutId);
