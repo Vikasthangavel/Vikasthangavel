@@ -160,7 +160,7 @@ def chat():
         llm = ChatOpenAI(
             model="openai/gpt-4o-mini",
             base_url="https://openrouter.ai/api/v1",
-            api_key=os.environ.get("OPENROUTER_API_KEY", "emihhbkbkj"),
+            api_key=os.environ.get("OPENROUTER_API_KEY"),
         )
         
         for attempt in range(2):
@@ -179,6 +179,65 @@ def chat():
         if "429" in str(e):
             return jsonify({"error": "I'm a bit busy right now — please try again in a moment! ⏳"}), 429
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/", methods=["GET"])
+def home():
+    try:
+        # Check Gemini API
+        client.models.embed_content(
+            model="models/gemini-embedding-001",
+            contents=["test"],
+            config=types.EmbedContentConfig(task_type="RETRIEVAL_QUERY"),
+        )
+        gemini_status = "Active"
+    except Exception as e:
+        gemini_status = f"Error: {str(e)}"
+
+    try:
+        # Check OpenRouter API
+        from langchain_openai import ChatOpenAI
+        llm = ChatOpenAI(
+            model="openai/gpt-4o-mini",
+            base_url="https://openrouter.ai/api/v1",
+            api_key=os.environ.get("OPENROUTER_API_KEY"),
+        )
+        llm.invoke("Hi")
+        openrouter_status = "Active"
+    except Exception as e:
+        openrouter_status = f"Error: {str(e)}"
+        
+    html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>API Status</title>
+        <style>
+            body {{ font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; }}
+            .status-card {{ border: 1px solid #eee; padding: 15px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
+            h2 {{ color: #333; text-align: center; }}
+            h3 {{ margin-top: 0; color: #555; }}
+            .active {{ color: #28a745; font-weight: bold; }}
+            .error {{ color: #dc3545; font-weight: bold; }}
+            .badge {{ display: inline-block; padding: 5px 10px; border-radius: 12px; font-size: 0.9em; }}
+            .bg-active {{ background-color: #d4edda; }}
+            .bg-error {{ background-color: #f8d7da; }}
+        </style>
+    </head>
+    <body>
+        <h2>Chatbot API Status</h2>
+        <div class="status-card">
+            <h3>Gemini API (Embeddings)</h3>
+            <p>Status: <span class="badge {'bg-active' if gemini_status == 'Active' else 'bg-error'} {'active' if gemini_status == 'Active' else 'error'}">{gemini_status}</span></p>
+        </div>
+        <div class="status-card">
+            <h3>OpenRouter API (Chat)</h3>
+            <p>Status: <span class="badge {'bg-active' if openrouter_status == 'Active' else 'bg-error'} {'active' if openrouter_status == 'Active' else 'error'}">{openrouter_status}</span></p>
+        </div>
+    </body>
+    </html>
+    """
+    return html
 
 
 @app.route("/health", methods=["GET"])
