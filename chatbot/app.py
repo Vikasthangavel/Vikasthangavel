@@ -160,7 +160,7 @@ def chat():
         llm = ChatOpenAI(
             model="openai/gpt-4o-mini",
             base_url="https://openrouter.ai/api/v1",
-            api_key=os.environ.get("OPENROUTER_API_KEY", "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"),
+            api_key=os.environ.get("OPENROUTER_API_KEY", "emihhbkbkj"),
         )
         
         for attempt in range(2):

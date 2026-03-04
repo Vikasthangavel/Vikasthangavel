@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 
-const API_URL = "http://localhost:5000/chat";
+const API_URL = "https://vikasthangavel.onrender.com/chat";
 
 const BotIcon = () => (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
