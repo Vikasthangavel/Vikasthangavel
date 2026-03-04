@@ -101,11 +101,16 @@ export default function Chatbot() {
                 .filter(m => m.text !== WAKING && m.text !== WELCOME)
                 .map(m => ({ role: m.role, content: m.text }));
 
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
             const res = await fetch(API_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: text, history: history })
+                body: JSON.stringify({ message: text, history: history }),
+                signal: controller.signal
             });
+            clearTimeout(timeoutId);
             const data = await res.json();
             const answer = data.answer || data.error || "Sorry, I couldn't get a response.";
             setMessages(prev => [...prev, {
@@ -125,10 +130,10 @@ export default function Chatbot() {
                     console.error("Failed to log chatbot query:", err);
                 }
             }
-        } catch {
+        } catch (err) {
             setMessages(prev => [...prev, {
                 role: "assistant",
-                text: "Oops! Coffee break for our chat robot ☕. Give it 2–5 minutes and try again!"
+                text: "Oops! Our chat robot seems to be taking a quick coffee break ☕. Try again in a moment."
             }]);
         } finally {
             setLoading(false);
