@@ -9,4 +9,5 @@ langchain-core==0.3.29
 langchain-huggingface>=0.1.0
 chromadb==0.5.23
 sentence-transformers==3.3.1
+tokenizers==0.20.3
 reportlab
