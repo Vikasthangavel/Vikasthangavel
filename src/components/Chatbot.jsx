@@ -5,12 +5,8 @@ import { db } from "../firebase";
 const API_URL = "https://vikasthangavel.onrender.com/chat";
 
 const BotIcon = () => (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-        <line x1="12" y1="3" x2="12" y2="7" />
-        <circle cx="9" cy="16" r="1" fill="currentColor" stroke="none" />
-        <circle cx="15" cy="16" r="1" fill="currentColor" stroke="none" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83M10 10l4 4m-4 0l4-4" />
     </svg>
 );
 
@@ -42,7 +38,7 @@ const TypingDots = () => (
 );
 
 const WAKING = "Waking up the AI... this might take a few seconds if the server is asleep 😴";
-const WELCOME = "Hey there! 👋 I'm Vikas's AI assistant. Ask me anything about his projects, skills, experience, or how to get in touch!";
+const WELCOME = "Hey there! 👋 I am the virtual assistant of Vikas. How can I help you today? Ask me anything about his projects, skills, experience, or how to get in touch!";
 
 export default function Chatbot() {
     const [open, setOpen] = useState(false);
@@ -180,6 +176,42 @@ export default function Chatbot() {
                         pointerEvents: "none"
                     }} />
                 )}
+
+                {/* Notification Badge / Label */}
+                {!open && (
+                    <div style={{
+                        position: "absolute",
+                        right: 75,
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        background: "rgba(13,17,23,0.9)",
+                        backdropFilter: "blur(8px)",
+                        border: "1px solid rgba(245,158,11,0.3)",
+                        padding: "6px 12px",
+                        borderRadius: "16px",
+                        color: "#f8fafc",
+                        fontSize: "13px",
+                        fontWeight: "500",
+                        whiteSpace: "nowrap",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
+                        pointerEvents: "none",
+                        animation: "chatbotLabelFloat 3s ease-in-out infinite"
+                    }}>
+                        Hey! I'm Vikas's AI Assistant 👋
+                        <div style={{
+                            position: "absolute",
+                            right: -6,
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            width: 0,
+                            height: 0,
+                            borderTop: "5px solid transparent",
+                            borderBottom: "5px solid transparent",
+                            borderLeft: "6px solid rgba(245,158,11,0.3)",
+                        }} />
+                    </div>
+                )}
+
                 {open ? <CloseIcon /> : <BotIcon />}
             </button>
 
@@ -225,11 +257,11 @@ export default function Chatbot() {
                         <div style={{ fontSize: 12, color: "rgba(245,158,11,0.8)", display: "flex", alignItems: "center", gap: 5 }}>
                             <span style={{
                                 width: 7, height: 7, borderRadius: "50%",
-                                background: "#22c55e",
+                                background: serverAwake ? "#22c55e" : "#ef4444",
                                 display: "inline-block",
-                                boxShadow: "0 0 6px #22c55e"
+                                boxShadow: serverAwake ? "0 0 6px #22c55e" : "0 0 6px #ef4444"
                             }} />
-                            Online · Powered by Gemini AI
+                            {serverAwake ? "Online" : "Offline / Waking up... (~2 mins)"}
                         </div>
                     </div>
                 </div>
@@ -254,11 +286,8 @@ export default function Chatbot() {
                                     display: "flex", alignItems: "center", justifyContent: "center",
                                     color: "#0a0a0f", marginBottom: 2
                                 }}>
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                        <rect x="3" y="11" width="18" height="11" rx="2" />
-                                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                                        <circle cx="9" cy="16" r="1" fill="currentColor" stroke="none" />
-                                        <circle cx="15" cy="16" r="1" fill="currentColor" stroke="none" />
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83M10 10l4 4m-4 0l4-4" />
                                     </svg>
                                 </div>
                             )}
@@ -290,11 +319,8 @@ export default function Chatbot() {
                                 display: "flex", alignItems: "center", justifyContent: "center",
                                 color: "#0a0a0f"
                             }}>
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" />
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                                    <circle cx="9" cy="16" r="1" fill="currentColor" stroke="none" />
-                                    <circle cx="15" cy="16" r="1" fill="currentColor" stroke="none" />
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83M10 10l4 4m-4 0l4-4" />
                                 </svg>
                             </div>
                             <div style={{
