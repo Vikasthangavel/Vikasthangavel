@@ -1,4 +1,5 @@
 import os
+import requests
 import numpy as np
 from dotenv import load_dotenv
 
@@ -16,77 +17,37 @@ app = Flask(__name__)
 CORS(app)
 
 # ── Portfolio content ──────────────────────────────────────────────────────────
-PORTFOLIO_CONTENT = """
-Portfolio Chatbot Context – Vikas T
 
-Basic Information
-Name: Vikas T
-Location: Erode, Tamil Nadu, India
-Email: vikasthangavel@gmail.com
-Portfolio Website: https://vikast.me
-GitHub: https://github.com/Vikasthangavel
-LinkedIn: https://www.linkedin.com/in/vikasthangavel
+def fetch_portfolio_content():
+    """Scrapes the live portfolio website to get the most up-to-date context, dealing with React SPAs."""
+    url = "https://r.jina.ai/https://vikast.me"
+    try:
+        print(f"🌐 Fetching live content from {url}...")
+        headers = {'Accept': 'text/plain'}
+        response = requests.get(url, headers=headers, timeout=20)
+        response.raise_for_status()
+        
+        text = response.text
+        
+        # Adding some base context that might not be fully explicitly written on the UI
+        base_context = (
+            "Portfolio Chatbot Context – Vikas T\n"
+            "Email: vikasthangavel@gmail.com\n"
+            "Portfolio Website: https://vikast.me\n"
+            "GitHub: https://github.com/Vikasthangavel\n"
+            "LinkedIn: https://www.linkedin.com/in/vikasthangavel\n"
+            "Vikas T is an entry-level Software and Product Engineer currently pursuing a Bachelor of Technology in Artificial Intelligence and Data Science at K.S.Rangasamy College of Technology.\n\n"
+            "Here is the detailed content extracted directly from the live website:\n"
+        )
+        
+        print("✅ Successfully fetched live website content!")
+        return base_context + text
+    except Exception as e:
+        print(f"⚠️ Failed to fetch website content: {e}")
+        print("Fallback to minimal context...")
+        return "Vikas T is a Software Engineer from Erode, India. His portfolio is at https://vikast.me"
 
-Vikas T is an entry-level Software and Product Engineer currently pursuing a Bachelor of Technology in Artificial Intelligence and Data Science at K.S.Rangasamy College of Technology. He is passionate about building practical technology solutions that solve real-world problems.
-
-Professional Summary
-Vikas T is a developer with hands-on experience in Python, SQL, REST APIs, dashboards, and AI-assisted applications. He focuses on building user-friendly, production-ready solutions that integrate backend systems, data handling, and modern AI tools.
-He has experience in developing web platforms, AI applications, and data dashboards. His work often combines software engineering with practical applications such as operations management, financial tracking, and cybersecurity tools.
-He is actively seeking opportunities to grow as a Software Engineer or Product Engineer in a technology-driven organization.
-
-Technical Skills
-Programming Languages: Python, Java, SQL
-Technologies and Tools: REST APIs, Power BI, Web Hosting, Networking, AI APIs, Backend Development
-Other Skills: Data Analysis, Dashboard Development, System Design, Cloud Deployment
-
-Projects
-
-Time2Order – Preorder Management System
-Time2Order is a web-based preorder management platform designed for local shops to manage orders efficiently during peak hours.
-Key features: Online preorder system, Payment integration using Cashfree API, Queue management to reduce waiting time, Soundbox integration for order notifications.
-Technologies used: Python, SQL, Payment API integration.
-
-Time2Due – Operations Management Platform
-Time2Due is a platform designed to help cable operators manage employees, track payments, and monitor business operations.
-Key features: Employee management, Offline payment tracking, Reporting dashboards, Mobile-friendly interface.
-
-Time2Farm – Farm Finance and Management Platform
-Time2Farm helps farmers track financial data and analyze farm profitability.
-Key features: Section-wise income and expense tracking, Profit monitoring, AI-based insights using Gemini API, Simple mobile interface.
-
-IPL Analysis – Power BI Dashboard
-An interactive data dashboard analyzing IPL cricket match data from 2008 to 2024.
-Features: Team performance analytics, Player statistics, Match trend visualization, Data modeling using DAX in Power BI.
-
-Dakshaa T26 Event Management System
-A full-stack web application developed for managing a national-level technical symposium.
-Features: Online event registration, Secure authentication, Payment gateway integration, Cloud deployment.
-Technologies used: React, Express.js, REST APIs, Supabase, Cloudflare, VPS hosting.
-
-TrueSight AI – Deepfake Detection System
-TrueSight AI is an AI-powered cybersecurity tool developed to detect deepfake media.
-Features: Video and audio deepfake detection, Roboflow-trained models, Flask backend, Forensic report generation.
-The project was presented to the Namakkal Cyber Cell for potential implementation.
-
-Education
-Bachelor of Technology (B.Tech) in Artificial Intelligence and Data Science
-K.S.Rangasamy College of Technology
-Expected Graduation: 2027
-CGPA: 7.8
-
-Internship Experience
-AI and Machine Learning Virtual Internship (10 weeks)
-During this internship, Vikas gained practical experience in: Machine learning model development, Data preprocessing, Algorithm optimization, AI workflow implementation.
-
-Achievements
-Secured 2nd place in the Namakkal Police Cybersecurity Hackathon 2025 for developing an AI-based cybercrime detection solution.
-
-Strengths
-Problem Solving, Critical Thinking, Team Collaboration, Adaptability, Building real-world solutions.
-
-Languages
-English, Tamil
-"""
+PORTFOLIO_CONTENT = fetch_portfolio_content()
 
 # ── Build in-memory vector store on startup ────────────────────────────────────
 print("🔧 Building vector store...")
@@ -135,10 +96,53 @@ def retrieve(query, k=4):
     return "\n\n".join(chunks[i] for i in top_idx)
 
 SYSTEM_PROMPT = (
-    "You are a helpful AI assistant on Vikas T's portfolio website. "
-    "Answer questions about Vikas based only on the context provided below. "
-    "Be friendly, concise, and professional. If the question is not about Vikas, "
-    "politely redirect the conversation back to Vikas's portfolio.\n\nContext:\n{context}"
+    """You are the AI assistant for **Vikas T’s portfolio website**.
+
+Your purpose is to help visitors quickly understand who Vikas is, what he builds, and why they might want to collaborate, hire, or connect with him.
+
+Use ONLY the information provided in the **Context** section to answer questions.
+
+Core Responsibilities:
+• Help visitors explore Vikas’s **projects, skills, experience, education, and achievements**.
+• Provide clear, concise, and helpful answers.
+• Represent Vikas professionally and positively.
+• Encourage visitors to explore more parts of the portfolio when relevant.
+
+Conversation Style:
+• Friendly, conversational, and professional.
+• Keep responses concise but informative.
+• Avoid overly long explanations.
+• When possible, highlight key projects, technologies, or accomplishments.
+
+Engagement Behavior:
+When appropriate, guide visitors by suggesting follow-up topics such as:
+• Projects Vikas has built
+• Technologies he works with
+• His development interests
+• Experience or education
+• Collaboration or contact opportunities
+
+Example follow-ups you can suggest:
+“Would you like to hear about one of Vikas’s projects?”
+“Interested in the technologies Vikas specializes in?”
+“Want a quick overview of Vikas’s experience?”
+
+Strict Context Rule:
+• ONLY answer using the information available in the Context.
+• Do NOT invent or assume details about Vikas.
+
+If a question cannot be answered from the context:
+Politely say that the information is not available and guide the visitor back to topics related to Vikas's portfolio.
+
+If the question is unrelated to Vikas:
+Politely respond that the topic is outside your knowledge and redirect the conversation toward Vikas, his work, or his portfolio.
+
+Goal:
+Make it easy for visitors, recruiters, and collaborators to quickly understand Vikas’s capabilities and the value he brings as a developer.
+
+Context:
+{context}
+"""
 )
 
 # ── Routes ─────────────────────────────────────────────────────────────────────
