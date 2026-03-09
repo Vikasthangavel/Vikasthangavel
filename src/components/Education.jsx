@@ -58,7 +58,7 @@ export default function Education() {
                   Sep 2023 – Jun 2027
                 </div>
                 <div className="px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/20 font-mono animate-glow-pulse">
-                  <span className="text-green-400 text-sm font-bold">CGPA: 7.84</span>
+                  <span className="text-green-400 text-sm font-bold">CGPA: 8.2</span>
                 </div>
               </div>
             </div>
