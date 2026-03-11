@@ -4,6 +4,18 @@ import { Calendar, Briefcase, CheckCircle2, ExternalLink } from "lucide-react";
 
 const experiences = [
   {
+    role: "Web Developer",
+    company: "Gradix Technologies",
+    period: "Mar 2026 – Present",
+    duration: "Intern",
+    link: "https://gradixtech.com/",
+    points: [
+      "Working as a Web Developer Intern at Gradix Technologies, contributing to the development and enhancement of web applications",
+      "Building responsive and performant user interfaces using modern frontend technologies",
+      "Collaborating with the development team to implement new features and improve existing functionality",
+    ],
+  },
+  {
     role: "Full-Stack Developer",
     company: "Dakshaa T26 — National-Level Technical Symposium",
     period: "2025 – 2026",
