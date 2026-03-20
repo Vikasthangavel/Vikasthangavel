@@ -68,6 +68,18 @@ export default function Footer() {
             <span>by Vikas T</span>
           </motion.div>
         </div>
+
+        {/* Credit */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-6 pt-4 border-t border-gray-800/30 text-center font-mono text-xs text-gray-700 flex items-center justify-center gap-1.5"
+        >
+          Designed &amp; Developed with <Heart size={11} className="text-amber-600/60 fill-amber-600/40" /> by{" "}
+          <span className="text-amber-600/60">Vikas T</span>
+        </motion.div>
       </div>
     </footer>
   );

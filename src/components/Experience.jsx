@@ -16,7 +16,7 @@ const experiences = [
     ],
   },
   {
-    role: "Full-Stack Developer",
+    role: "Backend Developer",
     company: "Dakshaa T26 — National-Level Technical Symposium",
     period: "2025 – 2026",
     duration: "Product Development",
@@ -28,18 +28,6 @@ const experiences = [
       "Implemented Supabase for secure database management, real-time data sync, and user authentication across the platform",
       "Integrated the college payment gateway to enable smooth online registration and transaction processing, handling high-volume payment flows with real-time reconciliation",
       "Deployed the application on Cloudflare (Frontend) and a VPS server (Backend) ensuring fast global delivery, high availability, and production-grade reliability",
-    ],
-  },
-  {
-    role: "AI/ML Virtual Intern",
-    company: "Google via EduSkills",
-    period: "April 2025 – June 2025",
-    duration: "10 Weeks",
-    points: [
-      "Engaged in hands-on model development for AI/ML applications",
-      "Performed extensive data preprocessing for high-quality algorithm inputs",
-      "Worked on algorithm optimization to improve accuracy and efficiency",
-      "Collaborated with peers to solve complex machine learning problems",
     ],
   },
 ];

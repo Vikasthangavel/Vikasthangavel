@@ -2,8 +2,72 @@ import React, { useState, useRef, useEffect } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 
-const API_URL = "https://vikasthangavel.onrender.com/chat";
+// ─── API Keys ─────────────────────────────────────────────────────────────────
+const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || "";
 
+// ─── Exact same model as app.py ───────────────────────────────────────────────
+const CHAT_MODEL = "openai/gpt-4o-mini";
+
+// ─── Exact same base context as app.py ───────────────────────────────────────
+const BASE_CONTEXT =
+    "Portfolio Chatbot Context – Vikas T\n" +
+    "Email: vikasthangavel@gmail.com\n" +
+    "Portfolio Website: https://vikast.me\n" +
+    "GitHub: https://github.com/Vikasthangavel\n" +
+    "LinkedIn: https://www.linkedin.com/in/vikasthangavel\n" +
+    "Vikas T is an entry-level Software and Product Engineer currently pursuing a Bachelor of Technology in Artificial Intelligence and Data Science at K.S.Rangasamy College of Technology.\n\n" +
+    "Here is the detailed content extracted directly from the live website:\n";
+
+// ─── Exact same system prompt as app.py ───────────────────────────────────────
+const buildSystemPrompt = (context) => `You are the AI assistant for **Vikas T's portfolio website**.
+
+Your purpose is to help visitors quickly understand who Vikas is, what he builds, and why they might want to collaborate, hire, or connect with him.
+
+Use ONLY the information provided in the **Context** section to answer questions.
+
+Core Responsibilities:
+• Help visitors explore Vikas's **projects, skills, experience, education, and achievements**.
+• Provide clear, concise, and helpful answers.
+• Represent Vikas professionally and positively.
+• Encourage visitors to explore more parts of the portfolio when relevant.
+
+Conversation Style:
+• Friendly, conversational, and professional.
+• Keep responses concise but informative.
+• Avoid overly long explanations.
+• When possible, highlight key projects, technologies, or accomplishments.
+
+Engagement Behavior:
+When appropriate, guide visitors by suggesting follow-up topics such as:
+• Projects Vikas has built
+• Technologies he works with
+• His development interests
+• Experience or education
+• Collaboration or contact opportunities
+
+Example follow-ups you can suggest:
+"Would you like to hear about one of Vikas's projects?"
+"Interested in the technologies Vikas specializes in?"
+"Want a quick overview of Vikas's experience?"
+
+Strict Context Rule:
+• ONLY answer using the information available in the Context.
+• Do NOT invent or assume details about Vikas.
+
+If a question cannot be answered from the context:
+Politely say that the information is not available and guide the visitor back to topics related to Vikas's portfolio.
+
+If the question is unrelated to Vikas:
+Politely respond that the topic is outside your knowledge and redirect the conversation toward Vikas, his work, or his portfolio.
+
+Goal:
+Make it easy for visitors, recruiters, and collaborators to quickly understand Vikas's capabilities and the value he brings as a developer.
+
+Context:
+${context}
+`;
+
+// ─── Icons ────────────────────────────────────────────────────────────────────
 const BotIcon = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83M10 10l4 4m-4 0l4-4" />
@@ -37,39 +101,60 @@ const TypingDots = () => (
     </div>
 );
 
-const WAKING = "Waking up the AI... this might take a few seconds if the server is asleep 😴";
-const WELCOME = "Hey there! 👋 I am the virtual assistant of Vikas. How can I help you today? Ask me anything about his projects, skills, experience, or how to get in touch!";
-
+// ─── Main Component ───────────────────────────────────────────────────────────
 export default function Chatbot() {
     const [open, setOpen] = useState(false);
-    const [messages, setMessages] = useState([{ role: "assistant", text: WAKING }]);
+    const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
     const [pulse, setPulse] = useState(true);
-    const [serverAwake, setServerAwake] = useState(false);
+    const [ready, setReady] = useState(false);
+
+    // System prompt built once from fetched content
+    const systemPromptRef = useRef("");
+    // Full conversation history for multi-turn context
+    const historyRef = useRef([]);
+
     const endRef = useRef(null);
     const inputRef = useRef(null);
 
-    // Initial ping to wake up backend (e.g. Render free tier)
+    // ── On mount: fetch live portfolio via jina.ai (same URL as app.py) ─────────
     useEffect(() => {
-        const pingServer = async () => {
+        let cancelled = false;
+
+        const init = async () => {
+            setMessages([{ role: "assistant", text: "⏳ Loading Vikas's portfolio data..." }]);
+
+            let portfolioText = "";
             try {
-                const healthUrl = API_URL.replace("/chat", "/health");
-                const res = await fetch(healthUrl);
-                if (res.ok) {
-                    setServerAwake(true);
-                    setMessages([{ role: "assistant", text: WELCOME }]);
-                }
-            } catch (err) {
-                console.log("Waiting for backend to wake up...");
-                // Retry after a bit if failed
-                setTimeout(pingServer, 5000);
+                const res = await fetch("https://r.jina.ai/https://vikast.me", {
+                    headers: { Accept: "text/plain" },
+                });
+                if (res.ok) portfolioText = await res.text();
+            } catch (_) {
+                // jina.ai failed — use base context only
+            }
+
+            const fullContext = portfolioText
+                ? BASE_CONTEXT + portfolioText
+                : BASE_CONTEXT + "Skills: Python, JavaScript, React, Node.js, SQL, AI/ML\n" +
+                "Open to Full-Stack or Backend Engineering roles from July 2026.\n" +
+                "Location: Erode, Tamil Nadu, India.";
+
+            if (!cancelled) {
+                systemPromptRef.current = buildSystemPrompt(fullContext);
+                setReady(true);
+                setMessages([{
+                    role: "assistant",
+                    text: "Hey there! 👋 I am Vikas's AI assistant. Ask me anything about his projects, skills, experience, or how to get in touch!"
+                }]);
             }
         };
-        pingServer();
+
+        init();
+        return () => { cancelled = true; };
     }, []);
 
-    // Stop pulsing after 6 seconds
     useEffect(() => {
         const t = setTimeout(() => setPulse(false), 6000);
         return () => clearTimeout(t);
@@ -83,48 +168,72 @@ export default function Chatbot() {
         if (open) setTimeout(() => inputRef.current?.focus(), 300);
     }, [open]);
 
+    // ── Send message — same model & prompt structure as app.py ────────────────
     const sendMessage = async () => {
         const text = input.trim();
-        if (!text || loading) return;
+        if (!text || loading || !ready) return;
 
         setMessages(prev => [...prev, { role: "user", text }]);
         setInput("");
         setLoading(true);
 
+        // Build message history (multi-turn)
+        const updatedHistory = [
+            ...historyRef.current,
+            { role: "user", content: text }
+        ];
+
         try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 20000); // 10s timeout
-
-            const res = await fetch(API_URL, {
+            const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: text }),
-                signal: controller.signal
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+                    "HTTP-Referer": window.location.origin,
+                    "X-Title": "Vikas Portfolio Chatbot",
+                },
+                body: JSON.stringify({
+                    model: CHAT_MODEL,
+                    messages: [
+                        { role: "system", content: systemPromptRef.current },
+                        ...updatedHistory,
+                    ],
+                    temperature: 0.7,
+                    max_tokens: 512,
+                }),
             });
-            clearTimeout(timeoutId);
-            const data = await res.json();
-            const answer = data.answer || data.error || "Sorry, I couldn't get a response.";
-            setMessages(prev => [...prev, {
-                role: "assistant",
-                text: answer
-            }]);
 
-            // Log query to Firebase
-            if (data.answer) {
-                try {
-                    await addDoc(collection(db, "chatbotQueries"), {
-                        question: text,
-                        answer: answer,
-                        timestamp: serverTimestamp()
-                    });
-                } catch (err) {
-                    console.error("Failed to log chatbot query:", err);
-                }
+            if (!res.ok) {
+                const errData = await res.json().catch(() => ({}));
+                if (res.status === 429) throw new Error("429");
+                throw new Error(errData?.error?.message || `HTTP ${res.status}`);
             }
+
+            const data = await res.json();
+            const answer = data?.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.";
+
+            // Update history for next turn
+            historyRef.current = [
+                ...updatedHistory,
+                { role: "assistant", content: answer }
+            ];
+
+            setMessages(prev => [...prev, { role: "assistant", text: answer }]);
+
+            // Log to Firebase
+            try {
+                await addDoc(collection(db, "chatbotQueries"), {
+                    question: text, answer, timestamp: serverTimestamp(),
+                });
+            } catch (_) { /* silent */ }
+
         } catch (err) {
+            const is429 = String(err.message).includes("429");
             setMessages(prev => [...prev, {
                 role: "assistant",
-                text: "Oops! Our chat robot seems to be taking a quick coffee break ☕. Try again in a moment."
+                text: is429
+                    ? "I'm a bit busy right now — please try again in a moment! ⏳"
+                    : `Oops! Something went wrong: ${err.message}. Try again.`
             }]);
         } finally {
             setLoading(false);
@@ -135,7 +244,6 @@ export default function Chatbot() {
         if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); }
     };
 
-    // Helper to safely parse **bold** text in responses
     const renderMessageText = (text) => {
         if (!text) return null;
         const parts = text.split(/(\*\*.*?\*\*)/g);
@@ -167,7 +275,6 @@ export default function Chatbot() {
                 onMouseEnter={e => e.currentTarget.style.transform = "scale(1.12) rotate(5deg)"}
                 onMouseLeave={e => e.currentTarget.style.transform = open ? "scale(1.08) rotate(15deg)" : "scale(1)"}
             >
-                {/* Pulse ring */}
                 {pulse && !open && (
                     <span style={{
                         position: "absolute", inset: -6, borderRadius: "50%",
@@ -176,42 +283,29 @@ export default function Chatbot() {
                         pointerEvents: "none"
                     }} />
                 )}
-
-                {/* Notification Badge / Label */}
                 {!open && (
                     <div style={{
-                        position: "absolute",
-                        right: 75,
-                        top: "50%",
+                        position: "absolute", right: 75, top: "50%",
                         transform: "translateY(-50%)",
-                        background: "rgba(13,17,23,0.9)",
-                        backdropFilter: "blur(8px)",
+                        background: "rgba(13,17,23,0.9)", backdropFilter: "blur(8px)",
                         border: "1px solid rgba(245,158,11,0.3)",
-                        padding: "6px 12px",
-                        borderRadius: "16px",
-                        color: "#f8fafc",
-                        fontSize: "13px",
-                        fontWeight: "500",
-                        whiteSpace: "nowrap",
-                        boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
+                        padding: "6px 12px", borderRadius: "16px",
+                        color: "#f8fafc", fontSize: "13px", fontWeight: "500",
+                        whiteSpace: "nowrap", boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
                         pointerEvents: "none",
                         animation: "chatbotLabelFloat 3s ease-in-out infinite"
                     }}>
                         Hey! I'm Vikas's AI Assistant 👋
                         <div style={{
-                            position: "absolute",
-                            right: -6,
-                            top: "50%",
+                            position: "absolute", right: -6, top: "50%",
                             transform: "translateY(-50%)",
-                            width: 0,
-                            height: 0,
+                            width: 0, height: 0,
                             borderTop: "5px solid transparent",
                             borderBottom: "5px solid transparent",
                             borderLeft: "6px solid rgba(245,158,11,0.3)",
                         }} />
                     </div>
                 )}
-
                 {open ? <CloseIcon /> : <BotIcon />}
             </button>
 
@@ -219,13 +313,10 @@ export default function Chatbot() {
             <div style={{
                 position: "fixed", bottom: 100, right: 28, zIndex: 9998,
                 width: 370, maxWidth: "calc(100vw - 40px)",
-                background: "rgba(13,17,23,0.97)",
-                backdropFilter: "blur(20px)",
-                border: "1px solid rgba(245,158,11,0.18)",
-                borderRadius: 20,
+                background: "rgba(13,17,23,0.97)", backdropFilter: "blur(20px)",
+                border: "1px solid rgba(245,158,11,0.18)", borderRadius: 20,
                 boxShadow: "0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,158,11,0.05)",
-                display: "flex", flexDirection: "column",
-                overflow: "hidden",
+                display: "flex", flexDirection: "column", overflow: "hidden",
                 transformOrigin: "bottom right",
                 transition: "opacity 0.3s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1)",
                 opacity: open ? 1 : 0,
@@ -233,20 +324,17 @@ export default function Chatbot() {
                 pointerEvents: open ? "all" : "none",
                 maxHeight: "75vh",
             }}>
-
                 {/* Header */}
                 <div style={{
                     padding: "16px 18px", display: "flex", alignItems: "center", gap: 12,
                     background: "linear-gradient(135deg, rgba(245,158,11,0.12), rgba(168,85,247,0.06))",
-                    borderBottom: "1px solid rgba(245,158,11,0.1)",
-                    flexShrink: 0,
+                    borderBottom: "1px solid rgba(245,158,11,0.1)", flexShrink: 0,
                 }}>
                     <div style={{
                         width: 40, height: 40, borderRadius: "50%",
                         background: "linear-gradient(135deg, #f59e0b, #d97706)",
                         display: "flex", alignItems: "center", justifyContent: "center",
-                        color: "#0a0a0f", flexShrink: 0,
-                        boxShadow: "0 0 16px rgba(245,158,11,0.3)"
+                        color: "#0a0a0f", flexShrink: 0, boxShadow: "0 0 16px rgba(245,158,11,0.3)"
                     }}>
                         <BotIcon />
                     </div>
@@ -257,11 +345,11 @@ export default function Chatbot() {
                         <div style={{ fontSize: 12, color: "rgba(245,158,11,0.8)", display: "flex", alignItems: "center", gap: 5 }}>
                             <span style={{
                                 width: 7, height: 7, borderRadius: "50%",
-                                background: serverAwake ? "#22c55e" : "#ef4444",
+                                background: ready ? "#22c55e" : "#f59e0b",
                                 display: "inline-block",
-                                boxShadow: serverAwake ? "0 0 6px #22c55e" : "0 0 6px #ef4444"
+                                boxShadow: ready ? "0 0 6px #22c55e" : "0 0 6px #f59e0b"
                             }} />
-                            {serverAwake ? "Online" : "Offline / Waking up... (~2 mins)"}
+                            {ready ? "Online" : "Loading portfolio data..."}
                         </div>
                     </div>
                 </div>
@@ -310,7 +398,6 @@ export default function Chatbot() {
                             </div>
                         </div>
                     ))}
-
                     {loading && (
                         <div style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
                             <div style={{
@@ -326,8 +413,7 @@ export default function Chatbot() {
                             <div style={{
                                 background: "rgba(255,255,255,0.04)",
                                 border: "1px solid rgba(255,255,255,0.07)",
-                                borderRadius: "18px 18px 18px 4px",
-                                padding: "10px 14px"
+                                borderRadius: "18px 18px 18px 4px", padding: "10px 14px"
                             }}>
                                 <TypingDots />
                             </div>
@@ -336,13 +422,11 @@ export default function Chatbot() {
                     <div ref={endRef} />
                 </div>
 
-                {/* Suggestions */}
-                {messages.length === 1 && (
-                    <div style={{
-                        padding: "0 14px 10px", display: "flex", flexWrap: "wrap", gap: 6, flexShrink: 0
-                    }}>
+                {/* Quick suggestions */}
+                {messages.length === 1 && ready && (
+                    <div style={{ padding: "0 14px 10px", display: "flex", flexWrap: "wrap", gap: 6, flexShrink: 0 }}>
                         {["What projects has he built?", "What are his skills?", "How to contact him?"].map(q => (
-                            <button key={q} onClick={() => { setInput(q); }} style={{
+                            <button key={q} onClick={() => setInput(q)} style={{
                                 background: "rgba(245,158,11,0.07)",
                                 border: "1px solid rgba(245,158,11,0.18)",
                                 borderRadius: 20, padding: "5px 12px",
@@ -359,10 +443,8 @@ export default function Chatbot() {
 
                 {/* Input bar */}
                 <div style={{
-                    padding: "12px 14px",
-                    borderTop: "1px solid rgba(245,158,11,0.08)",
-                    display: "flex", gap: 8, flexShrink: 0,
-                    background: "rgba(0,0,0,0.2)"
+                    padding: "12px 14px", borderTop: "1px solid rgba(245,158,11,0.08)",
+                    display: "flex", gap: 8, flexShrink: 0, background: "rgba(0,0,0,0.2)"
                 }}>
                     <input
                         ref={inputRef}
@@ -370,8 +452,8 @@ export default function Chatbot() {
                         value={input}
                         onChange={e => setInput(e.target.value)}
                         onKeyDown={handleKey}
-                        placeholder="Ask about Vikas..."
-                        disabled={loading}
+                        placeholder={ready ? "Ask about Vikas..." : "Loading..."}
+                        disabled={loading || !ready}
                         style={{
                             flex: 1, background: "rgba(255,255,255,0.05)",
                             border: "1px solid rgba(245,158,11,0.15)",
@@ -386,19 +468,20 @@ export default function Chatbot() {
                     <button
                         id="chatbot-send-btn"
                         onClick={sendMessage}
-                        disabled={loading || !input.trim()}
+                        disabled={loading || !input.trim() || !ready}
                         style={{
                             width: 42, height: 42, borderRadius: 12,
-                            background: input.trim() && !loading
+                            background: input.trim() && !loading && ready
                                 ? "linear-gradient(135deg, #f59e0b, #d97706)"
                                 : "rgba(245,158,11,0.15)",
-                            border: "none", cursor: input.trim() && !loading ? "pointer" : "not-allowed",
-                            color: input.trim() && !loading ? "#0a0a0f" : "rgba(245,158,11,0.4)",
+                            border: "none",
+                            cursor: input.trim() && !loading && ready ? "pointer" : "not-allowed",
+                            color: input.trim() && !loading && ready ? "#0a0a0f" : "rgba(245,158,11,0.4)",
                             display: "flex", alignItems: "center", justifyContent: "center",
                             transition: "background 0.25s, color 0.25s, transform 0.15s",
                             flexShrink: 0
                         }}
-                        onMouseEnter={e => { if (input.trim() && !loading) e.currentTarget.style.transform = "scale(1.08)"; }}
+                        onMouseEnter={e => { if (input.trim() && !loading && ready) e.currentTarget.style.transform = "scale(1.08)"; }}
                         onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
                     >
                         <SendIcon />
