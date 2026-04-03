@@ -80,7 +80,7 @@ export default function About() {
                 <p className="ml-4"><span className="text-orange-300">role</span>: <span className="text-green-400">"Software Engineer"</span>,</p>
                 <p className="ml-4"><span className="text-orange-300">location</span>: <span className="text-green-400">"Erode, TN"</span>,</p>
                 <p className="ml-4"><span className="text-orange-300">passion</span>: <span className="text-green-400">"Building products that matter"</span>,</p>
-                <p className="ml-4"><span className="text-orange-300">stack</span>: [<span className="text-yellow-300">"Python"</span>, <span className="text-yellow-300">"React"</span>, <span className="text-yellow-300">"SQL"</span>, <span className="text-yellow-300">"AI"</span>],</p>
+                <p className="ml-4"><span className="text-orange-300">stack</span>: [<span className="text-yellow-300">"Python"</span>,<span className="text-yellow-300">"Java"</span>,<span className="text-yellow-300">"React & Node"</span>,<span className="text-yellow-300">"SQL"</span>,<span className="text-yellow-300">"AI"</span>],</p>
                 <p>{"}"}</p>
               </div>
             </div>
