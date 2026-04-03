@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import {
   Github,
   Linkedin,
@@ -69,20 +69,36 @@ const stats = [
   { value: "10K+",label: "Users" },
 ];
 
+/* ── Particle positions — computed once, stable across renders ── */
+const PARTICLES = Array.from({ length: 10 }, (_, i) => ({
+  w:     1.5 + (i % 3),
+  top:   10 + i * 8,
+  left:  5  + i * 9,
+  color: ["#4ade80", "#34d399", "#86efac"][i % 3],
+  dur:   5  + i * 0.6,
+  delay: i  * 0.5,
+  yEnd:  -(60 + i * 6),
+}));
+
 /* ── Main Hero ───────────────────────────────────────────── */
 export default function Hero() {
   const typed = useTypewriter(roles);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+
+  // useMotionValue: mouse updates go straight to CSS transform — zero re-renders
+  const rawX  = useMotionValue(0);
+  const rawY  = useMotionValue(0);
+  const blobX = useSpring(rawX, { stiffness: 38, damping: 26, mass: 1 });
+  const blobY = useSpring(rawY, { stiffness: 38, damping: 26, mass: 1 });
 
   useEffect(() => {
-    const fn = (e) =>
-      setMouse({
-        x: (e.clientX / window.innerWidth  - 0.5) * 18,
-        y: (e.clientY / window.innerHeight - 0.5) * 18,
-      });
-    window.addEventListener("mousemove", fn);
+    const fn = (e) => {
+      rawX.set((e.clientX / window.innerWidth  - 0.5) * 18);
+      rawY.set((e.clientY / window.innerHeight - 0.5) * 18);
+    };
+    window.addEventListener("mousemove", fn, { passive: true });
     return () => window.removeEventListener("mousemove", fn);
-  }, []);
+  }, [rawX, rawY]);
+
 
   return (
     <section id="hero" className="min-h-screen flex items-center relative overflow-hidden">
@@ -100,34 +116,31 @@ export default function Hero() {
       {/* Grid lines */}
       <div className="absolute inset-0 grid-bg opacity-35 z-0" />
 
-      {/* Mouse-reactive glow blobs */}
+      {/* Mouse-reactive glow blobs — driven by motion values, no re-render */}
       <motion.div
         className="absolute top-[5%] left-[2%] w-[480px] h-[480px] rounded-full blur-[140px] hero-blob-1 z-0"
-        style={{ background: "rgba(74,222,128,0.055)" }}
-        animate={{ x: mouse.x * 0.4, y: mouse.y * 0.4 }}
-        transition={{ type: "spring", damping: 55 }}
+        style={{ background: "rgba(74,222,128,0.055)", x: blobX, y: blobY }}
       />
       <motion.div
         className="absolute bottom-[8%] right-[5%] w-[380px] h-[380px] rounded-full blur-[130px] hero-blob-2 z-0"
-        style={{ background: "rgba(16,185,129,0.04)" }}
-        animate={{ x: mouse.x * -0.25, y: mouse.y * -0.25 }}
-        transition={{ type: "spring", damping: 55 }}
+        style={{ background: "rgba(16,185,129,0.04)", x: blobX, y: blobY }}
       />
 
-      {/* Floating micro-particles */}
-      {[...Array(10)].map((_, i) => (
+      {/* Floating particles — positions from memoised constant, CSS-only anim */}
+      {PARTICLES.map((p, i) => (
         <motion.div
           key={i}
           className="absolute rounded-full hidden md:block z-0"
           style={{
-            width:  `${1.5 + (i % 3)}px`,
-            height: `${1.5 + (i % 3)}px`,
-            top:    `${10 + i * 8}%`,
-            left:   `${5  + i * 9}%`,
-            background: ["#4ade80","#34d399","#86efac"][i % 3],
+            width:      p.w,
+            height:     p.w,
+            top:        `${p.top}%`,
+            left:       `${p.left}%`,
+            background: p.color,
+            willChange: "transform, opacity",
           }}
-          animate={{ y: [0, -60 - i * 6, 0], opacity: [0, 0.65, 0] }}
-          transition={{ duration: 5 + i * 0.6, repeat: Infinity, delay: i * 0.5, ease: "easeInOut" }}
+          animate={{ y: [0, p.yEnd, 0], opacity: [0, 0.6, 0] }}
+          transition={{ duration: p.dur, repeat: Infinity, delay: p.delay, ease: "easeInOut" }}
         />
       ))}
 
@@ -262,45 +275,80 @@ export default function Hero() {
               </motion.div>
             </motion.div>
 
-            {/* Socials + stats row */}
+            {/* Social icons row */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1, duration: 0.5 }}
-              className="flex items-center gap-6 flex-wrap"
+              className="flex items-center gap-3 mb-8"
             >
-              {/* Social icons */}
-              <div className="flex items-center gap-2">
-                {[
-                  { href: "https://github.com/Vikasthangavel/",        icon: <Github   size={17} />, hover: "hover:text-white   hover:border-white/30" },
-                  { href: "https://www.linkedin.com/in/vikasthangavel/",icon: <Linkedin size={17} />, hover: "hover:text-blue-400 hover:border-blue-400/30" },
-                  { href: "mailto:vikasthangavel@gmail.com",            icon: <Mail     size={17} />, hover: "hover:text-green-400 hover:border-green-400/30" },
-                ].map((s, i) => (
-                  <motion.a
-                    key={i} href={s.href} target="_blank" rel="noopener noreferrer"
-                    initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.1 + i * 0.1 }} whileHover={{ y: -3, scale: 1.12 }}
-                    className={`p-2 rounded-lg text-gray-500 border border-white/[0.06] bg-white/[0.02] transition-all duration-300 ${s.hover}`}
+              <span className="text-[10px] font-mono text-gray-600 uppercase tracking-widest">Find me</span>
+              <div className="w-6 h-px bg-gray-800" />
+              {[
+                { href: "https://github.com/Vikasthangavel/",         icon: <Github   size={17} />, hover: "hover:text-white   hover:border-white/30" },
+                { href: "https://www.linkedin.com/in/vikasthangavel/", icon: <Linkedin size={17} />, hover: "hover:text-blue-400 hover:border-blue-400/30" },
+                { href: "mailto:vikasthangavel@gmail.com",             icon: <Mail     size={17} />, hover: "hover:text-green-400 hover:border-green-400/30" },
+              ].map((s, i) => (
+                <motion.a
+                  key={i} href={s.href} target="_blank" rel="noopener noreferrer"
+                  initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.1 + i * 0.1 }} whileHover={{ y: -3, scale: 1.12 }}
+                  className={`p-2 rounded-lg text-gray-500 border border-white/[0.06] bg-white/[0.02] transition-all duration-300 ${s.hover}`}
+                >
+                  {s.icon}
+                </motion.a>
+              ))}
+            </motion.div>
+
+            {/* ── Stat cards ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1, duration: 0.55 }}
+              className="grid grid-cols-3 gap-3 max-w-md"
+            >
+              {stats.map((st, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.2 + i * 0.12 }}
+                  whileHover={{ y: -4, scale: 1.03 }}
+                  className="group relative flex flex-col items-center justify-center py-4 px-3 rounded-xl border cursor-default overflow-hidden"
+                  style={{
+                    background: "rgba(74,222,128,0.04)",
+                    borderColor: "rgba(74,222,128,0.12)",
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.borderColor = "rgba(74,222,128,0.3)";
+                    e.currentTarget.style.background  = "rgba(74,222,128,0.07)";
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.borderColor = "rgba(74,222,128,0.12)";
+                    e.currentTarget.style.background  = "rgba(74,222,128,0.04)";
+                  }}
+                >
+                  {/* glow on hover */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{ background: "radial-gradient(ellipse at center, rgba(74,222,128,0.08) 0%, transparent 70%)" }}
+                  />
+                  {/* top accent line */}
+                  <div
+                    className="absolute top-0 left-4 right-4 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ background: "linear-gradient(to right, transparent, rgba(74,222,128,0.5), transparent)" }}
+                  />
+                  <div
+                    className="text-3xl font-black font-mono leading-none mb-1"
+                    style={{ color: "#4ade80", textShadow: "0 0 18px rgba(74,222,128,0.4)" }}
                   >
-                    {s.icon}
-                  </motion.a>
-                ))}
-              </div>
-
-              {/* Divider */}
-              <div className="w-px h-8 bg-gray-800 hidden sm:block" />
-
-              {/* Mini stats */}
-              <div className="flex gap-5">
-                {stats.map((st, i) => (
-                  <div key={i} className="text-center cursor-default">
-                    <div className="text-lg font-black font-mono gradient-text leading-none">
-                      <AnimatedCounter value={st.value} delay={1300 + i * 250} />
-                    </div>
-                    <div className="text-[10px] text-gray-600 font-mono mt-0.5 tracking-wide">{st.label}</div>
+                    <AnimatedCounter value={st.value} delay={1400 + i * 250} />
                   </div>
-                ))}
-              </div>
+                  <div className="text-[11px] text-gray-500 font-mono tracking-wide group-hover:text-gray-400 transition-colors">
+                    {st.label}
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
 
