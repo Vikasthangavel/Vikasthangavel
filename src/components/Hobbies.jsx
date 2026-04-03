@@ -25,9 +25,9 @@ const hobbies = [
     icon: <Cpu size={28} />,
     title: "Tech-Driven Environments",
     description: "I love creating technology-powered surroundings — from IoT-based smart setups to automation that makes everyday life smarter and more efficient.",
-    gradient: "from-amber-500 to-rose-500",
-    iconBg: "bg-amber-500/10 text-amber-400",
-    borderColor: "hover:border-amber-500/30",
+    gradient: "from-green-500 to-rose-500",
+    iconBg: "bg-green-500/10 text-green-400",
+    borderColor: "hover:border-green-500/30",
     emoji: "⚡",
   },
 ];
@@ -44,7 +44,7 @@ export default function Hobbies() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-amber-500 text-sm tracking-wider mb-3 block">{"// hobbies"}</span>
+          <span className="font-mono text-green-500 text-sm tracking-wider mb-3 block">{"// hobbies"}</span>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Beyond <span className="gradient-text animate-gradient-text">Code</span>
           </h2>
@@ -89,7 +89,7 @@ export default function Hobbies() {
                   >
                     {hobby.emoji}
                   </motion.span>
-                  <h3 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors font-mono">
+                  <h3 className="text-lg font-bold text-white group-hover:text-green-400 transition-colors font-mono">
                     {hobby.title}
                   </h3>
                 </div>

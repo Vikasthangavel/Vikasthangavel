@@ -31,7 +31,7 @@ const projects = [
     category: "personal",
     highlight: true,
     Icon: Zap,
-    accent: "#f59e0b",
+    accent: "#4ade80",
     num: "01",
   },
   {
@@ -45,7 +45,7 @@ const projects = [
     category: "personal",
     highlight: true,
     Icon: Globe,
-    accent: "#a78bfa",
+    accent: "#34d399",
     num: "02",
   },
   {
@@ -59,7 +59,7 @@ const projects = [
     category: "personal",
     highlight: true,
     Icon: Cpu,
-    accent: "#22d3ee",
+    accent: "#86efac",
     num: "03",
   },
   {
@@ -73,7 +73,7 @@ const projects = [
     category: "client",
     highlight: true,
     Icon: Layers,
-    accent: "#34d399",
+    accent: "#16a34a",
     num: "04",
   },
   // ── extra projects shown after "View All" ──
@@ -379,13 +379,13 @@ const ProjectCard = ({ project, index }) => (
     <div className="terminal-header">
       <div className="ml-auto flex items-center gap-2">
         {project.featured && <Star size={11} className="text-yellow-500 fill-yellow-500" />}
-        <Folder size={11} className="text-gray-600 group-hover:text-amber-500 transition-colors" />
+        <Folder size={11} className="text-gray-600 group-hover:text-green-400 transition-colors" />
       </div>
     </div>
     <div className="p-5 flex flex-col flex-1">
       <div className="mb-3">
         <div className="flex items-center gap-2 flex-wrap">
-          <h3 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors font-mono">
+          <h3 className="text-base font-bold text-white group-hover:text-green-400 transition-colors font-mono">
             {project.title}
           </h3>
           {project.underDev && (
@@ -403,7 +403,7 @@ const ProjectCard = ({ project, index }) => (
             {project.category}
           </span>
         </div>
-        <p className="text-amber-500/60 text-[11px] font-mono mt-0.5">{project.subtitle}</p>
+        <p className="text-green-500/60 text-[11px] font-mono mt-0.5">{project.subtitle}</p>
       </div>
       <p className="text-gray-400 text-sm leading-relaxed mb-5 flex-1">{project.description}</p>
       <div className="mt-auto">
@@ -411,7 +411,7 @@ const ProjectCard = ({ project, index }) => (
           {project.tech.map((t, i) => (
             <span
               key={i}
-              className="text-[11px] px-2 py-0.5 bg-amber-500/5 text-amber-400/80 rounded font-mono border border-amber-500/10"
+              className="text-[11px] px-2 py-0.5 bg-green-500/5 text-green-400/80 rounded font-mono border border-green-500/10"
             >
               {t}
             </span>
@@ -426,7 +426,7 @@ const ProjectCard = ({ project, index }) => (
                 target="_blank"
                 rel="noopener noreferrer"
                 download={link.download}
-                className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-amber-400 transition-all font-mono hover:translate-x-1 duration-300"
+                className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-green-400 transition-all font-mono hover:translate-x-1 duration-300"
               >
                 {link.download ? <Download size={11} /> : <ExternalLink size={11} />}
                 {link.label}
@@ -461,7 +461,7 @@ export default function Projects() {
           className="text-center mb-16"
         >
           <motion.span
-            className="font-mono text-amber-500 text-sm tracking-wider mb-3 block"
+            className="font-mono text-green-500 text-sm tracking-wider mb-3 block"
             animate={{ opacity: [0.6, 1, 0.6] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
@@ -472,7 +472,7 @@ export default function Projects() {
           </h2>
           <p className="text-gray-500 text-sm font-mono">
             {projects.length} projects shipped —{" "}
-            <span className="text-amber-500/70">here are the highlights</span>
+            <span className="text-green-500/70">here are the highlights</span>
           </p>
         </motion.div>
 
@@ -491,13 +491,13 @@ export default function Projects() {
             whileTap={{ scale: 0.96 }}
             className="relative group flex items-center gap-2.5 px-8 py-3.5 rounded-full font-mono text-sm font-semibold overflow-hidden border transition-colors duration-300"
             style={{
-              background: "rgba(245,158,11,0.07)",
-              borderColor: "rgba(245,158,11,0.28)",
-              color: "#f59e0b",
+              background: "rgba(74,222,128,0.06)",
+              borderColor: "rgba(74,222,128,0.25)",
+              color: "#4ade80",
             }}
           >
             {/* shimmer sweep */}
-            <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/12 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-green-400/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
             <span className="relative z-10 flex items-center gap-2">
               {showAll ? (
                 <>
@@ -527,9 +527,9 @@ export default function Projects() {
             >
               <div className="flex items-center gap-4 mb-8">
                 <h3 className="text-lg font-bold text-white font-mono flex items-center gap-2 whitespace-nowrap">
-                  <span className="text-amber-500">✦</span> All Projects
+                  <span className="text-green-400">✦</span> All Projects
                 </h3>
-                <div className="h-px flex-1 bg-gradient-to-r from-amber-500/30 to-transparent" />
+                <div className="h-px flex-1 bg-gradient-to-r from-green-500/30 to-transparent" />
                 <span className="text-xs font-mono text-gray-600 whitespace-nowrap">
                   {remainingProjects.length} more
                 </span>

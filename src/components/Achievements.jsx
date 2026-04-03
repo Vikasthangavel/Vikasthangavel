@@ -18,10 +18,10 @@ const achievements = [
     title: "Presented to Namakkal Cyber Cell",
     org: "Tamil Nadu Police",
     description: "Demonstrated the deepfake detection system to law enforcement officials for real-world cybercrime applications.",
-    gradient: "from-amber-500 to-rose-500",
-    glow: "shadow-amber-500/20",
-    borderColor: "border-amber-500/30",
-    iconBg: "bg-amber-500/10 text-amber-400",
+    gradient: "from-green-500 to-rose-500",
+    glow: "shadow-green-500/20",
+    borderColor: "border-green-500/30",
+    iconBg: "bg-green-500/10 text-green-400",
   }
 ];
 
@@ -37,7 +37,7 @@ export default function Achievements() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-amber-500 text-sm tracking-wider mb-3 block">{"// achievements"}</span>
+          <span className="font-mono text-green-500 text-sm tracking-wider mb-3 block">{"// achievements"}</span>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             <span className="gradient-text animate-gradient-text">Achievements</span>
           </h2>
@@ -73,7 +73,7 @@ export default function Achievements() {
                   {item.icon}
                 </motion.div>
                 <div>
-                  <h3 className="text-lg font-bold text-white mb-1 group-hover:text-amber-400 transition-colors">
+                  <h3 className="text-lg font-bold text-white mb-1 group-hover:text-green-400 transition-colors">
                     {item.title}
                   </h3>
                   <span className="text-xs font-mono text-gray-500 mb-3 block">{item.org}</span>

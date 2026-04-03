@@ -17,12 +17,12 @@ export default function Footer() {
             <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.5 }}
-              className="p-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 group-hover:border-amber-400/50 transition-colors"
+              className="p-1.5 rounded-lg bg-green-500/10 border border-green-500/20 group-hover:border-green-400/45 transition-colors"
             >
-              <Terminal size={16} className="text-amber-400" />
+              <Terminal size={16} className="text-green-400" />
             </motion.div>
             <span className="font-mono text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
-              vikas<span className="text-amber-400">.dev</span>
+              vikas<span className="text-green-400">.dev</span>
             </span>
           </motion.div>
 
@@ -46,7 +46,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 whileHover={{ y: -3, scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.05] text-gray-500 hover:text-amber-400 hover:border-amber-500/20 hover:bg-amber-500/5 transition-all"
+                className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.05] text-gray-500 hover:text-green-400 hover:border-green-500/20 hover:bg-green-500/5 transition-all"
                 aria-label={link.label}
               >
                 {link.icon}
@@ -77,8 +77,8 @@ export default function Footer() {
           transition={{ delay: 0.3 }}
           className="mt-6 pt-4 border-t border-gray-800/30 text-center font-mono text-xs text-gray-700 flex items-center justify-center gap-1.5"
         >
-          Designed &amp; Developed with <Heart size={11} className="text-amber-600/60 fill-amber-600/40" /> by{" "}
-          <span className="text-amber-600/60">Vikas T</span>
+          Designed & Developed with <Heart size={11} className="text-green-600/60 fill-green-600/40" /> by{" "}
+          <span className="text-green-600/60">Vikas T</span>
         </motion.div>
       </div>
     </footer>

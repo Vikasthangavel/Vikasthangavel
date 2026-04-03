@@ -100,7 +100,7 @@ export default function Hero() {
       <motion.div
         animate={{ x: mousePos.x * 0.5, y: mousePos.y * 0.5 }}
         transition={{ type: "spring", damping: 50 }}
-        className="absolute top-[5%] left-[5%] w-[500px] h-[500px] bg-amber-500/8 rounded-full blur-[150px] hero-blob-1"
+        className="absolute top-[5%] left-[5%] w-[500px] h-[500px] rounded-full blur-[150px] hero-blob-1" style={{ background: 'rgba(74,222,128,0.06)' }}
       />
       <motion.div
         animate={{ x: mousePos.x * -0.3, y: mousePos.y * -0.3 }}
@@ -123,7 +123,7 @@ export default function Hero() {
             height: `${2 + Math.random() * 3}px`,
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,
-            background: i % 3 === 0 ? "#f59e0b" : i % 3 === 1 ? "#a855f7" : "#fb7185",
+            background: i % 3 === 0 ? "#4ade80" : i % 3 === 1 ? "#34d399" : "#86efac",
           }}
           animate={{
             y: [0, -80 - Math.random() * 60, 0],
@@ -155,7 +155,7 @@ export default function Hero() {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1, duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/20 bg-amber-500/5 text-amber-300/90 text-xs font-mono mb-6 backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/20 bg-green-500/5 text-green-300/90 text-xs font-mono mb-6 backdrop-blur-sm"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -193,9 +193,9 @@ export default function Hero() {
                   <span className="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
                 </div>
                 <span className="text-gray-600 ml-1">|</span>
-                <span className="text-amber-500">--</span>
+                <span className="text-green-500">--</span>
                 <span className="text-gray-300">{typedText}</span>
-                <span className="text-amber-400 animate-pulse font-light">▊</span>
+                <span className="text-green-400 animate-pulse font-light">▊</span>
               </div>
             </motion.div>
 
@@ -207,7 +207,7 @@ export default function Hero() {
               className="text-gray-400 text-base md:text-lg leading-relaxed mb-8 max-w-xl"
             >
               Building production-grade apps from{" "}
-              <span className="text-amber-400/90 font-medium">idea to deployment</span>. 
+              <span className="text-green-400/90 font-medium">idea to deployment</span>. 
               I craft full-stack products with Python, React & AI — focusing on 
               <span className="text-rose-400/90 font-medium"> real-world impact</span>.
             </motion.p>
@@ -225,7 +225,7 @@ export default function Hero() {
                   smooth={true}
                   duration={500}
                   offset={-70}
-                  className="group px-7 py-3.5 bg-gradient-to-r from-amber-500 to-rose-500 text-white rounded-xl font-semibold transition-all cursor-pointer shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 flex items-center gap-2.5 magnetic-btn relative overflow-hidden"
+                  className="group px-7 py-3.5 bg-gradient-to-r from-green-500 to-emerald-400 text-[#050d07] rounded-xl font-semibold transition-all cursor-pointer shadow-lg shadow-green-500/20 hover:shadow-green-500/35 flex items-center gap-2.5 magnetic-btn relative overflow-hidden"
                 >
                   <Rocket size={16} className="group-hover:rotate-12 transition-transform" />
                   View Projects
@@ -241,7 +241,7 @@ export default function Hero() {
                 <a
                   href={resume}
                   download="Vikas_T_Resume.pdf"
-                  className="px-7 py-3.5 border border-gray-700/80 hover:border-amber-500/40 text-gray-300 hover:text-white rounded-xl font-semibold transition-all hover:bg-amber-500/5 cursor-pointer flex items-center gap-2.5 magnetic-btn backdrop-blur-sm"
+                  className="px-7 py-3.5 border border-gray-700/80 hover:border-green-500/35 text-gray-300 hover:text-white rounded-xl font-semibold transition-all hover:bg-green-500/5 cursor-pointer flex items-center gap-2.5 magnetic-btn backdrop-blur-sm"
                 >
                   <Download size={16} />
                   Resume
@@ -272,7 +272,7 @@ export default function Hero() {
               {[
                 { href: "https://github.com/Vikasthangavel/", icon: <Github size={18} />, hover: "hover:text-white hover:border-gray-500" },
                 { href: "https://www.linkedin.com/in/vikasthangavel/", icon: <Linkedin size={18} />, hover: "hover:text-blue-400 hover:border-blue-500/40" },
-                { href: "mailto:vikasthangavel@gmail.com", icon: <Mail size={18} />, hover: "hover:text-amber-400 hover:border-amber-500/40" },
+                { href: "mailto:vikasthangavel@gmail.com", icon: <Mail size={18} />, hover: "hover:text-green-400 hover:border-green-500/35" },
               ].map((social, i) => (
                 <motion.a
                   key={i}
@@ -307,12 +307,12 @@ export default function Hero() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 1 + i * 0.15 }}
                   whileHover={{ x: -5, scale: 1.02 }}
-                  className="group flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-amber-500/20 hover:bg-white/[0.04] transition-all backdrop-blur-sm cursor-default"
+                  className="group flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-green-500/20 hover:bg-green-500/[0.03] transition-all backdrop-blur-sm cursor-default"
                 >
                   <div className="text-3xl md:text-4xl font-black font-mono gradient-text leading-none">
                     <AnimatedCounter value={stat.value} delay={1200 + i * 300} />
                   </div>
-                  <div className="w-px h-8 bg-gray-800 group-hover:bg-amber-500/30 transition-colors"></div>
+                  <div className="w-px h-8 bg-gray-800 group-hover:bg-green-500/30 transition-colors"></div>
                   <span className="text-sm text-gray-500 group-hover:text-gray-300 transition-colors font-medium">{stat.label}</span>
                 </motion.div>
               ))}
@@ -353,9 +353,9 @@ export default function Hero() {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-5 h-8 rounded-full border-2 border-gray-800 hover:border-amber-500/40 transition-colors flex justify-center pt-1.5"
+            className="w-5 h-8 rounded-full border-2 border-gray-800 hover:border-green-500/35 transition-colors flex justify-center pt-1.5"
           >
-            <div className="w-1 h-2 bg-amber-500/70 rounded-full"></div>
+            <div className="w-1 h-2 bg-green-500/70 rounded-full"></div>
           </motion.div>
         </motion.div>
       </Link>
@@ -365,7 +365,7 @@ export default function Hero() {
         initial={{ height: 0 }}
         animate={{ height: "120px" }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="hidden lg:block absolute left-8 top-1/2 -translate-y-1/2 w-px bg-gradient-to-b from-transparent via-amber-500/30 to-transparent"
+        className="hidden lg:block absolute left-8 top-1/2 -translate-y-1/2 w-px bg-gradient-to-b from-transparent via-green-500/25 to-transparent"
       />
     </section>
   );
