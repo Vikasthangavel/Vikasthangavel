@@ -123,7 +123,7 @@ const projects = [
     description:
       "Full-featured e-commerce platform for a house cleaning products brand. Smooth shopping experience, secure checkout, and product catalog management.",
     tech: ["E-Commerce", "Web App", "Product Catalog"],
-    links: [{ label: "propic.in", url: "https://propic.in/" }],
+    links: [{ label: "propic.in", url: "https://thepropic.pages.dev" }],
     featured: true,
     category: "client",
   },
