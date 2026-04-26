@@ -10,9 +10,9 @@ const experiences = [
     duration: "Intern",
     link: "https://gradixtech.com/",
     points: [
-      "Working as a Web Developer Intern at Gradix Technologies, contributing to the development and enhancement of web applications",
-      "Building responsive and performant user interfaces using modern frontend technologies",
-      "Collaborating with the development team to implement new features and improve existing functionality",
+      "Engineered Vyuga (vyuga.nexyuga.in), a full-stack event management web app using React and Supabase.",
+      "Integrated Razorpay for secure payment processing and managed deployment infrastructure using Cloudflare and VPS.",
+      "Collaborating with the development team to implement new features and build responsive user interfaces.",
     ],
   },
   {
