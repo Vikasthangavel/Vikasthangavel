@@ -8,7 +8,8 @@ const experiences = [
     company: "Gradix Technologies",
     period: "Mar 2026 – Present",
     duration: "Intern",
-    link: "https://vyuga.nexyuga.in/",
+    link: "https://gradixtech.com/",
+    projectLink: "https://vyuga.nexyuga.in/",
     points: [
       "Engineered Vyuga (vyuga.nexyuga.in), a full-stack event management web app using React and Supabase.",
       "Integrated Razorpay for secure payment processing and managed deployment infrastructure using Cloudflare and VPS.",
@@ -120,6 +121,20 @@ export default function Experience() {
                         </motion.li>
                       ))}
                     </ul>
+                    {exp.projectLink && (
+                      <motion.div
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: exp.points.length * 0.1 }}
+                        className="mt-4 pt-4 border-t border-white/5"
+                      >
+                        <a href={exp.projectLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-mono text-green-400 hover:text-green-300 transition-colors hover:translate-x-1 duration-300">
+                          <ExternalLink size={14} />
+                          Project: {exp.projectLink.replace('https://', '').replace(/\/$/, '')}
+                        </a>
+                      </motion.div>
+                    )}
                   </div>
                 </div>
               </motion.div>
