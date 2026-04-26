@@ -456,6 +456,10 @@ const ProjectCard = ({ project, index }) => (
 /* ── Main Export ──────────────────────────────────────────────── */
 export default function Projects() {
   const [showAll, setShowAll] = useState(false);
+  const [filter, setFilter] = useState("all");
+
+  const displayedHighlights = highlightProjects.filter((p) => filter === "all" || p.category === filter);
+  const displayedRemaining = remainingProjects.filter((p) => filter === "all" || p.category === filter);
 
   return (
     <section id="projects" className="py-24 relative">
@@ -480,17 +484,40 @@ export default function Projects() {
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Featured <span className="gradient-text animate-gradient-text">Work</span>
           </h2>
-          <p className="text-gray-500 text-sm font-mono">
+          <p className="text-gray-500 text-sm font-mono mb-8">
             {projects.length} projects shipped —{" "}
             <span className="text-green-500/70">here are the highlights</span>
           </p>
+
+          {/* ── Filter Controls ── */}
+          <div className="flex justify-center gap-3">
+            {["all", "personal", "client"].map((f) => (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                className={`px-5 py-2 text-sm font-mono rounded-full border transition-all ${
+                  filter === f
+                    ? "bg-green-500/20 border-green-500/50 text-green-400 shadow-[0_0_15px_rgba(74,222,128,0.2)]"
+                    : "bg-transparent border-gray-800 text-gray-500 hover:text-gray-300 hover:border-gray-600"
+                }`}
+              >
+                {f.charAt(0).toUpperCase() + f.slice(1)} {f !== "all" ? "Projects" : ""}
+              </button>
+            ))}
+          </div>
         </motion.div>
 
         {/* ── 4 × 1 Tile Stack ── */}
         <div className="flex flex-col gap-5 mb-10">
-          {highlightProjects.map((project, index) => (
-            <TileCard key={project.title} project={project} index={index} />
-          ))}
+          {displayedHighlights.length > 0 ? (
+            displayedHighlights.map((project, index) => (
+              <TileCard key={project.title} project={project} index={index} />
+            ))
+          ) : (
+            <div className="text-center text-gray-500 font-mono py-10">
+              No featured projects in this category.
+            </div>
+          )}
         </div>
 
         {/* ── Toggle button ── */}
@@ -541,15 +568,21 @@ export default function Projects() {
                 </h3>
                 <div className="h-px flex-1 bg-gradient-to-r from-green-500/30 to-transparent" />
                 <span className="text-xs font-mono text-gray-600 whitespace-nowrap">
-                  {remainingProjects.length} more
+                  {displayedRemaining.length} more
                 </span>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {remainingProjects.map((project, index) => (
-                  <ProjectCard key={project.title} project={project} index={index} />
-                ))}
-              </div>
+              {displayedRemaining.length > 0 ? (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {displayedRemaining.map((project, index) => (
+                    <ProjectCard key={project.title} project={project} index={index} />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center text-gray-500 font-mono py-10">
+                  No extra projects in this category.
+                </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
