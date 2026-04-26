@@ -78,6 +78,16 @@ const projects = [
   },
   // ── extra projects shown after "View All" ──
   {
+    title: "PrimePick",
+    subtitle: "Affiliate Web App",
+    description:
+      "Affiliate web application built for a client. Developed using React and Firebase, and hosted on Cloudflare Pages for optimal performance.",
+    tech: ["React", "Firebase", "Cloudflare"],
+    links: [{ label: "primepick.pages.dev", url: "https://primepick.pages.dev/" }],
+    featured: true,
+    category: "client",
+  },
+  {
     title: "Time2Due",
     subtitle: "Operations Management Platform",
     description:
