@@ -8,7 +8,7 @@ const experiences = [
     company: "Gradix Technologies",
     period: "Mar 2026 – Present",
     duration: "Intern",
-    link: "https://gradixtech.com/",
+    link: "https://vyuga.nexyuga.in/",
     points: [
       "Engineered Vyuga (vyuga.nexyuga.in), a full-stack event management web app using React and Supabase.",
       "Integrated Razorpay for secure payment processing and managed deployment infrastructure using Cloudflare and VPS.",
