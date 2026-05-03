@@ -19,15 +19,32 @@ CORS(app)
 # ── Portfolio content ──────────────────────────────────────────────────────────
 
 def fetch_portfolio_content():
-    """Scrapes the live portfolio website to get the most up-to-date context, dealing with React SPAs."""
-    url = "https://r.jina.ai/https://vikast.me"
+    """Reads local React components for the most up-to-date context, falling back to scraping if needed."""
+    import glob
+    
     try:
-        print(f"🌐 Fetching live content from {url}...")
-        headers = {'Accept': 'text/plain'}
-        response = requests.get(url, headers=headers, timeout=20)
-        response.raise_for_status()
+        print("📁 Reading local portfolio content from src/components...")
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        parent_dir = os.path.dirname(current_dir)
         
-        text = response.text
+        components_path = os.path.join(parent_dir, "src", "components", "*.jsx")
+        files = glob.glob(components_path)
+        
+        content = ""
+        if files:
+            for f in files:
+                with open(f, "r", encoding="utf-8") as file:
+                    content += f"\n--- File: {os.path.basename(f)} ---\n"
+                    content += file.read() + "\n"
+            print(f"✅ Successfully read {len(files)} local component files!")
+        else:
+            print("⚠️ No local component files found. Trying fallback scraping...")
+            url = "https://r.jina.ai/https://vikast.me"
+            headers = {'Accept': 'text/plain'}
+            response = requests.get(url, headers=headers, timeout=20)
+            response.raise_for_status()
+            content = response.text
+            print("✅ Successfully fetched from Jina!")
         
         # Adding some base context that might not be fully explicitly written on the UI
         base_context = (
@@ -37,13 +54,12 @@ def fetch_portfolio_content():
             "GitHub: https://github.com/Vikasthangavel\n"
             "LinkedIn: https://www.linkedin.com/in/vikasthangavel\n"
             "Vikas T is an entry-level Software and Product Engineer currently pursuing a Bachelor of Technology in Artificial Intelligence and Data Science at K.S.Rangasamy College of Technology.\n\n"
-            "Here is the detailed content extracted directly from the live website:\n"
+            "Here is the detailed content extracted directly from the portfolio source code:\n"
         )
         
-        print("✅ Successfully fetched live website content!")
-        return base_context + text
+        return base_context + content
     except Exception as e:
-        print(f"⚠️ Failed to fetch website content: {e}")
+        print(f"⚠️ Failed to get portfolio content: {e}")
         print("Fallback to minimal context...")
         return "Vikas T is a Software Engineer from Erode, India. His portfolio is at https://vikast.me"
 

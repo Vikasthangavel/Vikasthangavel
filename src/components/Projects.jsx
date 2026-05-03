@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 
 /* ── Project Data ────────────────────────────────────────────── */
-const projects = [
+export const projects = [
   {
     title: "Time2Order",
     subtitle: "Preorder Management System",

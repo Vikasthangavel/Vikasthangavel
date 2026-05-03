@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Braces, Brain, Languages } from "lucide-react";
 
-const techSkills = [
+export const techSkills = [
   { name: "Python", level: 90 },
   { name: "Java", level: 70 },
   { name: "SQL", level: 85 },

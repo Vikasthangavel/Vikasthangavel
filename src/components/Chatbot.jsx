@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import { projects } from "./Projects";
+import { experiences } from "./Experience";
+import { techSkills } from "./Skills";
 
 // ─── API Keys ─────────────────────────────────────────────────────────────────
 const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || "";
@@ -118,31 +121,34 @@ export default function Chatbot() {
     const endRef = useRef(null);
     const inputRef = useRef(null);
 
-    // ── On mount: fetch live portfolio via jina.ai (same URL as app.py) ─────────
+    // ── On mount: build context dynamically from local files ─────────
     useEffect(() => {
         let cancelled = false;
 
-        const init = async () => {
-            setMessages([{ role: "assistant", text: "⏳ Loading Vikas's portfolio data..." }]);
+        const init = () => {
+            let dynamicContext = BASE_CONTEXT;
 
-            let portfolioText = "";
-            try {
-                const res = await fetch("https://r.jina.ai/https://vikast.me", {
-                    headers: { Accept: "text/plain" },
-                });
-                if (res.ok) portfolioText = await res.text();
-            } catch (_) {
-                // jina.ai failed — use base context only
-            }
+            dynamicContext += "\n--- PROJECTS ---\n";
+            projects.forEach(p => {
+                dynamicContext += `${p.title} - ${p.subtitle}\nDescription: ${p.description}\nTech Stack: ${p.tech.join(", ")}\n`;
+                if (p.links && p.links.length > 0) {
+                    dynamicContext += `Links: ${p.links.map(l => l.url).join(", ")}\n`;
+                }
+                dynamicContext += "\n";
+            });
 
-            const fullContext = portfolioText
-                ? BASE_CONTEXT + portfolioText
-                : BASE_CONTEXT + "Skills: Python, JavaScript, React, Node.js, SQL, AI/ML\n" +
-                "Open to Full-Stack or Backend Engineering roles from July 2026.\n" +
-                "Location: Erode, Tamil Nadu, India.";
+            dynamicContext += "--- EXPERIENCE ---\n";
+            experiences.forEach(e => {
+                dynamicContext += `${e.role} at ${e.company} (${e.period}, ${e.duration})\n`;
+                e.points.forEach(pt => dynamicContext += `- ${pt}\n`);
+                dynamicContext += "\n";
+            });
+
+            dynamicContext += "--- SKILLS ---\n";
+            dynamicContext += techSkills.map(s => `${s.name} (${s.level}%)`).join(", ") + "\n\n";
 
             if (!cancelled) {
-                systemPromptRef.current = buildSystemPrompt(fullContext);
+                systemPromptRef.current = buildSystemPrompt(dynamicContext);
                 setReady(true);
                 setMessages([{
                     role: "assistant",
