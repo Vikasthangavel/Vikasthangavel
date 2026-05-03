@@ -67,7 +67,7 @@ export const projects = [
     subtitle: "Online Vehicle Auction Platform",
     description:
       "Interactive online auction portal revolutionizing how vehicles are bought and sold. Features real-time bidding, thousands of vehicles at competitive prices, and a trustworthy marketplace with flexible offers.",
-    tech: ["Web App", "Auction System", "E-Commerce"],
+    tech: ["React", "Node.js", "MongoDB", "Razorpay", "E-Commerce"],
     links: [{ label: "autorevives.com", url: "https://autorevives.com/" }],
     featured: true,
     category: "client",
@@ -92,7 +92,7 @@ export const projects = [
     subtitle: "Operations Management Platform",
     description:
       "Platform for employee tracking, offline payments, and real-time dashboards to streamline business operations and workforce management.",
-    tech: ["Web Dev", "Dashboard", "Payments"],
+    tech: ["React", "Firebase", "Cloudflare", "Real-Time DB"],
     links: [{ label: "time2due.com", url: "https://time2due.com" }],
     featured: true,
     category: "personal",
