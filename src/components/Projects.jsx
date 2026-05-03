@@ -178,6 +178,16 @@ const projects = [
     featured: true,
     category: "client",
   },
+  {
+    title: "The Astro Tech",
+    subtitle: "Billing Software with GST Invoice",
+    description:
+      "A comprehensive billing software featuring GST invoicing and customer login. Integrated with a business chatbot using LangChain and a router API powered by GPT Mini.",
+    tech: ["React", "Python Flask", "LangChain", "GPT Mini"],
+    links: [{ label: "bill.theastrotech.in", url: "https://theastrotech.pages.dev/" }],
+    featured: true,
+    category: "client",
+  },
 ];
 
 const highlightProjects = projects.filter((p) => p.highlight);
