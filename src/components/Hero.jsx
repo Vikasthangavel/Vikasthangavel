@@ -64,9 +64,10 @@ function AnimatedCounter({ value, delay = 0 }) {
 }
 
 const stats = [
-  { value: "13+", label: "Projects" },
-  { value: "4+",  label: "Clients" },
-  { value: "10K+",label: "Users" },
+  { value: "15+", label: "Projects Shipped" },
+  { value: "4+",  label: "Clients Served" },
+  { value: "10K+", label: "Users Reached", sub: "via event platforms" },
+  { value: "2+",  label: "Yrs Building" },
 ];
 
 /* ── Particle positions — computed once, stable across renders ── */
@@ -241,6 +242,36 @@ export default function Hero() {
               <span className="text-emerald-300/80 font-medium">real-world impact</span>.
             </motion.p>
 
+            {/* ── Hire-me CTA banner ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.68, duration: 0.5 }}
+              className="flex items-start gap-3 px-4 py-3 rounded-xl border mb-6 relative overflow-hidden"
+              style={{
+                background: "rgba(251,191,36,0.05)",
+                borderColor: "rgba(251,191,36,0.25)",
+                boxShadow: "0 0 24px rgba(251,191,36,0.06)",
+              }}
+            >
+              {/* Left accent strip */}
+              <div
+                className="absolute left-0 top-0 bottom-0 w-0.5 rounded-l-xl"
+                style={{ background: "linear-gradient(to bottom, transparent, #f59e0b, transparent)" }}
+              />
+              {/* Pulsing dot */}
+              <span className="relative flex h-2 w-2 mt-1 flex-shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400" />
+              </span>
+              <div>
+                <p className="text-amber-300 text-sm font-semibold leading-snug">
+                  Open to Full-Stack &amp; Backend Engineering roles
+                </p>
+                <p className="text-amber-400/55 text-xs font-mono mt-0.5">Available from July 2026 · Open to relocation</p>
+              </div>
+            </motion.div>
+
             {/* CTA buttons */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -320,7 +351,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.1, duration: 0.55 }}
-              className="grid grid-cols-3 gap-3 max-w-md"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-lg"
             >
               {stats.map((st, i) => (
                 <motion.div
@@ -359,9 +390,14 @@ export default function Hero() {
                   >
                     <AnimatedCounter value={st.value} delay={1400 + i * 250} />
                   </div>
-                  <div className="text-[11px] text-gray-500 font-mono tracking-wide group-hover:text-gray-400 transition-colors">
+                  <div className="text-[11px] text-gray-500 font-mono tracking-wide group-hover:text-gray-400 transition-colors text-center">
                     {st.label}
                   </div>
+                  {st.sub && (
+                    <div className="text-[9px] text-gray-700 font-mono tracking-wide mt-0.5 text-center leading-tight">
+                      {st.sub}
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </motion.div>

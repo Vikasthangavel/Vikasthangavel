@@ -91,9 +91,42 @@ export default function About() {
               solutions that solve real-world problems. Currently pursuing B.Tech in AI & DS.
             </p>
 
-            <p className="text-amber-400/80 font-mono text-sm mb-8 px-4 py-3 bg-amber-500/5 border border-amber-500/20 rounded-lg">
-              🚀 Currently open to Full-Stack or Backend Engineering roles starting July 2026.
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="relative flex items-start gap-3.5 px-4 py-3.5 rounded-xl border mb-8 overflow-hidden"
+              style={{
+                background: "rgba(251,191,36,0.06)",
+                borderColor: "rgba(251,191,36,0.3)",
+                boxShadow: "0 0 32px rgba(251,191,36,0.07), inset 0 0 20px rgba(251,191,36,0.03)",
+              }}
+            >
+              {/* Left glow strip */}
+              <div
+                className="absolute left-0 top-0 bottom-0 w-0.5"
+                style={{ background: "linear-gradient(to bottom, transparent, #f59e0b, transparent)" }}
+              />
+              {/* Top shimmer */}
+              <div
+                className="absolute top-0 left-8 right-8 h-px"
+                style={{ background: "linear-gradient(to right, transparent, rgba(251,191,36,0.35), transparent)" }}
+              />
+              {/* Pulsing indicator */}
+              <span className="relative flex h-2.5 w-2.5 mt-1 flex-shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500" />
+              </span>
+              <div className="flex-1 min-w-0">
+                <p className="text-amber-300 font-semibold text-sm leading-snug">
+                  🚀 Open to Full-Stack &amp; Backend Engineering roles
+                </p>
+                <p className="text-amber-400/60 text-xs font-mono mt-1">
+                  Available from July 2026 &nbsp;·&nbsp; Open to relocation &nbsp;·&nbsp; Internship or FTE
+                </p>
+              </div>
+            </motion.div>
 
             {/* Highlight chips */}
             <div className="grid grid-cols-2 gap-3 mb-8">
