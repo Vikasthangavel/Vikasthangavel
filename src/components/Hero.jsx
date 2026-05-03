@@ -151,20 +151,35 @@ export default function Hero() {
           {/* ════ LEFT: Text content ════ */}
           <div className="flex flex-col">
 
-            {/* Status pill */}
+            {/* Status pill row */}
             <motion.div
               initial={{ opacity: 0, y: -16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.55 }}
-              className="inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full border border-green-500/20 bg-green-500/5 text-green-300/85 text-xs font-mono mb-7 backdrop-blur-sm"
+              className="flex flex-wrap items-center gap-2 self-start mb-7"
             >
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-400" />
-              </span>
-              <span className="text-gray-500">~/vikas-t</span>
-              <ChevronRight size={11} className="text-gray-600" />
-              <span className="text-green-400">open-to-work</span>
+              {/* Open-to-work pill */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-green-500/20 bg-green-500/5 text-green-300/85 text-xs font-mono backdrop-blur-sm">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-400" />
+                </span>
+                <span className="text-gray-500">~/vikas-t</span>
+                <ChevronRight size={11} className="text-gray-600" />
+                <span className="text-green-400">open-to-work</span>
+              </div>
+              {/* Degree badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.22, duration: 0.45 }}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-amber-500/25 bg-amber-500/8 text-amber-300/90 text-xs font-mono backdrop-blur-sm"
+              >
+                <span className="text-amber-500">🎓</span>
+                <span className="text-amber-400/80">B.Tech AI &amp; DS</span>
+                <span className="text-gray-600">•</span>
+                <span className="text-amber-300">Graduating May 2027</span>
+              </motion.div>
             </motion.div>
 
             {/* Heading */}
