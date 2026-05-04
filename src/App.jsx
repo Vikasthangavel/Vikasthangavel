@@ -10,6 +10,7 @@ import Achievements from "./components/Achievements";
 import Hobbies from "./components/Hobbies";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import QuickSummary from "./components/QuickSummary";
 import { useAnalytics } from "./hooks/useAnalytics";
 import AdminStats from "./components/AdminStats";
 import Chatbot from "./components/Chatbot";
@@ -24,6 +25,7 @@ function App() {
       {showStats && <AdminStats />}
       <Navbar />
       <Hero />
+      <QuickSummary />
       <About />
       <Skills />
       <Projects />
