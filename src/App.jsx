@@ -13,7 +13,7 @@ import Footer from "./components/Footer";
 import QuickSummary from "./components/QuickSummary";
 import { useAnalytics } from "./hooks/useAnalytics";
 import AdminStats from "./components/AdminStats";
-import Chatbot from "./components/Chatbot";
+import Chatbot from "./components/Chatbot.jsx";
 
 
 function App() {
