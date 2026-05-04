@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useMemo, memo } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 /* ─────────────────────────────────────────────────────────────
    All orbit positions pre-computed — never recomputed on render
@@ -18,10 +18,33 @@ const ORBIT_RADIUS   = 130;
 const ORBIT_DURATION = 28; // slower = less CPU torque on low-end
 
 /* Memoised tag — only re-mounts once, framer drives it via CSS transform */
-const OrbitTag = memo(function OrbitTag({ label, angle }) {
+const OrbitTag = memo(function OrbitTag({ label, angle, disableHeavyFx }) {
   const rad = (angle * Math.PI) / 180;
   const x   = Math.cos(rad) * ORBIT_RADIUS;
   const y   = Math.sin(rad) * ORBIT_RADIUS;
+
+  // On mobile / reduced-motion: render tags at fixed positions, no rotation
+  if (disableHeavyFx) {
+    return (
+      <div
+        className="absolute"
+        style={{ left: "50%", top: "50%" }}
+      >
+        <div
+          style={{
+            transform: `translate(${x - 28}px, ${y - 12}px)`,
+            background:   "rgba(74,222,128,0.07)",
+            borderColor:  "rgba(74,222,128,0.22)",
+            color:        "rgba(74,222,128,0.85)",
+            boxShadow:    "0 0 6px rgba(74,222,128,0.1)",
+          }}
+          className="text-[10px] px-2 py-0.5 rounded font-mono border whitespace-nowrap"
+        >
+          {label}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -56,12 +79,23 @@ const OrbitTag = memo(function OrbitTag({ label, angle }) {
    ───────────────────────────────────────────────────────────── */
 const CODE_CHARS = "01PYTHONREACTSQLAI</>{}[];".split("");
 
-const CodeRain = memo(function CodeRain() {
+const CodeRain = memo(function CodeRain({ disableHeavyFx }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    // Skip canvas animation entirely on mobile / reduced-motion
+    if (disableHeavyFx) {
+      const ctx = canvas.getContext("2d");
+      canvas.width  = canvas.offsetWidth || 400;
+      canvas.height = canvas.offsetHeight || 400;
+      // Render a single static frame
+      ctx.fillStyle = "rgba(5,13,7,1)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
 
     const ctx  = canvas.getContext("2d", { alpha: false }); // alpha:false = faster composite
     let animId;
@@ -114,13 +148,13 @@ const CodeRain = memo(function CodeRain() {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", onResize);
     };
-  }, []);
+  }, [disableHeavyFx]);
 
   return (
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full"
-      style={{ opacity: 0.5 }}
+      style={{ opacity: disableHeavyFx ? 0.15 : 0.5 }}
     />
   );
 });
@@ -159,12 +193,16 @@ const PulseRings = memo(function PulseRings() {
    Main export — memoised so parent re-renders don't cascade
    ───────────────────────────────────────────────────────────── */
 export default memo(function FloatingShape() {
+  const shouldReduceMotion = useReducedMotion();
+  const isMobile = typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
+  const disableHeavyFx = shouldReduceMotion || isMobile;
+
   return (
     <div className="relative w-full aspect-square max-w-[460px] mx-auto pointer-events-none">
 
-      {/* Code rain */}
+      {/* Code rain — static frame on mobile */}
       <div className="absolute inset-0 rounded-2xl overflow-hidden">
-        <CodeRain />
+        <CodeRain disableHeavyFx={disableHeavyFx} />
       </div>
 
       {/* Vignette */}
@@ -179,14 +217,14 @@ export default memo(function FloatingShape() {
 
         <div className="relative w-0 h-0">
           {ORBIT_ITEMS.map((item) => (
-            <OrbitTag key={item.label} label={item.label} angle={item.angle} />
+            <OrbitTag key={item.label} label={item.label} angle={item.angle} disableHeavyFx={disableHeavyFx} />
           ))}
         </div>
 
         {/* Centre badge */}
         <div className="absolute flex flex-col items-center justify-center">
           <motion.div
-            animate={{ scale: [1, 1.035, 1] }}
+            animate={disableHeavyFx ? {} : { scale: [1, 1.035, 1] }}
             transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
             style={{
               willChange:  "transform",
@@ -203,7 +241,7 @@ export default memo(function FloatingShape() {
           <motion.p
             className="mt-2 text-[10px] font-mono tracking-widest"
             style={{ color: "rgba(74,222,128,0.45)" }}
-            animate={{ opacity: [0.35, 0.8, 0.35] }}
+            animate={disableHeavyFx ? {} : { opacity: [0.35, 0.8, 0.35] }}
             transition={{ duration: 2.5, repeat: Infinity }}
           >
             &lt;vikas.dev/&gt;

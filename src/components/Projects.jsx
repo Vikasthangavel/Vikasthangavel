@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, useReducedMotion } from "framer-motion";
 import {
   ExternalLink,
   GitBranch,
@@ -197,12 +197,18 @@ const remainingProjects = projects.filter((p) => !p.highlight);
 const TileCard = ({ project, index }) => {
   const { Icon, accent, num } = project;
   const ref = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
+  const isMobile = typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
+  const disableTilt = shouldReduceMotion || isMobile;
+
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], [4, -4]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-6, 6]);
+  // On mobile / reduced-motion, useTransform returns static 0 — no GPU cost
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], disableTilt ? [0, 0] : [4, -4]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], disableTilt ? [0, 0] : [-6, 6]);
 
   const handleMouseMove = (e) => {
+    if (disableTilt) return; // no mouse on mobile anyway
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     mouseX.set((e.clientX - rect.left) / rect.width - 0.5);

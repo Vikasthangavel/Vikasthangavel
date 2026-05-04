@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import {
   Github,
   Linkedin,
@@ -84,6 +84,11 @@ const PARTICLES = Array.from({ length: 10 }, (_, i) => ({
 /* ── Main Hero ───────────────────────────────────────────── */
 export default function Hero() {
   const typed = useTypewriter(roles);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Detect mobile (touch-primary devices) — no mouse to track anyway
+  const isMobile = typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
+  const disableHeavyFx = shouldReduceMotion || isMobile;
 
   // useMotionValue: mouse updates go straight to CSS transform — zero re-renders
   const rawX  = useMotionValue(0);
@@ -92,13 +97,15 @@ export default function Hero() {
   const blobY = useSpring(rawY, { stiffness: 38, damping: 26, mass: 1 });
 
   useEffect(() => {
+    // Skip mouse tracking on mobile / reduced-motion — no benefit, only cost
+    if (disableHeavyFx) return;
     const fn = (e) => {
       rawX.set((e.clientX / window.innerWidth  - 0.5) * 18);
       rawY.set((e.clientY / window.innerHeight - 0.5) * 18);
     };
     window.addEventListener("mousemove", fn, { passive: true });
     return () => window.removeEventListener("mousemove", fn);
-  }, [rawX, rawY]);
+  }, [rawX, rawY, disableHeavyFx]);
 
 
   return (
@@ -117,18 +124,18 @@ export default function Hero() {
       {/* Grid lines */}
       <div className="absolute inset-0 grid-bg opacity-35 z-0" />
 
-      {/* Mouse-reactive glow blobs — driven by motion values, no re-render */}
+      {/* Mouse-reactive glow blobs — static on mobile / reduced-motion */}
       <motion.div
         className="absolute top-[5%] left-[2%] w-[480px] h-[480px] rounded-full blur-[140px] hero-blob-1 z-0"
-        style={{ background: "rgba(74,222,128,0.055)", x: blobX, y: blobY }}
+        style={{ background: "rgba(74,222,128,0.055)", x: disableHeavyFx ? 0 : blobX, y: disableHeavyFx ? 0 : blobY }}
       />
       <motion.div
         className="absolute bottom-[8%] right-[5%] w-[380px] h-[380px] rounded-full blur-[130px] hero-blob-2 z-0"
-        style={{ background: "rgba(16,185,129,0.04)", x: blobX, y: blobY }}
+        style={{ background: "rgba(16,185,129,0.04)", x: disableHeavyFx ? 0 : blobX, y: disableHeavyFx ? 0 : blobY }}
       />
 
-      {/* Floating particles — positions from memoised constant, CSS-only anim */}
-      {PARTICLES.map((p, i) => (
+      {/* Floating particles — hidden on mobile / reduced-motion to save GPU */}
+      {!disableHeavyFx && PARTICLES.map((p, i) => (
         <motion.div
           key={i}
           className="absolute rounded-full hidden md:block z-0"
