@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Music, Sprout, Cpu, Headphones, TreePine, Lightbulb } from "lucide-react";
+import { Music, Sprout, Cpu, Headphones, TreePine, Lightbulb, Wrench } from "lucide-react";
 
 const hobbies = [
   {
@@ -29,6 +29,15 @@ const hobbies = [
     iconBg: "bg-green-500/10 text-green-400",
     borderColor: "hover:border-green-500/30",
     emoji: "⚡",
+  },
+  {
+    icon: <Wrench size={28} />,
+    title: "Fixer, Not a Replacer",
+    description: "Why toss it when you can fix it? I get a kick out of diagnosing what's broken and breathing new life into it — because real satisfaction comes from revival, not replacement.",
+    gradient: "from-amber-500 to-orange-500",
+    iconBg: "bg-amber-500/10 text-amber-400",
+    borderColor: "hover:border-amber-500/30",
+    emoji: "🔧",
   },
 ];
 
