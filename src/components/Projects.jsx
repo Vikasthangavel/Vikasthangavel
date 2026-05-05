@@ -82,8 +82,8 @@ export const projects = [
     subtitle: "Digital Agreement & eSign Platform",
     description:
       "A platform where tourist packers can create professional agreements and instantly send them to clients. Clients can review and digitally sign agreements online — eliminating paperwork, reducing back-and-forth, and making the booking process seamless for both parties.",
-    tech: ["React", "Digital Signatures", "Cloudflare", "Agreement Workflow"],
-    links: [{ label: "time2confirm.pages.dev", url: "https://time2confirm.pages.dev/" }],
+    tech: ["React", "Digital Signatures", "Cloudflare", "Firebase", "Cloudinary"],
+    links: [{ label: "time2confirm.com", url: "https://time2confirm.pages.dev/" }],
     featured: true,
     category: "personal",
     highlight: true,
