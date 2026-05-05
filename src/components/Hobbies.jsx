@@ -37,7 +37,7 @@ const hobbies = [
     gradient: "from-amber-500 to-orange-500",
     iconBg: "bg-amber-500/10 text-amber-400",
     borderColor: "hover:border-amber-500/30",
-    emoji: "🔧",
+    emoji: "🛠️",
   },
 ];
 
