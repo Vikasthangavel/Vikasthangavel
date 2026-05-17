@@ -1,117 +1,165 @@
-# Hi, I'm Vikas T 👋
+<div align="center">
 
-> **AI Engineer · Full Stack Developer · Product Builder**  
-> I build things that solve real problems — from a deepfake detection system reviewed by law enforcement to a preorder platform helping local shops go digital.
+# Vikas T
+### AI Engineer · Full Stack Developer · Product Builder
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-vikast.me-534AB7?style=flat&logo=vercel&logoColor=white)](https://vikast.me/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-vikasthangavel-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vikasthangavel/)
-[![GitHub](https://img.shields.io/badge/GitHub-Vikasthangavel-181717?style=flat&logo=github&logoColor=white)](https://github.com/Vikasthangavel)
-[![Email](https://img.shields.io/badge/Email-vikasthangavel@gmail.com-EA4335?style=flat&logo=gmail&logoColor=white)](mailto:vikasthangavel@gmail.com)
+*I build things that solve real problems — from a deepfake detection system reviewed by law enforcement*  
+*to a preorder platform helping local shops go digital.*
+
+[![Portfolio](https://img.shields.io/badge/🌐_Portfolio-vikast.me-534AB7?style=for-the-badge)](https://vikast.me/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-vikasthangavel-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vikasthangavel/)
+[![GitHub](https://img.shields.io/badge/GitHub-Vikasthangavel-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Vikasthangavel)
+[![Email](https://img.shields.io/badge/Email-vikasthangavel@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:vikasthangavel@gmail.com)
+
+</div>
 
 ---
 
 ## 🏆 Achievement
 
-**2nd Place — Namakkal Police Cybersecurity Hackathon 2025**  
-Built an AI-based cybercrime detection and forensic investigation support system. Project presented to Namakkal Cyber Cell for potential pilot implementation.
+> 🥈 **2nd Place — Namakkal Police Cybersecurity Hackathon 2025**  
+> Built an AI-based cybercrime detection system. Presented to Namakkal Cyber Cell for pilot implementation.
 
 ---
 
 ## 👨‍💻 About Me
 
-- 🎓 **B.Tech in Artificial Intelligence & Data Science** — K.S. Rangasamy College of Technology (CGPA: 8.2)
+- 🎓 **B.Tech in AI & Data Science** — K.S. Rangasamy College of Technology · CGPA: **8.2**
 - 🚀 Shipped **6+ live products** end-to-end: ML pipelines, REST APIs, and frontend UIs
-- 🧠 Passionate about AI, product engineering, and building tools that make a real-world difference
-- 📍 Based in Erode, Tamil Nadu
+- 🧠 Passionate about AI, product engineering, and real-world impact
+- 📍 Erode, Tamil Nadu
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category | Technologies |
-|---|---|
-| **Languages** | Python · Java · SQL · JavaScript |
-| **Frontend** | React.js · HTML · CSS · Tailwind |
-| **Backend** | Flask · Express.js · Node.js · Django · Spring Boot |
-| **Databases** | MySQL · Supabase · PostgreSQL |
-| **AI / ML** | Machine Learning · Deep Learning · Computer Vision · Roboflow · Gemini API |
-| **Tools & Deploy** | Power BI · Git · Cloudflare · VPS · REST APIs |
+**Languages & Frontend**
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+
+**Backend & Databases**
+
+![Flask](https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-404D59?style=flat-square&logo=express&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=flat-square&logo=node.js&logoColor=white)
+![Django](https://img.shields.io/badge/Django-092E20?style=flat-square&logo=django&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
+
+**AI / ML & Tools**
+
+![ML](https://img.shields.io/badge/Machine_Learning-FF6F00?style=flat-square&logo=tensorflow&logoColor=white)
+![CV](https://img.shields.io/badge/Computer_Vision-5C3EE8?style=flat-square&logo=opencv&logoColor=white)
+![Roboflow](https://img.shields.io/badge/Roboflow-6706CE?style=flat-square)
+![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=flat-square&logo=cloudflare&logoColor=white)
 
 ---
 
 ## 🚀 Featured Projects
 
-### 🔍 [TrueSight AI — Deepfake Detection System](https://tinyurl.com/cybernamakkal)
-> AI-powered multimodal deepfake detection (video + audio) with forensic evidence report generation.  
-> Designed for cybercrime investigation workflows. **Reviewed by Namakkal Cyber Cell for pilot deployment.**
+### 🔍 TrueSight AI — Deepfake Detection System
+> Multimodal (video + audio) deepfake detection using Roboflow-trained CV models.  
+> Generates structured forensic evidence reports for cybercrime investigation workflows.  
+> **Reviewed by Namakkal Cyber Cell for pilot deployment.**
 
-`Flask` `Roboflow` `Computer Vision` `Python` `Deep Learning`
+![Flask](https://img.shields.io/badge/Flask-000?style=flat-square&logo=flask)
+![Roboflow](https://img.shields.io/badge/Roboflow-6706CE?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+[![Live](https://img.shields.io/badge/🔗_Live_Demo-534AB7?style=flat-square)](https://tinyurl.com/cybernamakkal)
 
 ---
 
-### 🛒 [Time2Order — Preorder Management System](https://time2orders.com)
-> Helps local shops manage preorders, reduce customer wait times, and process digital payments with soundbox notifications.
+### 🛒 Time2Order — Preorder Management System
+> Web platform helping local shops manage advance orders, reduce wait times, and accept digital payments.  
+> Features a soundbox notification system for real-time order alerts.
 
-`Python` `SQL` `Cashfree API` → [time2orders.com](https://time2orders.com) · [time2orders.shop](https://time2orders.shop)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+![Cashfree](https://img.shields.io/badge/Cashfree_API-00BAF2?style=flat-square)
+[![Live](https://img.shields.io/badge/🔗_time2orders.com-534AB7?style=flat-square)](https://time2orders.com)
+
+---
+
+### 🎓 DAKSHAA T26 — National Symposium Portal
+> Full-stack event management platform for a national-level technical symposium.  
+> Online registrations, college payment gateway, Supabase auth. Deployed on Cloudflare + VPS.
+
+![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
+![Express](https://img.shields.io/badge/Express.js-404D59?style=flat-square)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
+[![Live](https://img.shields.io/badge/🔗_dakshaa.ksrct.ac.in-534AB7?style=flat-square)](https://dakshaa.ksrct.ac.in)
 
 ---
 
 ### 🌾 Time2Farm — Farm Finance & AI Assistant
-> Farmer-focused financial tracker with section-wise P&L reporting and **Gemini API-powered AI insights** through a mobile-first interface.
+> Mobile-first financial tracker for farmers with section-wise P&L analysis.  
+> Integrated Gemini API for AI-driven insights on farm financial planning.
 
-`Python` `SQL` `Gemini API`
-
----
-
-### 🎓 [DAKSHAA T26 — National Symposium Portal](https://dakshaa.ksrct.ac.in)
-> Full-stack platform for a national-level technical symposium with online registrations, payment gateway integration, and Supabase authentication. Deployed on Cloudflare (frontend) and VPS (backend).
-
-`React` `Express.js` `Supabase` `Cloudflare` `REST APIs`
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![Gemini](https://img.shields.io/badge/Gemini_API-4285F4?style=flat-square&logo=google&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
 
 ---
 
-### 🏢 [Time2Due — Operations Management Platform](https://time2due.com)
-> ERP-style platform for cable operators — employee management, offline payment tracking, and mobile-friendly dashboards.
+### 🏢 Time2Due — Operations Management Platform
+> ERP-style platform for cable operators: employee management, offline payment tracking, mobile dashboards.
 
-`Python` `SQL` `REST APIs`
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+[![Live](https://img.shields.io/badge/🔗_time2due.com-534AB7?style=flat-square)](https://time2due.com)
 
 ---
 
 ### 📊 IPL Analysis — Power BI Dashboard
-> Interactive dashboard analyzing IPL match data from 2008–2024: team performance trends, player statistics, and match outcomes using DAX.
+> Interactive dashboard analyzing IPL match data (2008–2024): team trends, player stats, and outcomes using DAX.
 
-`Power BI` `DAX` `Data Visualization`
+![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black)
+![DAX](https://img.shields.io/badge/DAX-0078D4?style=flat-square)
 
 ---
 
-### 🏠 [The Astro Technologies — Product Catalog](https://theastro.pages.dev/)
-> Professional portfolio and product catalog for a Vellore-based RO System company with Cloudinary-powered image storage and dynamic product listings.
+### 🏠 The Astro Technologies — Product Catalog
+> Portfolio and product catalog for a Vellore-based RO System company with Cloudinary image storage.
 
-`React` `Firebase` `Cloudinary`
+![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black)
+![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=flat-square)
+[![Live](https://img.shields.io/badge/🔗_theastrotechnologies.in-534AB7?style=flat-square)](https://theastro.pages.dev/)
 
 ---
 
 ## 💼 Experience
 
-**Web Developer Intern — Gradix Technologies**
+**🖥️ Web Developer Intern — Gradix Technologies**
 - Built responsive web interfaces using modern frontend technologies
-- Collaborated on backend API integration and feature development
-- Improved application performance and UX in an agile team environment
+- Collaborated on backend API integration and feature development in an agile team
+- Improved application performance and user experience
 
-**AI/ML Virtual Internship** *(Apr – Jun 2025 · 10 weeks)*
-- Hands-on experience in model development, data preprocessing, and algorithm optimization
-
----
-
-## 📫 Let's Connect
-
-| | |
-|---|---|
-| 📍 | Erode, Tamil Nadu |
-| 📧 | vikasthangavel@gmail.com |
-| 💼 | [linkedin.com/in/vikasthangavel](https://www.linkedin.com/in/vikasthangavel/) |
-| 🌐 | [vikast.me](https://vikast.me/) |
+**🤖 AI/ML Virtual Internship** *(Apr – Jun 2025 · 10 weeks)*
+- Model development, data preprocessing, and algorithm optimization
 
 ---
 
-⭐ *If you find my work interesting, feel free to explore my repositories and reach out!*
+<div align="center">
+
+## 📊 GitHub Stats
+
+![Vikas's GitHub stats](https://github-readme-stats.vercel.app/api?username=Vikasthangavel&show_icons=true&theme=tokyonight&hide_border=true&count_private=true)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Vikasthangavel&layout=compact&theme=tokyonight&hide_border=true)
+
+---
+
+*📍 Erode, Tamil Nadu · 📧 vikasthangavel@gmail.com · 🌐 [vikast.me](https://vikast.me/)*
+
+⭐ *Exploring my repos? Feel free to reach out — always open to interesting collaborations!*
+
+</div>
