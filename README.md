@@ -151,12 +151,6 @@
 
 <div align="center">
 
-## 📊 GitHub Stats
-
-![Vikas's GitHub stats](https://github-readme-stats.vercel.app/api?username=Vikasthangavel&show_icons=true&theme=tokyonight&hide_border=true&count_private=true)
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Vikasthangavel&layout=compact&theme=tokyonight&hide_border=true)
-
----
 
 *📍 Erode, Tamil Nadu · 📧 vikasthangavel@gmail.com · 🌐 [vikast.me](https://vikast.me/)*
 
