@@ -145,7 +145,7 @@
 - Improved application performance and user experience
 
 **🤖 AI/ML Virtual Internship** *(Apr – Jun 2025 · 10 weeks)*
-- Model development, data preprocessing, and algorithm optimization
+- Model development , data preprocessing , and algorithm optimization
 
 ---
 
