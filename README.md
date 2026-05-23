@@ -24,7 +24,7 @@
 
 ## 👨‍💻 About Me
 
-- 🎓 **B.Tech in AI & Data Science** — K.S. Rangasamy College of Technology 
+- 🎓 **B.Tech in AI & Data Science** — K.S. Rangasamy College of Technology - CGPA : **8.2** 
 - 🚀 Shipped **6+ live products** end-to-end: ML pipelines, REST APIs, and frontend UIs
 - 🧠 Passionate about AI, product engineering, and real-world impact
 - 📍 Erode, Tamil Nadu
