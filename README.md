@@ -36,8 +36,7 @@ vikas = {
     "location"  : "Erode, Tamil Nadu 🇮🇳",
     "shipped"   : "6+ live products (ML pipelines, REST APIs, full-stack UIs)",
     "passion"   : ["AI", "Product Engineering", "Real-world Impact"],
-    "pronouns"  : "he/him",
-    "fun_fact"  : "My deepfake detector was reviewed by the police 👮"
+    "pronouns"  : "he/him"
 }
 ```
 
