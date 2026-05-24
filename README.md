@@ -68,7 +68,7 @@ vikas = {
 | 🛒 **[Time2Order](https://time2orders.com)** | Preorder platform for local shops with soundbox notifications + digital payments | `Python` `SQL` `Cashfree API` | ![Live](https://img.shields.io/badge/LIVE-4ade80?style=flat-square) |
 | 🎓 **[DAKSHAA T26](https://dakshaa.ksrct.ac.in)** | National symposium portal — online registrations, payment gateway, auth | `React` `Express` `Supabase` | ![Live](https://img.shields.io/badge/LIVE-4ade80?style=flat-square) |
 | 🏢 **[Time2Due](https://time2due.com)** | ERP for cable operators — employee mgmt, offline payments, mobile dashboards | `Python` `SQL` | ![Live](https://img.shields.io/badge/LIVE-4ade80?style=flat-square) |
-| 🌾 **Time2Farm(https://time2farm.pages.dev)** | Farm finance tracker with section-wise P&L + Gemini AI insights | `Python` `Gemini API` `SQL` | ![Beta](https://img.shields.io/badge/BETA-fbbf24?style=flat-square) |
+| 🌾 **[Time2Farm](https://time2farm.pages.dev)** | Farm finance tracker with section-wise P&L + Gemini AI insights | `Python` `Gemini API` `SQL` | ![Beta](https://img.shields.io/badge/BETA-fbbf24?style=flat-square) |
 | 📊 **IPL Analysis** | Interactive Power BI dashboard — IPL 2008–2024 trends, player stats | `Power BI` `DAX` | ![Done](https://img.shields.io/badge/DONE-8b5cf6?style=flat-square) |
 | 🏠 **[Astro Technologies](https://theastro.pages.dev/)** | Product catalog for RO Systems company — React + Firebase + Cloudinary | `React` `Firebase` `Cloudinary` | ![Live](https://img.shields.io/badge/LIVE-4ade80?style=flat-square) |
 
