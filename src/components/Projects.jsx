@@ -118,7 +118,7 @@ export const projects = [
     description:
       "AI-powered finance tracking for farmers. Features income/expense tracking and intelligent insights via Gemini API integration.",
     tech: ["AI", "Gemini API", "Finance"],
-    links: [],
+    links: [{ label: "Live", url: "https://time2farm.pages.dev" }],
     featured: false,
     category: "personal",
   },
