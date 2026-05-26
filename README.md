@@ -46,11 +46,7 @@ vikas = {
 
 <div align="center">
 <!-- refresh -->
-<img height="180" src="https://github-readme-stats.vercel.app/api?username=Vikasthangavel&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0a0a10&title_color=8b5cf6&icon_color=22d3ee&text_color=e2e0f0&ring_color=8b5cf6" />
-&nbsp;
-<img height="180" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vikasthangavel&layout=compact&theme=tokyonight&hide_border=true&bg_color=0a0a10&title_color=8b5cf6&text_color=e2e0f0&langs_count=6" />
 
-<br/><br/>
 
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=Vikasthangavel&theme=tokyonight&hide_border=true&background=0a0a10&ring=8b5cf6&fire=f472b6&currStreakLabel=22d3ee&sideLabels=e2e0f0&dates=6b6888" />
 
