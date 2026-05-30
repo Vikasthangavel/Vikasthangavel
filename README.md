@@ -121,7 +121,7 @@ vikas = {
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=8b5cf6&height=120&section=footer&text=Let%27s+build+something+together&fontSize=18&fontColor=ffffff&animation=fadeIn&fontAlignY=65" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=rounded&height=120&color=0:0f172a,50:7c3aed,100:06b6d4&text=See%20You%20in%20the%20Next%20Commit%20🚀&fontSize=24&fontColor=ffffff&animation=twinkling" width="100%"/>
 
 📍 Erode, Tamil Nadu &nbsp;·&nbsp; 📧 vikasthangavel@gmail.com &nbsp;·&nbsp; 🌐 [vikast.me](https://vikast.me/)
 
