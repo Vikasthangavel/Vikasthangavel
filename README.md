@@ -1,6 +1,5 @@
 <div align="center">
-
-<img src="https://capsule-render.vercel.app/api?type=waving&height=260&color=0:0f172a,50:7c3aed,100:06b6d4&text=Vikas%20T&fontColor=ffffff&fontSize=70&fontAlignY=35&desc=Building%20AI%20Products%20That%20People%20Actually%20Use&descAlignY=55&descSize=18&descColor=e2e8f0&animation=twinkling" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=venom&height=280&color=0:6366f1,50:8b5cf6,100:ec4899&text=Vikas%20T&fontColor=ffffff&fontSize=72&animation=fadeIn&desc=Engineering%20Ideas%20into%20Intelligent%20Products&descSize=20&descColor=f8fafc" width="100%"/>
 
 <img src="https://readme-typing-svg.demolab.com?font=Space+Mono&size=16&duration=2800&pause=800&color=8B5CF6&center=true&vCenter=true&multiline=false&width=500&lines=I+build+things+that+solve+real+problems.;6%2B+live+products+shipped+end-to-end.;AI+%C3%97+Full+Stack+%C3%97+Real+Impact.;From+deepfakes+to+farm+finance." alt="Typing SVG" />
 
