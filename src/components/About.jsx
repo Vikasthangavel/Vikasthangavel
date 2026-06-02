@@ -155,6 +155,7 @@ export default function About() {
               whileHover={{ x: 5 }}
               className="flex items-center gap-2 text-slate-500 font-mono text-sm cursor-default"
             >
+              <MapPin size={16} className="text-indigo-500 animate-pulse"/>
               <span>{">> "}is_open_to_relocation = <span className="text-indigo-600">True</span></span>
             </motion.div>
           </motion.div>
