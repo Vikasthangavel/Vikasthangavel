@@ -33,10 +33,10 @@ const OrbitTag = memo(function OrbitTag({ label, angle, disableHeavyFx }) {
         <div
           style={{
             transform: `translate(${x - 28}px, ${y - 12}px)`,
-            background:   "rgba(74,222,128,0.07)",
-            borderColor:  "rgba(74,222,128,0.22)",
-            color:        "rgba(74,222,128,0.85)",
-            boxShadow:    "0 0 6px rgba(74,222,128,0.1)",
+            background:   "rgba(99,102,241,0.08)",
+            borderColor:  "rgba(99,102,241,0.25)",
+            color:        "rgba(79,70,229,0.85)",
+            boxShadow:    "0 0 6px rgba(99,102,241,0.1)",
           }}
           className="text-[10px] px-2 py-0.5 rounded font-mono border whitespace-nowrap"
         >
@@ -59,10 +59,10 @@ const OrbitTag = memo(function OrbitTag({ label, angle, disableHeavyFx }) {
           x: x - 28,
           y: y - 12,
           willChange: "transform",
-          background:   "rgba(74,222,128,0.07)",
-          borderColor:  "rgba(74,222,128,0.22)",
-          color:        "rgba(74,222,128,0.85)",
-          boxShadow:    "0 0 6px rgba(74,222,128,0.1)",
+          background:   "rgba(99,102,241,0.08)",
+          borderColor:  "rgba(99,102,241,0.28)",
+          color:        "rgba(79,70,229,0.9)",
+          boxShadow:    "0 2px 8px rgba(99,102,241,0.12)",
         }}
         animate={{ rotate: -360 }}
         transition={{ duration: ORBIT_DURATION, repeat: Infinity, ease: "linear" }}
@@ -91,8 +91,7 @@ const CodeRain = memo(function CodeRain({ disableHeavyFx }) {
       const ctx = canvas.getContext("2d");
       canvas.width  = canvas.offsetWidth || 400;
       canvas.height = canvas.offsetHeight || 400;
-      // Render a single static frame
-      ctx.fillStyle = "rgba(5,13,7,1)";
+      ctx.fillStyle = "rgba(248,250,255,1)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       return;
     }
@@ -118,8 +117,8 @@ const CodeRain = memo(function CodeRain({ disableHeavyFx }) {
       if (ts - last < MS) return;        // skip frame — throttle
       last = ts;
 
-      // trail fade
-      ctx.fillStyle = "rgba(5,13,7,0.18)";
+      // trail fade — light background
+      ctx.fillStyle = "rgba(241,245,255,0.25)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.font = `${SIZE}px monospace`;
@@ -130,8 +129,8 @@ const CodeRain = memo(function CodeRain({ disableHeavyFx }) {
       for (let i = 0; i < cols; i++) {
         const char = CODE_CHARS[(Math.random() * CODE_CHARS.length) | 0];
         ctx.fillStyle = drops[i] < 2
-          ? "#a7f3d0"
-          : `rgba(74,222,128,${0.1 + Math.random() * 0.18})`;
+          ? "rgba(99,102,241,0.9)"
+          : `rgba(99,102,241,${0.06 + Math.random() * 0.12})`;
         ctx.fillText(char, i * SIZE, drops[i] * SIZE);
 
         if (drops[i] * SIZE > canvas.height && Math.random() > 0.97) drops[i] = 0;
@@ -178,7 +177,7 @@ const PulseRings = memo(function PulseRings() {
           style={{
             width:       r.size,
             height:      r.size,
-            borderColor: `rgba(74,222,128,${r.opacity})`,
+            borderColor: `rgba(99,102,241,${r.opacity})`,
             willChange:  "transform, opacity",
           }}
           animate={{ scale: [1, 1.055, 1], opacity: [r.opacity * 4, r.opacity * 7, r.opacity * 4] }}
@@ -208,7 +207,7 @@ export default memo(function FloatingShape() {
       {/* Vignette */}
       <div
         className="absolute inset-0 rounded-2xl"
-        style={{ background: "radial-gradient(ellipse at center, transparent 30%, rgba(5,13,7,0.88) 100%)" }}
+        style={{ background: "radial-gradient(ellipse at center, transparent 30%, rgba(241,245,255,0.85) 100%)" }}
       />
 
       {/* Rings + orbit tags */}
@@ -228,11 +227,11 @@ export default memo(function FloatingShape() {
             transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
             style={{
               willChange:  "transform",
-              background:  "rgba(74,222,128,0.08)",
-              borderColor: "rgba(74,222,128,0.28)",
-              color:       "#4ade80",
-              boxShadow:   "0 0 28px rgba(74,222,128,0.15), 0 0 56px rgba(74,222,128,0.05)",
-              textShadow:  "0 0 18px rgba(74,222,128,0.55)",
+              background:  "rgba(99,102,241,0.08)",
+              borderColor: "rgba(99,102,241,0.3)",
+              color:       "#6366f1",
+              boxShadow:   "0 0 28px rgba(99,102,241,0.18), 0 0 56px rgba(99,102,241,0.07)",
+              textShadow:  "0 0 18px rgba(99,102,241,0.4)",
             }}
             className="w-20 h-20 rounded-2xl flex items-center justify-center font-mono font-black text-2xl border"
           >
@@ -240,7 +239,7 @@ export default memo(function FloatingShape() {
           </motion.div>
           <motion.p
             className="mt-2 text-[10px] font-mono tracking-widest"
-            style={{ color: "rgba(74,222,128,0.45)" }}
+            style={{ color: "rgba(99,102,241,0.5)" }}
             animate={disableHeavyFx ? {} : { opacity: [0.35, 0.8, 0.35] }}
             transition={{ duration: 2.5, repeat: Infinity }}
           >

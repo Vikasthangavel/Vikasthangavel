@@ -21,21 +21,39 @@ function App() {
   const showStats = new URLSearchParams(window.location.search).get("view") === "stats";
 
   return (
-    <div className="bg-[#f8faff] min-h-screen text-slate-900 font-sans selection:bg-indigo-500 selection:text-white">
-      {showStats && <AdminStats />}
-      <Navbar />
-      <Hero />
-      <QuickSummary />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Education />
-      <Achievements />
-      <Hobbies />
-      <Contact />
-      <Footer />
-      <ChatBot />
+    <div
+      className="min-h-screen text-slate-900 font-sans selection:bg-indigo-500 selection:text-white relative"
+      style={{
+        background: "#f8faff",
+        backgroundImage: "radial-gradient(circle, rgba(99,102,241,0.08) 1px, transparent 1px)",
+        backgroundSize: "28px 28px",
+      }}
+    >
+      {/* Soft gradient mask over dot grid */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 20% 0%, rgba(99,102,241,0.07) 0%, transparent 60%)," +
+            "radial-gradient(ellipse 60% 50% at 90% 90%, rgba(139,92,246,0.06) 0%, transparent 55%)",
+        }}
+      />
+      <div className="relative z-10">
+        {showStats && <AdminStats />}
+        <Navbar />
+        <Hero />
+        <QuickSummary />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Education />
+        <Achievements />
+        <Hobbies />
+        <Contact />
+        <Footer />
+        <ChatBot />
+      </div>
     </div>
   );
 }
