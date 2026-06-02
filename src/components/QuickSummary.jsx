@@ -8,23 +8,23 @@ const items = [
     value: "B.Tech AI & DS, KSRCT",
     detail: "Graduating Jul 2026",
     color: "amber",
-    border: "rgba(251,191,36,0.18)",
-    bg: "rgba(251,191,36,0.05)",
-    glow: "rgba(251,191,36,0.12)",
-    textColor: "#fbbf24",
-    detailColor: "rgba(251,191,36,0.55)",
+    border: "rgba(245,158,11,0.25)",
+    bg: "rgba(255,251,235,0.9)",
+    glow: "rgba(245,158,11,0.08)",
+    textColor: "#b45309",
+    detailColor: "rgba(180,83,9,0.6)",
   },
   {
     emoji: "💼",
     label: "Role",
     value: "Full-Stack Developer",
     detail: "React · Python · Flask · Supabase",
-    color: "green",
-    border: "rgba(74,222,128,0.18)",
-    bg: "rgba(74,222,128,0.05)",
-    glow: "rgba(74,222,128,0.12)",
-    textColor: "#4ade80",
-    detailColor: "rgba(74,222,128,0.5)",
+    color: "indigo",
+    border: "rgba(99,102,241,0.25)",
+    bg: "rgba(238,242,255,0.9)",
+    glow: "rgba(99,102,241,0.08)",
+    textColor: "#4338ca",
+    detailColor: "rgba(67,56,202,0.6)",
   },
   {
     emoji: "🚀",
@@ -32,11 +32,11 @@ const items = [
     value: "15+ shipped products",
     detail: "10K+ users · 4+ clients · 1 internship",
     color: "sky",
-    border: "rgba(56,189,248,0.18)",
-    bg: "rgba(56,189,248,0.05)",
-    glow: "rgba(56,189,248,0.12)",
-    textColor: "#38bdf8",
-    detailColor: "rgba(56,189,248,0.5)",
+    border: "rgba(6,182,212,0.25)",
+    bg: "rgba(236,254,255,0.9)",
+    glow: "rgba(6,182,212,0.08)",
+    textColor: "#0e7490",
+    detailColor: "rgba(14,116,144,0.6)",
   },
 ];
 
@@ -52,7 +52,7 @@ export default function QuickSummary() {
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[480px] max-w-full h-px"
         style={{
           background:
-            "linear-gradient(to right, transparent, rgba(74,222,128,0.18), transparent)",
+            "linear-gradient(to right, transparent, rgba(99,102,241,0.18), transparent)",
         }}
       />
 
@@ -63,7 +63,7 @@ export default function QuickSummary() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45 }}
-          className="text-center text-[11px] font-mono tracking-[0.22em] text-gray-600 uppercase mb-4 select-none"
+          className="text-center text-[11px] font-mono tracking-[0.22em] text-slate-400 uppercase mb-4 select-none"
         >
           // TL;DR — Quick Summary
         </motion.p>
@@ -78,7 +78,7 @@ export default function QuickSummary() {
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.1 }}
               whileHover={{ y: -3, scale: 1.02 }}
-              className="group relative flex items-center gap-3.5 px-4 py-3.5 rounded-xl border backdrop-blur-sm cursor-default overflow-hidden"
+              className="group relative flex items-center gap-3.5 px-4 py-3.5 rounded-xl border cursor-default overflow-hidden shadow-sm"
               style={{
                 border: `1px solid ${item.border}`,
                 background: item.bg,
@@ -139,7 +139,7 @@ export default function QuickSummary() {
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[480px] max-w-full h-px"
         style={{
           background:
-            "linear-gradient(to right, transparent, rgba(74,222,128,0.1), transparent)",
+            "linear-gradient(to right, transparent, rgba(99,102,241,0.1), transparent)",
         }}
       />
     </section>

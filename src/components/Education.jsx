@@ -14,8 +14,8 @@ export default function Education() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-green-500 text-sm tracking-wider mb-3 block">{"// education"}</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <span className="font-mono text-indigo-500 text-sm tracking-wider mb-3 block">{"// education"}</span>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">
             <span className="gradient-text animate-gradient-text">Education</span>
           </h2>
         </motion.div>
@@ -38,34 +38,34 @@ export default function Education() {
                 <motion.div
                   animate={{ y: [0, -5, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="p-3 bg-purple-500/10 rounded-xl border border-purple-500/20 shrink-0"
+                  className="p-3 bg-violet-100 rounded-xl border border-violet-200 shrink-0"
                 >
-                  <GraduationCap size={28} className="text-purple-400" />
+                  <GraduationCap size={28} className="text-violet-500" />
                 </motion.div>
                 <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
+                  <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-1">
                     B.Tech in AI & Data Science
                   </h3>
-                  <p className="text-green-400 font-mono text-sm">
+                  <p className="text-indigo-600 font-mono text-sm">
                     K.S.Rangasamy College of Technology
                   </p>
                 </div>
               </div>
 
               <div className="flex flex-col items-start md:items-end gap-2 shrink-0">
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/5 border border-green-500/15 text-gray-400 text-xs font-mono">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-500 text-xs font-mono">
                   <Calendar size={13} />
                   Sep 2023 – Jun 2027
                 </div>
-                <div className="px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/20 font-mono animate-glow-pulse">
-                  <span className="text-green-400 text-sm font-bold">CGPA: 8.2</span>
+                <div className="px-3 py-1.5 rounded-lg bg-indigo-50 border border-indigo-200 font-mono">
+                  <span className="text-indigo-600 text-sm font-bold">CGPA: 8.2</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 pt-6 border-t border-gray-800">
-              <div className="font-mono text-sm leading-relaxed text-gray-400">
-                <p className="text-gray-600 mb-2">{"// coursework & focus areas"}</p>
+            <div className="mt-6 pt-6 border-t border-slate-200">
+              <div className="font-mono text-sm leading-relaxed text-slate-600">
+                <p className="text-slate-400 mb-2">{"// coursework & focus areas"}</p>
                 <div className="flex flex-wrap gap-2">
                   {["Machine Learning", "Data Structures", "Algorithms", "Database Management", "Deep Learning", "NLP", "Computer Vision"].map((course, i) => (
                     <motion.span
@@ -75,7 +75,7 @@ export default function Education() {
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.08 }}
                       whileHover={{ scale: 1.1, y: -2 }}
-                      className="px-3 py-1 rounded-md bg-white/[0.03] border border-white/[0.06] text-gray-400 text-xs hover:border-purple-500/30 hover:text-purple-300 hover:bg-purple-500/5 transition-all cursor-default inline-block"
+                      className="px-3 py-1 rounded-md bg-slate-100 border border-slate-200 text-slate-600 text-xs hover:border-indigo-300 hover:text-indigo-600 hover:bg-indigo-50 transition-all cursor-default inline-block"
                     >
                       {course}
                     </motion.span>
@@ -105,31 +105,31 @@ export default function Education() {
                 <motion.div
                   animate={{ y: [0, -5, 0] }}
                   transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                  className="p-3 bg-green-500/10 rounded-xl border border-green-500/20 shrink-0"
+                  className="p-3 bg-emerald-100 rounded-xl border border-emerald-200 shrink-0"
                 >
-                  <School size={28} className="text-green-400" />
+                  <School size={28} className="text-emerald-500" />
                 </motion.div>
                 <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
+                  <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-1">
                     HSC — 12th Standard
                   </h3>
-                  <p className="text-green-400 font-mono text-sm">
+                  <p className="text-indigo-600 font-mono text-sm">
                     SPB Matriculation Higher Secondary School
                   </p>
                 </div>
               </div>
 
               <div className="flex flex-col items-start md:items-end gap-2 shrink-0">
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/5 border border-green-500/15 text-gray-400 text-xs font-mono">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-500 text-xs font-mono">
                   <Calendar size={13} />
                   Graduated 2023
                 </div>
                 <div className="flex gap-2">
-                  <div className="px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/20 font-mono animate-glow-pulse">
-                    <span className="text-green-400 text-sm font-bold">89%</span>
+                  <div className="px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 font-mono">
+                    <span className="text-emerald-600 text-sm font-bold">89%</span>
                   </div>
-                  <div className="px-3 py-1.5 rounded-lg bg-purple-500/10 border border-purple-500/20 font-mono">
-                    <span className="text-purple-400 text-sm font-bold">Cutoff: 173</span>
+                  <div className="px-3 py-1.5 rounded-lg bg-violet-50 border border-violet-200 font-mono">
+                    <span className="text-violet-600 text-sm font-bold">Cutoff: 173</span>
                   </div>
                 </div>
               </div>

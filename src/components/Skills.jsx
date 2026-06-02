@@ -76,11 +76,11 @@ export default function Skills() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-green-500 text-sm tracking-wider mb-3 block">{"// tech-stack"}</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <span className="font-mono text-indigo-500 text-sm tracking-wider mb-3 block">{"// tech-stack"}</span>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">
             My <span className="gradient-text animate-gradient-text">Skills</span>
           </h2>
-          <p className="text-gray-500 text-sm font-mono">{techSkills.length}+ technologies across the full stack</p>
+          <p className="text-slate-500 text-sm font-mono">{techSkills.length}+ technologies across the full stack</p>
         </motion.div>
 
         {/* ── Skill Category Grid ── */}
@@ -113,7 +113,7 @@ export default function Skills() {
                   >
                     <cat.Icon size={14} style={{ color: cat.accent }} />
                   </div>
-                  <span className="text-sm font-bold font-mono text-gray-200">{cat.label}</span>
+                  <span className="text-sm font-bold font-mono text-slate-800">{cat.label}</span>
                 </div>
 
                 {/* Tag pills */}
@@ -181,10 +181,10 @@ export default function Skills() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07 }}
-                  className="flex items-center gap-2 p-2.5 rounded-lg bg-white/[0.02] hover:bg-white/[0.05] border border-transparent hover:border-purple-500/20 transition-all cursor-default"
+                  className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-50 hover:bg-indigo-50 border border-transparent hover:border-indigo-200 transition-all cursor-default"
                 >
                   <motion.span whileHover={{ scale: 1.3, rotate: 15 }} className="text-base">{s.emoji}</motion.span>
-                  <span className="text-xs font-medium text-gray-300 leading-tight">{s.name}</span>
+                  <span className="text-xs font-medium text-slate-700 leading-tight">{s.name}</span>
                 </motion.div>
               ))}
             </div>
@@ -207,10 +207,10 @@ export default function Skills() {
               {languages.map((lang) => (
                 <div
                   key={lang.name}
-                  className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] hover:bg-white/[0.04] transition-all cursor-default"
+                  className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 hover:bg-indigo-50 transition-all cursor-default"
                 >
-                  <span className="text-sm font-medium text-gray-300">{lang.name}</span>
-                  <span className="text-xs font-mono px-3 py-1 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">
+                  <span className="text-sm font-medium text-slate-700">{lang.name}</span>
+                  <span className="text-xs font-mono px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-200">
                     {lang.level}
                   </span>
                 </div>

@@ -21,7 +21,7 @@ function App() {
   const showStats = new URLSearchParams(window.location.search).get("view") === "stats";
 
   return (
-    <div className="bg-[#0a0a0f] min-h-screen text-slate-100 font-sans selection:bg-amber-500 selection:text-black">
+    <div className="bg-[#f8faff] min-h-screen text-slate-900 font-sans selection:bg-indigo-500 selection:text-white">
       {showStats && <AdminStats />}
       <Navbar />
       <Hero />

@@ -45,8 +45,8 @@ export default function Experience() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-green-500 text-sm tracking-wider mb-3 block">{"// experience"}</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <span className="font-mono text-indigo-500 text-sm tracking-wider mb-3 block">{"// experience"}</span>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">
             Work <span className="gradient-text animate-gradient-text">Experience</span>
           </h2>
         </motion.div>
@@ -58,7 +58,7 @@ export default function Experience() {
             whileInView={{ height: "100%" }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="absolute left-4 md:left-6 top-0 w-px bg-gradient-to-b from-green-500/50 via-emerald-500/25 to-transparent"
+            className="absolute left-4 md:left-6 top-0 w-px bg-gradient-to-b from-indigo-500/50 via-violet-500/25 to-transparent"
           ></motion.div>
 
           <div className="space-y-12">
@@ -77,7 +77,7 @@ export default function Experience() {
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.2, type: "spring", stiffness: 300 }}
-                  className="absolute left-2.5 md:left-4 top-2 w-4 h-4 rounded-full bg-green-500 ring-4 ring-[#050d07] glow-green animate-glow-pulse"
+                  className="absolute left-2.5 md:left-4 top-2 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-[#f8faff] glow-indigo animate-glow-pulse"
                 ></motion.div>
 
                 <div className="terminal-card card-shine">
@@ -87,22 +87,22 @@ export default function Experience() {
                   <div className="p-6 md:p-8">
                     <div className="flex flex-col md:flex-row md:items-start justify-between mb-5 gap-3">
                       <div>
-                        <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                          <Briefcase size={18} className="text-green-400" />
+                        <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                          <Briefcase size={18} className="text-indigo-500" />
                           {exp.role}
                         </h3>
-                        <span className="text-green-400/70 font-mono text-sm mt-1 block">{exp.company}</span>
+                        <span className="text-indigo-600/80 font-mono text-sm mt-1 block">{exp.company}</span>
                         {exp.link && (
-                          <a href={exp.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-1.5 text-xs font-mono text-green-400 hover:text-green-300 transition-colors">
+                          <a href={exp.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-1.5 text-xs font-mono text-indigo-500 hover:text-indigo-700 transition-colors">
                             <ExternalLink size={12} />
                             {exp.link.replace('https://', '')}
                           </a>
                         )}
                       </div>
-                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/5 border border-green-500/15 text-gray-400 text-xs font-mono shrink-0">
+                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-indigo-50 border border-indigo-100 text-slate-500 text-xs font-mono shrink-0">
                         <Calendar size={13} />
                         <span>{exp.period}</span>
-                        <span className="text-green-400">({exp.duration})</span>
+                        <span className="text-indigo-500">({exp.duration})</span>
                       </div>
                     </div>
 
@@ -114,9 +114,9 @@ export default function Experience() {
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: i * 0.1 }}
-                          className="flex items-start gap-3 text-gray-300 text-sm hover:text-gray-100 hover:translate-x-1 transition-all duration-300 cursor-default"
+                          className="flex items-start gap-3 text-slate-600 text-sm hover:text-slate-900 hover:translate-x-1 transition-all duration-300 cursor-default"
                         >
-                          <CheckCircle2 size={16} className="text-green-500 mt-0.5 shrink-0" />
+                          <CheckCircle2 size={16} className="text-indigo-500 mt-0.5 shrink-0" />
                           {point}
                         </motion.li>
                       ))}
@@ -127,9 +127,9 @@ export default function Experience() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: exp.points.length * 0.1 }}
-                        className="mt-4 pt-4 border-t border-white/5"
+                        className="mt-4 pt-4 border-t border-slate-100"
                       >
-                        <a href={exp.projectLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-mono text-green-400 hover:text-green-300 transition-colors hover:translate-x-1 duration-300">
+                        <a href={exp.projectLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-mono text-indigo-500 hover:text-indigo-700 transition-colors hover:translate-x-1 duration-300">
                           <ExternalLink size={14} />
                           Project: {exp.projectLink.replace('https://', '').replace(/\/$/, '')}
                         </a>

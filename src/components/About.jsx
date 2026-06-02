@@ -22,8 +22,8 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-amber-500 text-sm tracking-wider mb-3 block">{"/∕ about-me"}</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <span className="font-mono text-violet-500 text-sm tracking-wider mb-3 block">{"/∕ about-me"}</span>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">
             About <span className="gradient-text animate-gradient-text">Me</span>
           </h2>
         </motion.div>
@@ -39,22 +39,22 @@ export default function About() {
           >
             <div className="relative group">
               {/* Glow ring */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 via-rose-500 to-purple-500 rounded-2xl blur-md opacity-20 group-hover:opacity-50 transition duration-700"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 rounded-2xl blur-md opacity-20 group-hover:opacity-50 transition duration-700"></div>
               
               {/* Image container */}
-              <div className="relative w-72 h-72 md:w-[340px] md:h-[340px] rounded-2xl overflow-hidden border-2 border-gray-800 group-hover:border-amber-500/30 transition-all duration-500 tilt-hover">
+              <div className="relative w-72 h-72 md:w-[340px] md:h-[340px] rounded-2xl overflow-hidden border-2 border-slate-200 group-hover:border-indigo-400/50 transition-all duration-500 tilt-hover shadow-xl">
                 <img src={vikasImage} alt="Vikas T" className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" />
                 {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f]/80 via-transparent to-transparent group-hover:from-[#0a0a0f]/60 transition-all duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent group-hover:from-slate-900/20 transition-all duration-500"></div>
               </div>
 
               {/* Floating badge */}
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -bottom-4 -right-4 px-4 py-2 bg-[#0d1117] border border-amber-500/30 rounded-xl font-mono text-sm text-amber-400 glow-amber"
+                className="absolute -bottom-4 -right-4 px-4 py-2 bg-white border border-indigo-200 rounded-xl font-mono text-sm text-indigo-600 shadow-lg shadow-indigo-500/15"
               >
-                <span className="text-gray-500">const</span> status = <span className="text-green-400">"building"</span>
+                <span className="text-slate-400">const</span> status = <span className="text-emerald-600">"building"</span>
               </motion.div>
             </div>
           </motion.div>
@@ -85,7 +85,7 @@ export default function About() {
               </div>
             </div>
 
-            <p className="text-gray-400 leading-relaxed mb-4 text-base">
+            <p className="text-slate-600 leading-relaxed mb-4 text-base">
               I'm a hands-on engineer who loves turning ideas into real products. 
               From payment integrations to AI-powered dashboards, I build end-to-end 
               solutions that solve real-world problems. Currently pursuing B.Tech in AI & DS.
@@ -119,10 +119,10 @@ export default function About() {
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500" />
               </span>
               <div className="flex-1 min-w-0">
-                <p className="text-amber-300 font-semibold text-sm leading-snug">
+                <p className="text-amber-700 font-semibold text-sm leading-snug">
                   🚀 Open to Full-Stack &amp; Backend Engineering roles
                 </p>
-                <p className="text-amber-400/60 text-xs font-mono mt-1">
+                <p className="text-amber-600/70 text-xs font-mono mt-1">
                   Available from July 2026 &nbsp;·&nbsp; Open to relocation &nbsp;·&nbsp; Internship or FTE
                 </p>
               </div>
@@ -139,10 +139,10 @@ export default function About() {
                     transition={{ delay: i * 0.1 }}
                     whileHover={{ scale: 1.05, y: -3 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-amber-500/20 hover:bg-amber-500/5 transition-all group cursor-default"
+                    className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 transition-all group cursor-default shadow-sm"
                 >
-                  <div className="text-amber-400 group-hover:text-amber-300 transition-colors">{item.icon}</div>
-                  <span className="text-sm text-gray-300 font-medium">{item.label}</span>
+                  <div className="text-indigo-500 group-hover:text-indigo-600 transition-colors">{item.icon}</div>
+                  <span className="text-sm text-slate-700 font-medium">{item.label}</span>
                 </motion.div>
               ))}
             </div>
@@ -153,10 +153,9 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ delay: 0.8 }}
               whileHover={{ x: 5 }}
-              className="flex items-center gap-2 text-gray-500 font-mono text-sm cursor-default"
+              className="flex items-center gap-2 text-slate-500 font-mono text-sm cursor-default"
             >
-              <MapPin size={16} className="text-amber-500 animate-pulse"/>
-              <span>{">> "}is_open_to_relocation = <span className="text-green-400">True</span></span>
+              <span>{">> "}is_open_to_relocation = <span className="text-indigo-600">True</span></span>
             </motion.div>
           </motion.div>
         </div>

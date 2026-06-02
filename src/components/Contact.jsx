@@ -45,8 +45,8 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-green-500 text-sm tracking-wider mb-3 block">{"// contact"}</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <span className="font-mono text-indigo-500 text-sm tracking-wider mb-3 block">{"// contact"}</span>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">
             Get in <span className="gradient-text animate-gradient-text">Touch</span>
           </h2>
         </motion.div>
@@ -83,20 +83,20 @@ export default function Contact() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -4, scale: 1.02 }}
-                className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-green-500/20 hover:bg-white/[0.04] transition-all group cursor-default"
+                className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/40 transition-all group cursor-default shadow-sm"
               >
                 <div className={`p-2.5 rounded-lg bg-${item.color}-500/10 text-${item.color}-400`}>
                   {item.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs text-gray-500 font-mono mb-0.5">{item.label}</p>
+                  <p className="text-xs text-slate-400 font-mono mb-0.5">{item.label}</p>
                   {item.href ? (
-                    <a href={item.href} className="text-gray-200 text-sm hover:text-green-400 transition-colors flex items-center gap-1 truncate">
+                    <a href={item.href} className="text-slate-700 text-sm hover:text-indigo-600 transition-colors flex items-center gap-1 truncate">
                       {item.value}
                       <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                     </a>
                   ) : (
-                    <p className="text-gray-200 text-sm truncate">{item.value}</p>
+                    <p className="text-slate-700 text-sm truncate">{item.value}</p>
                   )}
                 </div>
               </motion.div>
@@ -128,7 +128,7 @@ export default function Contact() {
                 transition={{ duration: 0.8 }}
               />
             </motion.a>
-            <p className="text-gray-600 text-xs font-mono mt-4">
+            <p className="text-slate-400 text-xs font-mono mt-4">
             </p>
           </motion.div>
         </div>

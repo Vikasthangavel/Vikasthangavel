@@ -37,8 +37,8 @@ export default function Achievements() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-green-500 text-sm tracking-wider mb-3 block">{"// achievements"}</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <span className="font-mono text-indigo-500 text-sm tracking-wider mb-3 block">{"// achievements"}</span>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">
             <span className="gradient-text animate-gradient-text">Achievements</span>
           </h2>
         </motion.div>
@@ -73,11 +73,11 @@ export default function Achievements() {
                   {item.icon}
                 </motion.div>
                 <div>
-                  <h3 className="text-lg font-bold text-white mb-1 group-hover:text-green-400 transition-colors">
+                  <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors">
                     {item.title}
                   </h3>
-                  <span className="text-xs font-mono text-gray-500 mb-3 block">{item.org}</span>
-                  <p className="text-gray-400 text-sm leading-relaxed">{item.description}</p>
+                  <span className="text-xs font-mono text-slate-400 mb-3 block">{item.org}</span>
+                  <p className="text-slate-500 text-sm leading-relaxed">{item.description}</p>
                 </div>
               </div>
             </motion.div>
