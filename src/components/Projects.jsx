@@ -14,6 +14,8 @@ import {
   ArrowUpRight,
   Folder,
   Star,
+  Users,
+  Code2,
 } from "lucide-react";
 
 /* ── Project Data ─────────────────────────────────────────────── */
@@ -21,8 +23,9 @@ export const projects = [
   {
     title: "Time2Order",
     subtitle: "Preorder Management System",
+    impact: "Reduced customer waiting time by 40% • Integrated Cashfree payment gateway",
     description:
-      "Built a preorder management system that reduced customer waiting time by 40% and enabled secure online payments via Cashfree API. Features real-time order tracking, automated payment reconciliation, and a streamlined shop dashboard.",
+      "Built a preorder management system with real-time order tracking, automated payment reconciliation, and a streamlined shop dashboard.",
     tech: ["Python", "SQL", "Cashfree API"],
     links: [
       { label: "time2orders.com", url: "https://time2orders.com" },
@@ -33,13 +36,13 @@ export const projects = [
     highlight: true,
     Icon: Zap,
     accent: "#6366f1",
-    num: "01",
   },
   {
     title: "Dakshaa T26",
     subtitle: "Full-Stack Event Platform",
+    impact: "Served 5000+ students • Deployed on Cloudflare + VPS",
     description:
-      "Full-stack event management platform with React frontend, Express backend, Supabase Auth, and integrated payment processing. Deployed on Cloudflare + VPS for 5000+ student participants.",
+      "Full-stack event management platform with React frontend, Express backend, Supabase Auth, and integrated payment processing.",
     tech: ["React", "Express", "Supabase", "Cloudflare"],
     links: [{ label: "dakshaa.ksrct.ac.in", url: "https://dakshaa.ksrct.ac.in" }],
     featured: true,
@@ -47,13 +50,13 @@ export const projects = [
     highlight: true,
     Icon: Globe,
     accent: "#8b5cf6",
-    num: "02",
   },
   {
     title: "TrueSight AI",
     subtitle: "Deepfake Detection & Forensics",
+    impact: "Presented to Namakkal Cyber Cell • AI-powered forensic reports",
     description:
-      "AI deepfake detection using Roboflow models & Flask backend. Generates evidence-based forensic reports. Formally presented to Namakkal Cyber Cell for real-world cybercrime investigation.",
+      "AI deepfake detection using Roboflow models & Flask backend. Generates evidence-based forensic reports for real-world cybercrime investigation.",
     tech: ["Roboflow", "Flask", "AI/ML", "Forensics"],
     links: [{ label: "Cyber Cell Report", url: "https://tinyurl.com/cybernamakkal" }],
     featured: true,
@@ -61,13 +64,13 @@ export const projects = [
     highlight: true,
     Icon: Cpu,
     accent: "#06b6d4",
-    num: "03",
   },
   {
     title: "AutoRevive",
     subtitle: "Online Vehicle Auction Platform",
+    impact: "Real-time bidding system • Razorpay payment integration",
     description:
-      "Interactive online auction portal revolutionizing how vehicles are bought and sold. Features real-time bidding, thousands of vehicles at competitive prices, and a trustworthy marketplace with flexible offers.",
+      "Interactive online auction portal with real-time bidding, thousands of vehicles at competitive prices, and a trustworthy marketplace with flexible offers.",
     tech: ["React", "Node.js", "MongoDB", "Razorpay"],
     links: [{ label: "autorevives.com", url: "https://autorevives.com/" }],
     featured: true,
@@ -75,13 +78,13 @@ export const projects = [
     highlight: true,
     Icon: Layers,
     accent: "#10b981",
-    num: "04",
   },
   {
     title: "Time2Confirm",
     subtitle: "Digital Agreement & eSign Platform",
+    impact: "Eliminated paperwork • Instant digital signatures",
     description:
-      "A platform where tourist packers can create professional agreements and instantly send them to clients. Clients can review and digitally sign agreements online — eliminating paperwork and making the booking process seamless.",
+      "Platform where tourist packers create professional agreements and instantly send them to clients for online review and digital signing.",
     tech: ["React", "Digital Signatures", "Firebase", "Cloudinary"],
     links: [{ label: "time2confirm.com", url: "https://time2confirm.pages.dev/" }],
     featured: true,
@@ -89,7 +92,6 @@ export const projects = [
     highlight: true,
     Icon: FileSignature,
     accent: "#f59e0b",
-    num: "05",
   },
   // extra projects
   {
@@ -219,99 +221,101 @@ export const projects = [
 const highlightProjects = projects.filter((p) => p.highlight);
 const remainingProjects = projects.filter((p) => !p.highlight);
 
-/* ── Featured Card ─────────────────────────────────────────────── */
+/* ── Featured Card — Clean horizontal layout ──────────────────── */
 const FeaturedCard = ({ project, index }) => {
-  const { Icon, accent, num } = project;
+  const { Icon, accent } = project;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ delay: index * 0.1, duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
-      whileHover={{ y: -4 }}
-      className="group relative bg-white rounded-2xl border border-slate-200 hover:border-slate-300 hover:shadow-lg hover:shadow-slate-200/60 transition-all duration-300 overflow-hidden cursor-default"
+      transition={{ delay: index * 0.08, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="group relative bg-white rounded-xl border border-slate-200/80 hover:border-slate-300 transition-all duration-300 overflow-hidden"
+      style={{
+        boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.02)",
+      }}
     >
-      {/* Top accent bar */}
-      <div
-        className="h-1 w-full"
-        style={{ background: `linear-gradient(90deg, ${accent}, ${accent}88)` }}
-      />
+      {/* Subtle left accent */}
+      <div className="flex">
+        <div
+          className="w-1 flex-shrink-0 rounded-l-xl"
+          style={{ background: accent }}
+        />
 
-      <div className="flex items-start gap-5 p-6">
-        {/* Number + Icon column */}
-        <div className="flex flex-col items-center gap-2 flex-shrink-0">
-          <span
-            className="text-3xl font-black font-mono leading-none select-none"
-            style={{ color: `${accent}22`, WebkitTextStroke: `1px ${accent}40` }}
-          >
-            {num}
-          </span>
-          <div
-            className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 border"
-            style={{ background: `${accent}12`, borderColor: `${accent}30` }}
-          >
-            {Icon && <Icon size={20} style={{ color: accent }} />}
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="flex-1 min-w-0">
-          {/* Title row */}
-          <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
-            <div>
-              <div className="flex items-center gap-2 flex-wrap">
-                <h3 className="text-lg font-bold text-slate-900 font-mono tracking-tight">
-                  {project.title}
-                </h3>
-                <span
-                  className="text-[9px] px-2 py-0.5 rounded-full font-mono font-bold tracking-widest border"
-                  style={{ color: accent, background: `${accent}10`, borderColor: `${accent}30` }}
-                >
-                  FEATURED
-                </span>
-                <Star size={11} className="text-amber-400 fill-amber-400" />
+        <div className="flex-1 p-5 sm:p-6">
+          {/* Top row: Icon + Title + Category + Links */}
+          <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
+            <div className="flex items-start gap-3">
+              <div
+                className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+                style={{ background: `${accent}10`, border: `1px solid ${accent}20` }}
+              >
+                {Icon && <Icon size={18} style={{ color: accent }} strokeWidth={2} />}
               </div>
-              <p className="text-xs font-mono mt-0.5" style={{ color: `${accent}bb` }}>
-                {project.subtitle}
-              </p>
+              <div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="text-base font-semibold text-slate-900 leading-tight">
+                    {project.title}
+                  </h3>
+                  <span
+                    className={`text-[10px] px-2 py-0.5 rounded-md font-medium tracking-wide uppercase ${
+                      project.category === "client"
+                        ? "bg-emerald-50 text-emerald-600 border border-emerald-200/80"
+                        : "bg-indigo-50 text-indigo-500 border border-indigo-200/80"
+                    }`}
+                  >
+                    {project.category}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400 mt-0.5">{project.subtitle}</p>
+              </div>
             </div>
 
-            {/* Links */}
+            {/* Links — right side */}
             <div className="flex gap-2 flex-shrink-0 flex-wrap">
               {project.links.length > 0 ? (
                 project.links.map((link, i) => (
-                  <motion.a
+                  <a
                     key={i}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     download={link.download}
-                    whileHover={{ scale: 1.05, y: -1 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-lg border bg-slate-50 text-slate-600 border-slate-200 hover:border-indigo-300 hover:text-indigo-600 hover:bg-indigo-50 transition-all"
+                    className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border bg-slate-50 text-slate-500 border-slate-200 hover:border-indigo-300 hover:text-indigo-600 hover:bg-indigo-50/50 transition-all duration-200"
                   >
-                    {link.download ? <Download size={10} /> : <ArrowUpRight size={10} />}
+                    {link.download ? <Download size={11} /> : <ArrowUpRight size={11} />}
                     {link.label}
-                  </motion.a>
+                  </a>
                 ))
               ) : (
-                <span className="text-slate-400 text-xs font-mono italic flex items-center gap-1">
-                  <GitBranch size={10} /> private
+                <span className="text-slate-300 text-xs italic flex items-center gap-1">
+                  <GitBranch size={11} /> private
                 </span>
               )}
             </div>
           </div>
 
+          {/* Impact line */}
+          {project.impact && (
+            <p
+              className="text-xs font-medium mb-2.5 flex items-center gap-1.5"
+              style={{ color: accent }}
+            >
+              <Star size={11} className="flex-shrink-0 opacity-70" />
+              {project.impact}
+            </p>
+          )}
+
           {/* Description */}
-          <p className="text-slate-500 text-sm leading-relaxed mb-4">{project.description}</p>
+          <p className="text-slate-500 text-[13px] leading-relaxed mb-3.5">{project.description}</p>
 
           {/* Tech pills */}
           <div className="flex flex-wrap gap-1.5">
             {project.tech.map((t, i) => (
               <span
                 key={i}
-                className="text-[11px] px-2.5 py-0.5 rounded-full font-mono border bg-slate-50 text-slate-600 border-slate-200"
+                className="text-[11px] px-2.5 py-1 rounded-md bg-slate-50 text-slate-500 border border-slate-100"
               >
                 {t}
               </span>
@@ -323,15 +327,17 @@ const FeaturedCard = ({ project, index }) => {
   );
 };
 
-/* ── Extra Project Card ─────────────────────────────────────────── */
+/* ── Compact Card for additional projects ─────────────────────── */
 const ProjectCard = ({ project, index }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 16 }}
     animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: 16 }}
-    transition={{ delay: index * 0.06, duration: 0.4 }}
-    whileHover={{ y: -4 }}
-    className="group bg-white rounded-2xl border border-slate-200 hover:border-slate-300 hover:shadow-md hover:shadow-slate-200/50 transition-all duration-300 overflow-hidden flex flex-col cursor-default"
+    exit={{ opacity: 0, y: 12 }}
+    transition={{ delay: index * 0.05, duration: 0.35 }}
+    className="group bg-white rounded-xl border border-slate-200/80 hover:border-slate-300 transition-all duration-300 overflow-hidden flex flex-col"
+    style={{
+      boxShadow: "0 1px 3px rgba(0,0,0,0.03), 0 2px 8px rgba(0,0,0,0.02)",
+    }}
   >
     {/* Colored top strip */}
     <div
@@ -339,35 +345,35 @@ const ProjectCard = ({ project, index }) => (
       style={{ background: project.accent || "#6366f1" }}
     />
 
-    <div className="p-5 flex flex-col flex-1">
+    <div className="p-4 sm:p-5 flex flex-col flex-1">
       {/* Header */}
-      <div className="flex items-start justify-between gap-2 mb-3">
+      <div className="flex items-start justify-between gap-2 mb-2.5">
         <div>
           <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="text-sm font-bold text-slate-900 font-mono">
+            <h3 className="text-sm font-semibold text-slate-900">
               {project.title}
             </h3>
             {project.underDev && (
-              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200 font-mono animate-pulse">
+              <span className="text-[9px] px-1.5 py-0.5 rounded-md bg-amber-50 text-amber-600 border border-amber-200 animate-pulse">
                 In Dev
               </span>
             )}
             <span
-              className={`text-[9px] px-1.5 py-0.5 rounded font-mono uppercase tracking-wide border ${
+              className={`text-[9px] px-1.5 py-0.5 rounded-md uppercase tracking-wide border ${
                 project.category === "client"
                   ? "bg-emerald-50 text-emerald-600 border-emerald-200"
-                  : "bg-indigo-50 text-indigo-600 border-indigo-200"
+                  : "bg-indigo-50 text-indigo-500 border-indigo-200"
               }`}
             >
               {project.category}
             </span>
           </div>
-          <p className="text-[11px] font-mono text-slate-400 mt-0.5">{project.subtitle}</p>
+          <p className="text-[11px] text-slate-400 mt-0.5">{project.subtitle}</p>
         </div>
         {project.featured && <Star size={12} className="text-amber-400 fill-amber-400 flex-shrink-0 mt-0.5" />}
       </div>
 
-      <p className="text-slate-500 text-sm leading-relaxed mb-4 flex-1">{project.description}</p>
+      <p className="text-slate-500 text-[13px] leading-relaxed mb-3.5 flex-1">{project.description}</p>
 
       {/* Footer */}
       <div className="mt-auto">
@@ -375,7 +381,7 @@ const ProjectCard = ({ project, index }) => (
           {project.tech.map((t, i) => (
             <span
               key={i}
-              className="text-[10px] px-2 py-0.5 rounded-full font-mono border bg-slate-50 text-slate-500 border-slate-200"
+              className="text-[10px] px-2 py-0.5 rounded-md bg-slate-50 text-slate-500 border border-slate-100"
             >
               {t}
             </span>
@@ -390,14 +396,14 @@ const ProjectCard = ({ project, index }) => (
                 target="_blank"
                 rel="noopener noreferrer"
                 download={link.download}
-                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-indigo-600 transition-colors font-mono"
+                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-indigo-600 transition-colors"
               >
-                {link.download ? <Download size={10} /> : <ExternalLink size={10} />}
+                {link.download ? <Download size={11} /> : <ExternalLink size={11} />}
                 {link.label}
               </a>
             ))
           ) : (
-            <span className="text-slate-300 text-xs font-mono italic flex items-center gap-1">
+            <span className="text-slate-300 text-xs italic flex items-center gap-1">
               <GitBranch size={10} /> private / offline
             </span>
           )}
@@ -406,6 +412,39 @@ const ProjectCard = ({ project, index }) => (
     </div>
   </motion.div>
 );
+
+/* ── Stats Row ────────────────────────────────────────────────── */
+const StatsRow = () => {
+  const clientCount = projects.filter((p) => p.category === "client").length;
+  const personalCount = projects.filter((p) => p.category === "personal").length;
+
+  const stats = [
+    { label: "Total Projects", value: projects.length, icon: Code2 },
+    { label: "Client Projects", value: clientCount, icon: Users },
+    { label: "Personal Projects", value: personalCount, icon: Folder },
+  ];
+
+  return (
+    <div className="flex justify-center gap-6 sm:gap-10 mb-10">
+      {stats.map((s, i) => (
+        <motion.div
+          key={s.label}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 + i * 0.1 }}
+          className="text-center"
+        >
+          <div className="flex items-center justify-center gap-1.5 mb-1">
+            <s.icon size={14} className="text-indigo-400" />
+            <span className="text-2xl font-bold text-slate-800">{s.value}</span>
+          </div>
+          <span className="text-[11px] text-slate-400 uppercase tracking-wider">{s.label}</span>
+        </motion.div>
+      ))}
+    </div>
+  );
+};
 
 /* ── Main Export ──────────────────────────────────────────────── */
 export default function Projects() {
@@ -430,17 +469,18 @@ export default function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
-          <span className="font-mono text-indigo-500 text-sm tracking-wider mb-3 block">
-            {"// projects"}
+          <span className="text-indigo-500 text-xs font-medium tracking-widest uppercase mb-3 block">
+            Portfolio
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">
-            Featured <span className="gradient-text animate-gradient-text">Work</span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-slate-900">
+            Featured{" "}
+            <span className="gradient-text animate-gradient-text">Projects</span>
           </h2>
-          <p className="text-slate-500 text-sm font-mono mb-8">
-            {projects.length} projects shipped —{" "}
-            <span className="text-indigo-500">here are the highlights</span>
+          <p className="text-slate-400 text-sm max-w-md mx-auto mb-8">
+            A selection of projects I've built — from full-stack platforms
+            to AI-powered tools and client solutions.
           </p>
 
           {/* Filter tabs */}
@@ -449,27 +489,29 @@ export default function Projects() {
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`px-5 py-2 text-sm font-mono rounded-full border transition-all ${
+                className={`px-5 py-2 text-sm rounded-full border transition-all duration-200 ${
                   filter === f
-                    ? "bg-indigo-500 border-indigo-500 text-white shadow-md shadow-indigo-200"
+                    ? "bg-slate-900 border-slate-900 text-white shadow-sm"
                     : "bg-white border-slate-200 text-slate-500 hover:text-slate-700 hover:border-slate-300"
                 }`}
               >
-                {f === "all" ? "All" : f.charAt(0).toUpperCase() + f.slice(1)}{" "}
-                {f !== "all" ? "Projects" : ""}
+                {f === "all" ? "All" : f.charAt(0).toUpperCase() + f.slice(1)}
               </button>
             ))}
           </div>
         </motion.div>
 
+        {/* Stats */}
+        <StatsRow />
+
         {/* Featured stack */}
-        <div className="flex flex-col gap-4 mb-10">
+        <div className="flex flex-col gap-3 mb-10">
           {displayedHighlights.length > 0 ? (
             displayedHighlights.map((project, index) => (
               <FeaturedCard key={project.title} project={project} index={index} />
             ))
           ) : (
-            <div className="text-center text-slate-400 font-mono py-10">
+            <div className="text-center text-slate-400 py-10 text-sm">
               No featured projects in this category.
             </div>
           )}
@@ -479,9 +521,9 @@ export default function Projects() {
         <div className="flex justify-center mb-10">
           <motion.button
             onClick={() => setShowAll((prev) => !prev)}
-            whileHover={{ scale: 1.04 }}
+            whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2.5 px-7 py-3 rounded-full font-mono text-sm font-semibold border bg-white border-slate-200 text-slate-600 hover:border-indigo-300 hover:text-indigo-600 hover:bg-indigo-50 shadow-sm transition-all"
+            className="flex items-center gap-2.5 px-6 py-2.5 rounded-full text-sm font-medium border bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-800 shadow-sm transition-all"
           >
             {showAll ? (
               <><ChevronUp size={15} /> Show Less</>
@@ -503,23 +545,23 @@ export default function Projects() {
               className="overflow-hidden"
             >
               <div className="flex items-center gap-4 mb-6">
-                <h3 className="text-base font-bold text-slate-800 font-mono flex items-center gap-2 whitespace-nowrap">
-                  <span className="text-indigo-500">✦</span> All Projects
+                <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2 whitespace-nowrap">
+                  More Projects
                 </h3>
-                <div className="h-px flex-1 bg-gradient-to-r from-indigo-200 to-transparent" />
-                <span className="text-xs font-mono text-slate-400 whitespace-nowrap">
+                <div className="h-px flex-1 bg-slate-200" />
+                <span className="text-xs text-slate-400 whitespace-nowrap">
                   {displayedRemaining.length} more
                 </span>
               </div>
 
               {displayedRemaining.length > 0 ? (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
                   {displayedRemaining.map((project, index) => (
                     <ProjectCard key={project.title} project={project} index={index} />
                   ))}
                 </div>
               ) : (
-                <div className="text-center text-slate-400 font-mono py-10">
+                <div className="text-center text-slate-400 py-10 text-sm">
                   No extra projects in this category.
                 </div>
               )}
