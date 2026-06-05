@@ -5,7 +5,7 @@ import { Braces, Brain, Languages, Code2, Server, Database, Cloud, Cpu, Wrench }
 /* Exported flat list (used by chatbot context) */
 export const techSkills = [
   { name: "Python" }, { name: "Java" }, { name: "JavaScript" }, { name: "SQL" }, { name: "HTML/CSS" },
-  { name: "React" }, { name: "Flask" }, { name: "Express.js" }, { name: "Node.js" },
+  { name: "React" }, { name: "Flask" }, { name: "Express.js" }, { name: "Node.js" },{name:"SpringBoot"},
   { name: "Supabase" }, { name: "Firebase" }, { name: "PostgreSQL" }, { name: "MySQL" },
   { name: "Cloudflare" }, { name: "VPS" }, { name: "Git" }, { name: "Vercel" },
   { name: "Roboflow" }, { name: "LangChain" },
