@@ -171,7 +171,7 @@ export default function About() {
               className="flex items-center gap-2 text-stone-500 text-sm cursor-default"
             >
               <MapPin size={16} className="animate-pulse" style={{ color: "#c0624a" }} />
-              <span>Open to relocation — India &amp; Global</span>
+              <span>Open to relocation — True</span>
             </motion.div>
           </motion.div>
         </div>
