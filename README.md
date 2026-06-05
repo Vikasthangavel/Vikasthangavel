@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=venom&height=180&color=0:6366f1,50:8b5cf6,100:ec4899&text=Vikas%20T&fontColor=ffffff&fontSize=52&animation=fadeIn&desc=Engineering%20Ideas%20into%20Intelligent%20Products&descSize=14&descColor=f8fafc" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=slice&height=180&color=0:302b63,100:24243e&text=Vikas%20T&fontColor=c4b5fd&fontSize=52&animation=fadeIn&desc=Engineering%20Ideas%20into%20Intelligent%20Products&descSize=13&descColor=f8fafc"/>
 
 <img src="https://readme-typing-svg.demolab.com?font=Space+Mono&size=16&duration=2800&pause=800&color=8B5CF6&center=true&vCenter=true&multiline=false&width=500&lines=I+build+things+that+solve+real+problems.;6%2B+live+products+shipped+end-to-end.;AI+%C3%97+Full+Stack+%C3%97+Real+Impact.;From+deepfakes+to+farm+finance." alt="Typing SVG" />
 
@@ -44,7 +44,7 @@ vikas = {
 ## 🏆 Stats
 
 <div align="center">
-<!-- refresh on 01/06/2026-->
+<!-- refresh on 05/06/2026-->
 
 
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=Vikasthangavel&theme=tokyonight&hide_border=true&background=0a0a10&ring=8b5cf6&fire=f472b6&currStreakLabel=22d3ee&sideLabels=e2e0f0&dates=6b6888" />
