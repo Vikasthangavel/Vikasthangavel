@@ -8,7 +8,7 @@ export const techSkills = [
   { name: "React" }, { name: "Flask" }, { name: "Express.js" }, { name: "Node.js" },
   { name: "Supabase" }, { name: "Firebase" }, { name: "PostgreSQL" }, { name: "MySQL" },
   { name: "Cloudflare" }, { name: "VPS" }, { name: "Git" }, { name: "Vercel" },
-  { name: "Roboflow" }, { name: "LangChain" }, { name: "Gemini API" }, { name: "GPT API" },
+  { name: "Roboflow" }, { name: "LangChain" },
   { name: "Power BI" }, { name: "Razorpay" }, { name: "Cashfree" }, { name: "Twilio" },
 ];
 
