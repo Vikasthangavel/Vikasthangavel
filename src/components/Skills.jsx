@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Braces, Brain, Languages, Code2, Server, Database, Cloud, Cpu, Wrench } from "lucide-react";
+import { Brain, Languages, Code2, Server, Database, Cloud, Cpu, Wrench } from "lucide-react";
 
 /* Exported flat list (used by chatbot context) */
 export const techSkills = [
@@ -52,16 +52,16 @@ const skillCategories = [
 ];
 
 const strengths = [
-  { name: "Teamwork", emoji: "🤝" },
+  { name: "Teamwork",          emoji: "🤝" },
   { name: "Critical Thinking", emoji: "🧠" },
-  { name: "Problem Solving", emoji: "🧩" },
-  { name: "Adaptability", emoji: "⚡" },
-  { name: "Leadership", emoji: "🚀" },
+  { name: "Problem Solving",   emoji: "🧩" },
+  { name: "Adaptability",      emoji: "⚡" },
+  { name: "Leadership",        emoji: "🚀" },
 ];
 
 const languages = [
   { name: "English", level: "Professional" },
-  { name: "Tamil", level: "Native" },
+  { name: "Tamil",   level: "Native" },
 ];
 
 export default function Skills() {
@@ -76,11 +76,19 @@ export default function Skills() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-indigo-500 text-sm tracking-wider mb-3 block">{"// tech-stack"}</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">
+          <span
+            className="text-xs uppercase tracking-[0.2em] mb-3 block font-medium"
+            style={{ color: "#c0624a" }}
+          >
+            What I work with
+          </span>
+          <h2
+            className="text-3xl md:text-5xl font-bold mb-4 text-stone-900"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
             My <span className="gradient-text animate-gradient-text">Skills</span>
           </h2>
-          <p className="text-slate-500 text-sm font-mono">{techSkills.length}+ technologies across the full stack</p>
+          <p className="text-stone-500 text-sm">{techSkills.length}+ technologies across the full stack</p>
         </motion.div>
 
         {/* ── Skill Category Grid ── */}
@@ -92,30 +100,25 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: catIdx * 0.08, duration: 0.5, ease: "easeOut" }}
-              className="terminal-card card-shine group"
+              className="warm-card group overflow-hidden"
             >
-              <div className="terminal-header">
-                <span
-                  className="ml-3 text-xs font-mono flex items-center gap-1.5"
-                  style={{ color: `${cat.accent}99` }}
+              {/* Card header — clean, no terminal chrome */}
+              <div
+                className="px-5 py-3 border-b flex items-center gap-2"
+                style={{ borderColor: "rgba(0,0,0,0.06)", background: "#faf8f5" }}
+              >
+                <div
+                  className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0"
+                  style={{ background: `${cat.accent}18`, border: `1px solid ${cat.accent}28` }}
                 >
-                  <cat.Icon size={12} />
-                  {cat.label.toLowerCase().replace(/ /g, "_")}.json
+                  <cat.Icon size={13} style={{ color: cat.accent }} />
+                </div>
+                <span className="text-xs font-semibold text-stone-600 uppercase tracking-wider">
+                  {cat.label}
                 </span>
               </div>
 
               <div className="p-5">
-                {/* Category label */}
-                <div className="flex items-center gap-2 mb-4">
-                  <div
-                    className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: `${cat.accent}15`, border: `1px solid ${cat.accent}28` }}
-                  >
-                    <cat.Icon size={14} style={{ color: cat.accent }} />
-                  </div>
-                  <span className="text-sm font-bold font-mono text-slate-800">{cat.label}</span>
-                </div>
-
                 {/* Tag pills */}
                 <div className="flex flex-wrap gap-2">
                   {cat.tags.map((tag, tagIdx) => (
@@ -126,21 +129,21 @@ export default function Skills() {
                       viewport={{ once: true }}
                       transition={{ delay: catIdx * 0.08 + tagIdx * 0.05 + 0.2 }}
                       whileHover={{ y: -3, scale: 1.08 }}
-                      className="text-[12px] px-3 py-1 rounded-full font-mono border cursor-default transition-all duration-200"
+                      className="text-[12px] px-3 py-1 rounded-full border cursor-default transition-all duration-200"
                       style={{
-                        background: `${cat.accent}0d`,
-                        color: `${cat.accent}cc`,
-                        borderColor: `${cat.accent}25`,
+                        background:   `${cat.accent}0d`,
+                        color:        `${cat.accent}cc`,
+                        borderColor:  `${cat.accent}25`,
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.background = `${cat.accent}20`;
-                        e.currentTarget.style.borderColor = `${cat.accent}55`;
-                        e.currentTarget.style.color = cat.accent;
+                        e.currentTarget.style.background   = `${cat.accent}20`;
+                        e.currentTarget.style.borderColor  = `${cat.accent}55`;
+                        e.currentTarget.style.color        = cat.accent;
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.background = `${cat.accent}0d`;
-                        e.currentTarget.style.borderColor = `${cat.accent}25`;
-                        e.currentTarget.style.color = `${cat.accent}cc`;
+                        e.currentTarget.style.background   = `${cat.accent}0d`;
+                        e.currentTarget.style.borderColor  = `${cat.accent}25`;
+                        e.currentTarget.style.color        = `${cat.accent}cc`;
                       }}
                     >
                       {tag}
@@ -166,11 +169,15 @@ export default function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="terminal-card"
+            className="warm-card overflow-hidden"
           >
-            <div className="terminal-header">
-              <span className="ml-3 text-xs text-gray-500 font-mono flex items-center gap-1.5">
-                <Brain size={12} /> strengths.md
+            <div
+              className="px-5 py-3 border-b flex items-center gap-2"
+              style={{ borderColor: "rgba(0,0,0,0.06)", background: "#faf8f5" }}
+            >
+              <Brain size={14} style={{ color: "#c0624a" }} />
+              <span className="text-xs font-semibold text-stone-600 uppercase tracking-wider">
+                Strengths
               </span>
             </div>
             <div className="p-6 grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -181,10 +188,10 @@ export default function Skills() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07 }}
-                  className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-50 hover:bg-indigo-50 border border-transparent hover:border-indigo-200 transition-all cursor-default"
+                  className="flex items-center gap-2 p-2.5 rounded-lg bg-stone-50 hover:bg-amber-50 border border-transparent hover:border-amber-200 transition-all cursor-default"
                 >
                   <motion.span whileHover={{ scale: 1.3, rotate: 15 }} className="text-base">{s.emoji}</motion.span>
-                  <span className="text-xs font-medium text-slate-700 leading-tight">{s.name}</span>
+                  <span className="text-xs font-medium text-stone-700 leading-tight">{s.name}</span>
                 </motion.div>
               ))}
             </div>
@@ -196,21 +203,28 @@ export default function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="terminal-card"
+            className="warm-card overflow-hidden"
           >
-            <div className="terminal-header">
-              <span className="ml-3 text-xs text-gray-500 font-mono flex items-center gap-1.5">
-                <Languages size={12} /> languages.json
+            <div
+              className="px-5 py-3 border-b flex items-center gap-2"
+              style={{ borderColor: "rgba(0,0,0,0.06)", background: "#faf8f5" }}
+            >
+              <Languages size={14} style={{ color: "#6b8f6e" }} />
+              <span className="text-xs font-semibold text-stone-600 uppercase tracking-wider">
+                Languages
               </span>
             </div>
             <div className="p-6 space-y-3">
               {languages.map((lang) => (
                 <div
                   key={lang.name}
-                  className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 hover:bg-indigo-50 transition-all cursor-default"
+                  className="flex items-center justify-between p-2.5 rounded-lg bg-stone-50 hover:bg-amber-50 transition-all cursor-default"
                 >
-                  <span className="text-sm font-medium text-slate-700">{lang.name}</span>
-                  <span className="text-xs font-mono px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-200">
+                  <span className="text-sm font-medium text-stone-700">{lang.name}</span>
+                  <span
+                    className="text-xs font-medium px-3 py-1 rounded-full border"
+                    style={{ background: "rgba(192,98,74,0.07)", color: "#a04d37", borderColor: "rgba(192,98,74,0.18)" }}
+                  >
                     {lang.level}
                   </span>
                 </div>

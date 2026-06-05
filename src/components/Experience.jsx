@@ -45,8 +45,16 @@ export default function Experience() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-indigo-500 text-sm tracking-wider mb-3 block">{"// experience"}</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">
+          <span
+            className="text-xs uppercase tracking-[0.2em] mb-3 block font-medium"
+            style={{ color: "#c0624a" }}
+          >
+            Where I've worked
+          </span>
+          <h2
+            className="text-3xl md:text-5xl font-bold mb-4 text-stone-900"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
             Work <span className="gradient-text animate-gradient-text">Experience</span>
           </h2>
         </motion.div>
@@ -58,7 +66,8 @@ export default function Experience() {
             whileInView={{ height: "100%" }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="absolute left-4 md:left-6 top-0 w-px bg-gradient-to-b from-indigo-500/50 via-violet-500/25 to-transparent"
+            className="absolute left-4 md:left-6 top-0 w-px"
+            style={{ background: "linear-gradient(to bottom, rgba(192,98,74,0.5), rgba(201,136,44,0.2), transparent)" }}
           ></motion.div>
 
           <div className="space-y-12">
@@ -77,32 +86,34 @@ export default function Experience() {
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.2, type: "spring", stiffness: 300 }}
-                  className="absolute left-2.5 md:left-4 top-2 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-[#f8faff] glow-indigo animate-glow-pulse"
+                  className="absolute left-2.5 md:left-4 top-2 w-4 h-4 rounded-full ring-4 ring-[#faf8f5] animate-glow-pulse"
+                  style={{ background: "linear-gradient(135deg, #c0624a, #c9882c)" }}
                 ></motion.div>
 
-                <div className="terminal-card card-shine">
-                  <div className="terminal-header">
-                    <span className="ml-3 text-xs text-gray-500 font-mono">experience.log</span>
-                  </div>
+                <div className="warm-card overflow-hidden">
+                  <div className="h-0.5 w-full" style={{ background: "linear-gradient(to right, #c0624a, #c9882c, transparent)" }} />
                   <div className="p-6 md:p-8">
                     <div className="flex flex-col md:flex-row md:items-start justify-between mb-5 gap-3">
                       <div>
-                        <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                          <Briefcase size={18} className="text-indigo-500" />
+                        <h3
+                          className="text-xl font-bold text-stone-900 flex items-center gap-2"
+                          style={{ fontFamily: "'Playfair Display', serif" }}
+                        >
+                          <Briefcase size={18} style={{ color: "#c0624a" }} />
                           {exp.role}
                         </h3>
-                        <span className="text-indigo-600/80 font-mono text-sm mt-1 block">{exp.company}</span>
+                        <span className="text-sm mt-1 block font-medium" style={{ color: "#c0624a" }}>{exp.company}</span>
                         {exp.link && (
-                          <a href={exp.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-1.5 text-xs font-mono text-indigo-500 hover:text-indigo-700 transition-colors">
+                          <a href={exp.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-1.5 text-xs text-amber-700 hover:text-amber-900 transition-colors">
                             <ExternalLink size={12} />
                             {exp.link.replace('https://', '')}
                           </a>
                         )}
                       </div>
-                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-indigo-50 border border-indigo-100 text-slate-500 text-xs font-mono shrink-0">
+                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-stone-100 border border-stone-200 text-stone-500 text-xs shrink-0">
                         <Calendar size={13} />
                         <span>{exp.period}</span>
-                        <span className="text-indigo-500">({exp.duration})</span>
+                        <span style={{ color: "#c0624a" }}>({exp.duration})</span>
                       </div>
                     </div>
 
@@ -114,9 +125,9 @@ export default function Experience() {
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: i * 0.1 }}
-                          className="flex items-start gap-3 text-slate-600 text-sm hover:text-slate-900 hover:translate-x-1 transition-all duration-300 cursor-default"
+                          className="flex items-start gap-3 text-stone-600 text-sm hover:text-stone-900 hover:translate-x-1 transition-all duration-300 cursor-default"
                         >
-                          <CheckCircle2 size={16} className="text-indigo-500 mt-0.5 shrink-0" />
+                          <CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: "#c0624a" }} />
                           {point}
                         </motion.li>
                       ))}
@@ -129,7 +140,7 @@ export default function Experience() {
                         transition={{ delay: exp.points.length * 0.1 }}
                         className="mt-4 pt-4 border-t border-slate-100"
                       >
-                        <a href={exp.projectLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-mono text-indigo-500 hover:text-indigo-700 transition-colors hover:translate-x-1 duration-300">
+                        <a href={exp.projectLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-amber-700 hover:text-amber-900 transition-colors hover:translate-x-1 duration-300">
                           <ExternalLink size={14} />
                           Project: {exp.projectLink.replace('https://', '').replace(/\/$/, '')}
                         </a>

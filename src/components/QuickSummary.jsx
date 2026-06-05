@@ -20,11 +20,11 @@ const items = [
     value: "Full-Stack Developer",
     detail: "React · Python · Flask · Supabase",
     color: "indigo",
-    border: "rgba(99,102,241,0.25)",
-    bg: "rgba(238,242,255,0.9)",
-    glow: "rgba(99,102,241,0.08)",
-    textColor: "#4338ca",
-    detailColor: "rgba(67,56,202,0.6)",
+    border: "rgba(192,98,74,0.22)",
+    bg: "rgba(255,248,240,0.9)",
+    glow: "rgba(192,98,74,0.06)",
+    textColor: "#a04d37",
+    detailColor: "rgba(160,77,55,0.6)",
   },
   {
     emoji: "🚀",
@@ -32,11 +32,11 @@ const items = [
     value: "15+ shipped products",
     detail: "10K+ users · 4+ clients · 1 internship",
     color: "sky",
-    border: "rgba(6,182,212,0.25)",
-    bg: "rgba(236,254,255,0.9)",
-    glow: "rgba(6,182,212,0.08)",
-    textColor: "#0e7490",
-    detailColor: "rgba(14,116,144,0.6)",
+    border: "rgba(74,127,168,0.22)",
+    bg: "rgba(240,247,255,0.9)",
+    glow: "rgba(74,127,168,0.06)",
+    textColor: "#2d6a8c",
+    detailColor: "rgba(45,106,140,0.6)",
   },
 ];
 
@@ -52,7 +52,7 @@ export default function QuickSummary() {
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[480px] max-w-full h-px"
         style={{
           background:
-            "linear-gradient(to right, transparent, rgba(99,102,241,0.18), transparent)",
+            "linear-gradient(to right, transparent, rgba(192,98,74,0.14), transparent)",
         }}
       />
 
@@ -63,9 +63,9 @@ export default function QuickSummary() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45 }}
-          className="text-center text-[11px] font-mono tracking-[0.22em] text-slate-400 uppercase mb-4 select-none"
+          className="text-center text-[11px] tracking-[0.22em] text-stone-400 uppercase mb-4 select-none"
         >
-          // TL;DR — Quick Summary
+          At a glance
         </motion.p>
 
         {/* 3 cards in a row */}
@@ -139,7 +139,7 @@ export default function QuickSummary() {
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[480px] max-w-full h-px"
         style={{
           background:
-            "linear-gradient(to right, transparent, rgba(99,102,241,0.1), transparent)",
+            "linear-gradient(to right, transparent, rgba(192,98,74,0.09), transparent)",
         }}
       />
     </section>

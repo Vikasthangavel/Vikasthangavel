@@ -12,7 +12,8 @@ export default {
         dark: "#0f172a",
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans:  ['Inter', 'sans-serif'],
+        serif: ['Playfair Display', 'DM Serif Display', 'Georgia', 'serif'],
       }
     },
   },

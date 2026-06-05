@@ -53,9 +53,17 @@ export default function Hobbies() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-violet-500 text-sm tracking-wider mb-3 block">{"// hobbies"}</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">
-            Beyond <span className="gradient-text animate-gradient-text">Code</span>
+          <span
+            className="text-xs uppercase tracking-[0.2em] mb-3 block font-medium"
+            style={{ color: "#c0624a" }}
+          >
+            When I'm offline
+          </span>
+          <h2
+            className="text-3xl md:text-5xl font-bold mb-4 text-stone-900"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            Beyond <span className="gradient-text animate-gradient-text">Work</span>
           </h2>
         </motion.div>
 
@@ -69,7 +77,7 @@ export default function Hobbies() {
               transition={{ delay: i * 0.15, duration: 0.5 }}
               whileHover={{ y: -8, scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className={`terminal-card card-shine cursor-default group ${hobby.borderColor}`}
+              className={`warm-card cursor-default group border-transparent ${hobby.borderColor}`}
             >
               {/* Gradient accent */}
               <motion.div
@@ -98,12 +106,12 @@ export default function Hobbies() {
                   >
                     {hobby.emoji}
                   </motion.span>
-                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors font-mono">
+                  <h3 className="text-lg font-bold text-stone-900 group-hover:text-amber-800 transition-colors">
                     {hobby.title}
                   </h3>
                 </div>
 
-                <p className="text-slate-500 text-sm leading-relaxed">
+                <p className="text-stone-500 text-sm leading-relaxed">
                   {hobby.description}
                 </p>
               </div>

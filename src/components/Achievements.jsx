@@ -37,8 +37,16 @@ export default function Achievements() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-indigo-500 text-sm tracking-wider mb-3 block">{"// achievements"}</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">
+          <span
+            className="text-xs uppercase tracking-[0.2em] mb-3 block font-medium"
+            style={{ color: "#c0624a" }}
+          >
+            What I've accomplished
+          </span>
+          <h2
+            className="text-3xl md:text-5xl font-bold mb-4 text-stone-900"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
             <span className="gradient-text animate-gradient-text">Achievements</span>
           </h2>
         </motion.div>
@@ -53,7 +61,7 @@ export default function Achievements() {
               transition={{ delay: i * 0.1 }}
               whileHover={{ scale: 1.02, x: 5 }}
               whileTap={{ scale: 0.98 }}
-              className={`relative terminal-card overflow-hidden group card-shine cursor-default`}
+              className={`relative warm-card overflow-hidden group cursor-default`}
             >
               {/* Gradient accent line at top */}
               <motion.div
@@ -73,11 +81,14 @@ export default function Achievements() {
                   {item.icon}
                 </motion.div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors">
+                  <h3
+                    className="text-lg font-bold text-stone-900 mb-1 group-hover:text-amber-800 transition-colors"
+                    style={{ fontFamily: "'Playfair Display', serif" }}
+                  >
                     {item.title}
                   </h3>
-                  <span className="text-xs font-mono text-slate-400 mb-3 block">{item.org}</span>
-                  <p className="text-slate-500 text-sm leading-relaxed">{item.description}</p>
+                  <span className="text-xs text-stone-400 mb-3 block font-medium">{item.org}</span>
+                  <p className="text-stone-500 text-sm leading-relaxed">{item.description}</p>
                 </div>
               </div>
             </motion.div>

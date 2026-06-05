@@ -22,20 +22,18 @@ function App() {
 
   return (
     <div
-      className="min-h-screen text-slate-900 font-sans selection:bg-indigo-500 selection:text-white relative"
+      className="min-h-screen text-stone-900 font-sans selection:bg-amber-700/20 selection:text-amber-900 relative"
       style={{
-        background: "#f8faff",
-        backgroundImage: "radial-gradient(circle, rgba(99,102,241,0.08) 1px, transparent 1px)",
-        backgroundSize: "28px 28px",
+        background: "#faf8f5",
       }}
     >
-      {/* Soft gradient mask over dot grid */}
+      {/* Warm gradient overlay */}
       <div
         className="fixed inset-0 pointer-events-none z-0"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 20% 0%, rgba(99,102,241,0.07) 0%, transparent 60%)," +
-            "radial-gradient(ellipse 60% 50% at 90% 90%, rgba(139,92,246,0.06) 0%, transparent 55%)",
+            "radial-gradient(ellipse 70% 55% at 15% 0%, rgba(192,98,74,0.06) 0%, transparent 60%)," +
+            "radial-gradient(ellipse 55% 45% at 88% 92%, rgba(201,136,44,0.05) 0%, transparent 55%)",
         }}
       />
       <div className="relative z-10">

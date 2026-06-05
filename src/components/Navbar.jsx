@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-scroll";
-import { Menu, X, Terminal } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
@@ -30,7 +30,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        {/* Logo */}
+        {/* Logo — personal initials monogram */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
           <Link
             to="hero"
@@ -38,15 +38,20 @@ export default function Navbar() {
             duration={500}
             className="cursor-pointer font-bold text-xl flex items-center gap-2.5 group"
           >
+            {/* Monogram badge */}
             <motion.div
-              whileHover={{ rotate: 360, scale: 1.1 }}
-              transition={{ duration: 0.5 }}
-              className="p-1.5 rounded-lg bg-gradient-to-br from-indigo-500/15 to-violet-500/10 border border-indigo-500/25 group-hover:border-indigo-400/50 group-hover:from-indigo-500/25 transition-all shadow-lg shadow-indigo-500/10"
+              whileHover={{ scale: 1.08 }}
+              transition={{ duration: 0.25 }}
+              className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-md"
+              style={{ background: "linear-gradient(135deg, #c0624a, #c9882c)" }}
             >
-              <Terminal size={18} className="text-indigo-500 group-hover:text-indigo-400 transition-colors" />
+              VT
             </motion.div>
-            <span className="font-mono font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 bg-clip-text text-transparent group-hover:from-indigo-400 transition-all">
-              vikast<span className="text-slate-800">.dev</span>
+            <span
+              className="font-semibold tracking-tight text-stone-800 group-hover:text-stone-600 transition-colors"
+              style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem" }}
+            >
+              Vikas<span style={{ color: "#c0624a" }}> T</span>
             </span>
           </Link>
         </motion.div>
@@ -67,14 +72,14 @@ export default function Navbar() {
               spy={true}
               offset={-70}
               onSetActive={() => setActiveSection(link.to)}
-              className="relative px-4 py-2 text-sm text-slate-600 hover:text-indigo-600 cursor-pointer transition-all font-medium rounded-lg hover:bg-indigo-500/[0.06] group"
+              className="relative px-4 py-2 text-sm text-stone-600 hover:text-amber-800 cursor-pointer transition-all font-medium rounded-lg hover:bg-amber-500/[0.07] group"
             >
-              <span className="text-indigo-400/0 group-hover:text-indigo-400 transition-colors font-mono mr-1">/</span>
               {link.name}
               {activeSection === link.to && (
                 <motion.div
                   layoutId="activeSection"
-                  className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full"
+                  className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full"
+                  style={{ background: "linear-gradient(to right, #c0624a, #c9882c)" }}
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
@@ -86,7 +91,7 @@ export default function Navbar() {
         <div className="md:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-all"
+            className="p-2 rounded-lg text-stone-500 hover:text-amber-700 hover:bg-amber-50 transition-all"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -100,7 +105,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden glass-nav border-t border-slate-200/60"
+            className="md:hidden overflow-hidden glass-nav border-t border-stone-200/60"
           >
             <div className="flex flex-col p-4 gap-1">
               {navLinks.map((link, i) => (
@@ -116,9 +121,14 @@ export default function Navbar() {
                     smooth={true}
                     duration={500}
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-2 text-slate-600 hover:text-indigo-600 font-medium text-base cursor-pointer py-3 px-4 rounded-lg hover:bg-indigo-50 transition-all"
+                    className="flex items-center gap-3 text-stone-600 hover:text-amber-800 font-medium text-base cursor-pointer py-3 px-4 rounded-lg hover:bg-amber-50 transition-all"
                   >
-                    <span className="text-indigo-400/60 font-mono text-sm">0{i + 1}.</span>
+                    <span
+                      className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0"
+                      style={{ background: "linear-gradient(135deg, #c0624a, #c9882c)" }}
+                    >
+                      {i + 1}
+                    </span>
                     {link.name}
                   </Link>
                 </motion.div>

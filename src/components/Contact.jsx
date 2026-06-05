@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, MessageSquare, ArrowUpRight, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowUpRight, MessageCircle } from "lucide-react";
 
 export default function Contact() {
   const phoneNumber = "916381459911";
@@ -13,29 +13,38 @@ export default function Contact() {
       label: "Email",
       value: "vikasthangavel@gmail.com",
       href: "mailto:vikasthangavel@gmail.com",
-      color: "amber",
+      color: "#c0624a",
+      bg: "rgba(192,98,74,0.08)",
+      border: "rgba(192,98,74,0.18)",
     },
     {
       icon: <Phone size={20} />,
       label: "Phone",
       value: "+91 63814 59911",
       href: "tel:+916381459911",
-      color: "green",
+      color: "#6b8f6e",
+      bg: "rgba(107,143,110,0.08)",
+      border: "rgba(107,143,110,0.18)",
     },
     {
       icon: <MapPin size={20} />,
       label: "Location",
       value: "Erode, Tamil Nadu, India",
       href: null,
-      color: "purple",
+      color: "#4a7fa8",
+      bg: "rgba(74,127,168,0.08)",
+      border: "rgba(74,127,168,0.18)",
     },
   ];
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
       <div className="section-divider mb-24"></div>
-      {/* Background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-600/5 rounded-full blur-[150px] -z-10"></div>
+      {/* Warm background blob */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[150px] -z-10"
+        style={{ background: "rgba(107,143,110,0.05)" }}
+      ></div>
 
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
@@ -45,32 +54,34 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-indigo-500 text-sm tracking-wider mb-3 block">{"// contact"}</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">
+          <span
+            className="text-xs uppercase tracking-[0.2em] mb-3 block font-medium"
+            style={{ color: "#c0624a" }}
+          >
+            Let's connect
+          </span>
+          <h2
+            className="text-3xl md:text-5xl font-bold mb-4 text-stone-900"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
             Get in <span className="gradient-text animate-gradient-text">Touch</span>
           </h2>
         </motion.div>
 
         <div className="max-w-3xl mx-auto">
-          {/* Terminal card */}
+          {/* Human intro card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            className="warm-card p-6 mb-8"
           >
-            <div className="terminal-card mb-8 card-shine">
-              <div className="terminal-header">
-                <span className="ml-3 text-xs text-gray-500 font-mono flex items-center gap-1.5">
-                  <MessageSquare size={12} /> connect.sh
-                </span>
-              </div>
-              <div className="p-6 font-mono text-sm">
-                <p className="text-gray-600 mb-4">{"# Let's build something together"}</p>
-                <p><span className="text-purple-400">echo</span> <span className="text-green-400">"I'm always open to new opportunities"</span></p>
-                <p><span className="text-purple-400">echo</span> <span className="text-green-400">"Reach out via WhatsApp or any channel below"</span></p>
-              </div>
-            </div>
+            <p className="text-stone-700 text-base leading-relaxed">
+              I'm always open to new opportunities and conversations. Whether you have a project in mind,
+              a role to discuss, or just want to say hello — feel free to reach out via WhatsApp or any
+              channel below. I'll get back to you as soon as I can!
+            </p>
           </motion.div>
 
           {/* Contact Info Cards */}
@@ -83,20 +94,23 @@ export default function Contact() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -4, scale: 1.02 }}
-                className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/40 transition-all group cursor-default shadow-sm"
+                className="flex items-center gap-4 p-4 rounded-xl bg-white border border-stone-200 hover:border-amber-300 hover:bg-amber-50/40 transition-all group cursor-default shadow-sm"
               >
-                <div className={`p-2.5 rounded-lg bg-${item.color}-500/10 text-${item.color}-400`}>
+                <div
+                  className="p-2.5 rounded-lg flex-shrink-0"
+                  style={{ background: item.bg, color: item.color, border: `1px solid ${item.border}` }}
+                >
                   {item.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs text-slate-400 font-mono mb-0.5">{item.label}</p>
+                  <p className="text-xs text-stone-400 mb-0.5 uppercase tracking-wider">{item.label}</p>
                   {item.href ? (
-                    <a href={item.href} className="text-slate-700 text-sm hover:text-indigo-600 transition-colors flex items-center gap-1 truncate">
+                    <a href={item.href} className="text-stone-700 text-sm hover:text-amber-700 transition-colors flex items-center gap-1 truncate">
                       {item.value}
-                      <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                      <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                     </a>
                   ) : (
-                    <p className="text-slate-700 text-sm truncate">{item.value}</p>
+                    <p className="text-stone-700 text-sm truncate">{item.value}</p>
                   )}
                 </div>
               </motion.div>
@@ -117,7 +131,11 @@ export default function Contact() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05, y: -3 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 text-white font-semibold rounded-xl shadow-lg shadow-green-500/20 hover:shadow-green-500/40 transition-all text-base magnetic-btn relative overflow-hidden"
+              className="inline-flex items-center gap-3 px-10 py-4 text-white font-semibold rounded-xl shadow-lg transition-all text-base magnetic-btn relative overflow-hidden"
+              style={{
+                background: "linear-gradient(135deg, #22c55e, #16a34a)",
+                boxShadow: "0 4px 20px rgba(34,197,94,0.2)",
+              }}
             >
               <MessageCircle size={22} className="animate-bounce" />
               Message on WhatsApp
@@ -128,8 +146,6 @@ export default function Contact() {
                 transition={{ duration: 0.8 }}
               />
             </motion.a>
-            <p className="text-slate-400 text-xs font-mono mt-4">
-            </p>
           </motion.div>
         </div>
       </div>

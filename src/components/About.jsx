@@ -1,13 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, Code, Cpu, Database, Cloud, Zap } from "lucide-react";
+import { MapPin, Code, Cpu, Database, Cloud } from "lucide-react";
 import vikasImage from "../Vikas.jpg";
 
 const highlights = [
-  { icon: <Code size={20} />, label: "Full-Stack Apps", color: "amber" },
-  { icon: <Cpu size={20} />, label: "AI / ML", color: "purple" },
-  { icon: <Database size={20} />, label: "Database Design", color: "rose" },
-  { icon: <Cloud size={20} />, label: "Cloud Deploy", color: "green" },
+  { icon: <Code size={20} />, label: "Full-Stack Apps",   color: "#c0624a" },
+  { icon: <Cpu  size={20} />, label: "AI / ML",            color: "#6b8f6e" },
+  { icon: <Database size={20} />, label: "Database Design", color: "#4a7fa8" },
+  { icon: <Cloud size={20} />, label: "Cloud Deploy",      color: "#c9882c" },
 ];
 
 export default function About() {
@@ -22,8 +22,16 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="font-mono text-violet-500 text-sm tracking-wider mb-3 block">{"/∕ about-me"}</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">
+          <span
+            className="text-xs uppercase tracking-[0.2em] mb-3 block font-medium"
+            style={{ color: "#c0624a" }}
+          >
+            A little about me
+          </span>
+          <h2
+            className="text-3xl md:text-5xl font-bold mb-4 text-stone-900"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
             About <span className="gradient-text animate-gradient-text">Me</span>
           </h2>
         </motion.div>
@@ -38,23 +46,30 @@ export default function About() {
             className="flex justify-center"
           >
             <div className="relative group">
-              {/* Glow ring */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 rounded-2xl blur-md opacity-20 group-hover:opacity-50 transition duration-700"></div>
-              
+              {/* Warm glow ring */}
+              <div className="absolute -inset-1 rounded-2xl blur-md opacity-20 group-hover:opacity-40 transition duration-700"
+                style={{ background: "linear-gradient(135deg, #c0624a, #c9882c, #6b8f6e)" }}
+              ></div>
+
               {/* Image container */}
-              <div className="relative w-72 h-72 md:w-[340px] md:h-[340px] rounded-2xl overflow-hidden border-2 border-slate-200 group-hover:border-indigo-400/50 transition-all duration-500 tilt-hover shadow-xl">
-                <img src={vikasImage} alt="Vikas T" className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" />
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent group-hover:from-slate-900/20 transition-all duration-500"></div>
+              <div className="relative w-72 h-72 md:w-[340px] md:h-[340px] rounded-2xl overflow-hidden border-2 border-stone-200 group-hover:border-amber-400/50 transition-all duration-500 tilt-hover shadow-xl">
+                <img
+                  src={vikasImage}
+                  alt="Vikas T"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-900/25 via-transparent to-transparent group-hover:from-stone-900/15 transition-all duration-500"></div>
               </div>
 
               {/* Floating badge */}
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -bottom-4 -right-4 px-4 py-2 bg-white border border-indigo-200 rounded-xl font-mono text-sm text-indigo-600 shadow-lg shadow-indigo-500/15"
+                className="absolute -bottom-4 -right-4 px-4 py-2.5 bg-white border border-amber-200 rounded-xl text-sm shadow-lg"
+                style={{ boxShadow: "0 4px 20px rgba(192,98,74,0.12)" }}
               >
-                <span className="text-slate-400">const</span> status = <span className="text-emerald-600">"building"</span>
+                <span className="text-stone-500 text-xs">Currently</span>
+                <span className="ml-1.5 font-semibold text-amber-700">Building 🚀</span>
               </motion.div>
             </div>
           </motion.div>
@@ -66,29 +81,38 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            {/* Terminal-style about card */}
-            <div className="terminal-card mb-8">
-              <div className="terminal-header">
-                <span className="ml-3 text-xs text-gray-500 font-mono">about.js</span>
-              </div>
-              <div className="p-6 font-mono text-sm leading-relaxed">
-                <p className="text-gray-500">{"// Who am I?"}</p>
-                <p className="mt-2">
-                  <span className="text-purple-400">const</span>{" "}
-                  <span className="text-amber-400">vikas</span> = {"{"}
-                </p>
-                <p className="ml-4"><span className="text-orange-300">role</span>: <span className="text-green-400">"Software Engineer"</span>,</p>
-                <p className="ml-4"><span className="text-orange-300">location</span>: <span className="text-green-400">"Erode, TN"</span>,</p>
-                <p className="ml-4"><span className="text-orange-300">passion</span>: <span className="text-green-400">"Building products that matter"</span>,</p>
-                <p className="ml-4"><span className="text-orange-300">stack</span>: [<span className="text-yellow-300">"Python"</span>,<span className="text-yellow-300">"Java"</span>,<span className="text-yellow-300">"React & Node"</span>,<span className="text-yellow-300">"SQL"</span>,<span className="text-yellow-300">"AI"</span>],</p>
-                <p>{"}"}</p>
+            {/* Simple personal intro card */}
+            <div className="warm-card p-6 mb-8">
+              <h3
+                className="text-lg font-bold text-stone-800 mb-3"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                Who am I?
+              </h3>
+              <div className="space-y-1.5 text-sm text-stone-600">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#c0624a" }} />
+                  <span><strong className="text-stone-800">Role:</strong> Software Engineer</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#c9882c" }} />
+                  <span><strong className="text-stone-800">Location:</strong> Erode, Tamil Nadu</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#6b8f6e" }} />
+                  <span><strong className="text-stone-800">Passion:</strong> Building products that matter</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#4a7fa8" }} />
+                  <span><strong className="text-stone-800">Stack:</strong> Python, Java, React, Node.js, SQL, AI</span>
+                </div>
               </div>
             </div>
 
-            <p className="text-slate-600 leading-relaxed mb-4 text-base">
-              I'm a hands-on engineer who loves turning ideas into real products. 
-              From payment integrations to AI-powered dashboards, I build end-to-end 
-              solutions that solve real-world problems. Currently pursuing B.Tech in AI & DS.
+            <p className="text-stone-600 leading-relaxed mb-4 text-base">
+              I'm a hands-on engineer who loves turning ideas into real products.
+              From payment integrations to AI-powered dashboards, I build end-to-end
+              solutions that solve real-world problems. Currently pursuing B.Tech in AI &amp; DS.
             </p>
 
             <motion.div
@@ -98,31 +122,23 @@ export default function About() {
               transition={{ delay: 0.3 }}
               className="relative flex items-start gap-3.5 px-4 py-3.5 rounded-xl border mb-8 overflow-hidden"
               style={{
-                background: "rgba(251,191,36,0.06)",
-                borderColor: "rgba(251,191,36,0.3)",
-                boxShadow: "0 0 32px rgba(251,191,36,0.07), inset 0 0 20px rgba(251,191,36,0.03)",
+                background: "rgba(201,136,44,0.05)",
+                borderColor: "rgba(201,136,44,0.25)",
               }}
             >
-              {/* Left glow strip */}
               <div
                 className="absolute left-0 top-0 bottom-0 w-0.5"
-                style={{ background: "linear-gradient(to bottom, transparent, #f59e0b, transparent)" }}
+                style={{ background: "linear-gradient(to bottom, transparent, #c9882c, transparent)" }}
               />
-              {/* Top shimmer */}
-              <div
-                className="absolute top-0 left-8 right-8 h-px"
-                style={{ background: "linear-gradient(to right, transparent, rgba(251,191,36,0.35), transparent)" }}
-              />
-              {/* Pulsing indicator */}
               <span className="relative flex h-2.5 w-2.5 mt-1 flex-shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500" />
               </span>
               <div className="flex-1 min-w-0">
-                <p className="text-amber-700 font-semibold text-sm leading-snug">
+                <p className="text-amber-800 font-semibold text-sm leading-snug">
                   🚀 Open to Full-Stack &amp; Backend Engineering roles
                 </p>
-                <p className="text-amber-600/70 text-xs font-mono mt-1">
+                <p className="text-amber-700/60 text-xs mt-1">
                   Available from July 2026 &nbsp;·&nbsp; Open to relocation &nbsp;·&nbsp; Internship or FTE
                 </p>
               </div>
@@ -131,18 +147,17 @@ export default function About() {
             {/* Highlight chips */}
             <div className="grid grid-cols-2 gap-3 mb-8">
               {highlights.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    whileHover={{ scale: 1.05, y: -3 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 transition-all group cursor-default shadow-sm"
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  whileHover={{ scale: 1.05, y: -3 }}
+                  className="flex items-center gap-3 p-3 rounded-xl bg-stone-50 border border-stone-200 hover:border-amber-300 hover:bg-amber-50/40 transition-all group cursor-default shadow-sm"
                 >
-                  <div className="text-indigo-500 group-hover:text-indigo-600 transition-colors">{item.icon}</div>
-                  <span className="text-sm text-slate-700 font-medium">{item.label}</span>
+                  <div className="transition-colors" style={{ color: item.color }}>{item.icon}</div>
+                  <span className="text-sm text-stone-700 font-medium">{item.label}</span>
                 </motion.div>
               ))}
             </div>
@@ -153,10 +168,10 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ delay: 0.8 }}
               whileHover={{ x: 5 }}
-              className="flex items-center gap-2 text-slate-500 font-mono text-sm cursor-default"
+              className="flex items-center gap-2 text-stone-500 text-sm cursor-default"
             >
-              <MapPin size={16} className="text-indigo-500 animate-pulse"/>
-              <span>{">> "}is_open_to_relocation = <span className="text-indigo-600">True</span></span>
+              <MapPin size={16} className="animate-pulse" style={{ color: "#c0624a" }} />
+              <span>Open to relocation — India &amp; Global</span>
             </motion.div>
           </motion.div>
         </div>
