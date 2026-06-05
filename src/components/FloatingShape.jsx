@@ -1,47 +1,155 @@
-import React, { useEffect, useRef, useMemo, memo } from "react";
+import React, { useEffect, useRef, memo, useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
-/* ─────────────────────────────────────────────────────────────
-   All orbit positions pre-computed — never recomputed on render
-   ───────────────────────────────────────────────────────────── */
-const ORBIT_ITEMS = [
-  { label: "Python", angle: 0   },
-  { label: "React",  angle: 51  },
-  { label: "Flask",  angle: 102 },
-  { label: "SQL",    angle: 153 },
-  { label: "AI/ML",  angle: 204 },
-  { label: "Docker", angle: 255 },
-  { label: "Node",   angle: 306 },
-];
+/* ── Warm palette ──────────────────────────────── */
+const TERRA   = "#c0624a";
+const AMBER   = "#c9882c";
+const SAGE    = "#6b8f6e";
+const BLUE    = "#4a7fa8";
 
-const ORBIT_RADIUS   = 130;
-const ORBIT_DURATION = 28; // slower = less CPU torque on low-end
+/* ── Three orbital rings with different skills ─── */
+const RING_1 = {
+  items:    ["Python", "React", "SQL"],
+  radius:   88,
+  duration: 18,
+  tilt:     "rotateX(55deg)",
+  color:    TERRA,
+  glow:     "rgba(192,98,74,0.55)",
+  bg:       "rgba(192,98,74,0.12)",
+  border:   "rgba(192,98,74,0.35)",
+};
+const RING_2 = {
+  items:    ["Flask", "Node.js", "AI/ML", "Supabase"],
+  radius:   138,
+  duration: 26,
+  tilt:     "rotateX(55deg) rotateZ(30deg)",
+  color:    AMBER,
+  glow:     "rgba(201,136,44,0.5)",
+  bg:       "rgba(201,136,44,0.10)",
+  border:   "rgba(201,136,44,0.32)",
+};
+const RING_3 = {
+  items:    ["Git", "Cloud", "Java", "LangChain"],
+  radius:   188,
+  duration: 36,
+  tilt:     "rotateX(55deg) rotateZ(-20deg)",
+  color:    SAGE,
+  glow:     "rgba(107,143,110,0.45)",
+  bg:       "rgba(107,143,110,0.09)",
+  border:   "rgba(107,143,110,0.28)",
+};
+const ALL_RINGS = [RING_1, RING_2, RING_3];
 
-/* Memoised tag — only re-mounts once, framer drives it via CSS transform */
-const OrbitTag = memo(function OrbitTag({ label, angle, disableHeavyFx }) {
-  const rad = (angle * Math.PI) / 180;
-  const x   = Math.cos(rad) * ORBIT_RADIUS;
-  const y   = Math.sin(rad) * ORBIT_RADIUS;
+/* ── Particle canvas — warm drifting dots ──────── */
+const ParticleCanvas = memo(function ParticleCanvas({ disabled }) {
+  const ref = useRef(null);
 
-  // On mobile / reduced-motion: render tags at fixed positions, no rotation
-  if (disableHeavyFx) {
+  useEffect(() => {
+    const canvas = ref.current;
+    if (!canvas || disabled) return;
+
+    const ctx = canvas.getContext("2d", { alpha: true });
+    let raf;
+
+    const resize = () => {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resize();
+
+    const COLORS = [
+      "rgba(192,98,74,",
+      "rgba(201,136,44,",
+      "rgba(107,143,110,",
+      "rgba(74,127,168,",
+    ];
+
+    const count = 38;
+    const pts = Array.from({ length: count }, () => ({
+      x:     Math.random() * canvas.width,
+      y:     Math.random() * canvas.height,
+      r:     0.6 + Math.random() * 1.8,
+      vx:    (Math.random() - 0.5) * 0.25,
+      vy:    (Math.random() - 0.5) * 0.25,
+      alpha: 0.15 + Math.random() * 0.35,
+      color: COLORS[(Math.random() * COLORS.length) | 0],
+    }));
+
+    const draw = () => {
+      raf = requestAnimationFrame(draw);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      pts.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width)  p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color + p.alpha + ")";
+        ctx.fill();
+      });
+
+      /* Draw faint connection lines between nearby particles */
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const dx = pts[i].x - pts[j].x;
+          const dy = pts[i].y - pts[j].y;
+          const d  = Math.sqrt(dx * dx + dy * dy);
+          if (d < 68) {
+            ctx.beginPath();
+            ctx.moveTo(pts[i].x, pts[i].y);
+            ctx.lineTo(pts[j].x, pts[j].y);
+            ctx.strokeStyle = `rgba(192,98,74,${0.06 * (1 - d / 68)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+    };
+
+    draw();
+    window.addEventListener("resize", resize, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+    };
+  }, [disabled]);
+
+  return (
+    <canvas
+      ref={ref}
+      className="absolute inset-0 w-full h-full"
+      style={{ opacity: disabled ? 0.1 : 1 }}
+    />
+  );
+});
+
+/* ── Single orbiting pill ──────────────────────── */
+const OrbitPill = memo(function OrbitPill({ label, angle, ring, totalItems, disabled }) {
+  const rad   = (angle * Math.PI) / 180;
+  const x     = Math.cos(rad) * ring.radius;
+  const y     = Math.sin(rad) * ring.radius;
+  const delay = (angle / 360) * ring.duration;
+
+  if (disabled) {
     return (
       <div
         className="absolute"
-        style={{ left: "50%", top: "50%" }}
+        style={{
+          left: "50%", top: "50%",
+          transform: `translate(${x - 30}px, ${y - 11}px)`,
+        }}
       >
-        <div
-          style={{
-            transform: `translate(${x - 28}px, ${y - 12}px)`,
-            background:   "rgba(99,102,241,0.08)",
-            borderColor:  "rgba(99,102,241,0.25)",
-            color:        "rgba(79,70,229,0.85)",
-            boxShadow:    "0 0 6px rgba(99,102,241,0.1)",
-          }}
-          className="text-[10px] px-2 py-0.5 rounded font-mono border whitespace-nowrap"
+        <span
+          className="text-[10px] px-2.5 py-0.5 rounded-full border whitespace-nowrap font-medium block"
+          style={{ background: ring.bg, borderColor: ring.border, color: ring.color }}
         >
           {label}
-        </div>
+        </span>
       </div>
     );
   }
@@ -49,204 +157,258 @@ const OrbitTag = memo(function OrbitTag({ label, angle, disableHeavyFx }) {
   return (
     <motion.div
       className="absolute"
-      style={{ left: "50%", top: "50%", willChange: "transform" }}
+      style={{
+        left: "50%", top: "50%",
+        willChange: "transform",
+      }}
       animate={{ rotate: 360 }}
-      transition={{ duration: ORBIT_DURATION, repeat: Infinity, ease: "linear" }}
+      transition={{
+        duration: ring.duration,
+        repeat: Infinity,
+        ease: "linear",
+        delay: -delay,
+      }}
     >
-      {/* counter-rotate so label stays upright */}
+      {/* counter-rotate so text stays upright */}
       <motion.div
-        style={{
-          x: x - 28,
-          y: y - 12,
-          willChange: "transform",
-          background:   "rgba(99,102,241,0.08)",
-          borderColor:  "rgba(99,102,241,0.28)",
-          color:        "rgba(79,70,229,0.9)",
-          boxShadow:    "0 2px 8px rgba(99,102,241,0.12)",
-        }}
+        style={{ x: x - 30, y: y - 11, willChange: "transform" }}
         animate={{ rotate: -360 }}
-        transition={{ duration: ORBIT_DURATION, repeat: Infinity, ease: "linear" }}
-        className="text-[10px] px-2 py-0.5 rounded font-mono border whitespace-nowrap"
+        transition={{
+          duration: ring.duration,
+          repeat: Infinity,
+          ease: "linear",
+          delay: -delay,
+        }}
       >
-        {label}
+        <motion.span
+          whileHover={{ scale: 1.15 }}
+          animate={{
+            boxShadow: [
+              `0 0 6px ${ring.glow}`,
+              `0 0 14px ${ring.glow}`,
+              `0 0 6px ${ring.glow}`,
+            ],
+          }}
+          transition={{
+            boxShadow: {
+              duration: 2.5 + Math.random(),
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
+          className="text-[10px] px-2.5 py-0.5 rounded-full border whitespace-nowrap font-semibold block cursor-default"
+          style={{
+            background:   ring.bg,
+            borderColor:  ring.border,
+            color:        ring.color,
+          }}
+        >
+          {label}
+        </motion.span>
       </motion.div>
     </motion.div>
   );
 });
 
-/* ─────────────────────────────────────────────────────────────
-   Code rain — throttled to ~20 fps, smaller font, fewer columns
-   ───────────────────────────────────────────────────────────── */
-const CODE_CHARS = "01PYTHONREACTSQLAI</>{}[];".split("");
-
-const CodeRain = memo(function CodeRain({ disableHeavyFx }) {
-  const canvasRef = useRef(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    // Skip canvas animation entirely on mobile / reduced-motion
-    if (disableHeavyFx) {
-      const ctx = canvas.getContext("2d");
-      canvas.width  = canvas.offsetWidth || 400;
-      canvas.height = canvas.offsetHeight || 400;
-      ctx.fillStyle = "rgba(248,250,255,1)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      return;
-    }
-
-    const ctx  = canvas.getContext("2d", { alpha: false }); // alpha:false = faster composite
-    let animId;
-    let last   = 0;
-    const FPS  = 18;               // 18 frames/s is plenty for rain effect
-    const MS   = 1000 / FPS;
-    const SIZE = 13;               // larger font → fewer columns
-
-    const init = () => {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    init();
-
-    let cols  = Math.floor(canvas.width / SIZE);
-    const drops = Array.from({ length: cols }, () => Math.random() * 30);
-
-    const draw = (ts) => {
-      animId = requestAnimationFrame(draw);
-      if (ts - last < MS) return;        // skip frame — throttle
-      last = ts;
-
-      // trail fade — light background
-      ctx.fillStyle = "rgba(241,245,255,0.25)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.font = `${SIZE}px monospace`;
-
-      cols = Math.floor(canvas.width / SIZE);
-      while (drops.length < cols) drops.push(0);
-
-      for (let i = 0; i < cols; i++) {
-        const char = CODE_CHARS[(Math.random() * CODE_CHARS.length) | 0];
-        ctx.fillStyle = drops[i] < 2
-          ? "rgba(99,102,241,0.9)"
-          : `rgba(99,102,241,${0.06 + Math.random() * 0.12})`;
-        ctx.fillText(char, i * SIZE, drops[i] * SIZE);
-
-        if (drops[i] * SIZE > canvas.height && Math.random() > 0.97) drops[i] = 0;
-        drops[i] += 0.45;
-      }
-    };
-
-    animId = requestAnimationFrame(draw);
-
-    const onResize = () => { init(); };
-    window.addEventListener("resize", onResize, { passive: true });
-
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener("resize", onResize);
-    };
-  }, [disableHeavyFx]);
-
+/* ── Orbital ring track (the visible circle) ───── */
+function RingTrack({ ring, disabled }) {
+  const size = ring.radius * 2 + 4;
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full"
-      style={{ opacity: disableHeavyFx ? 0.15 : 0.5 }}
+    <motion.div
+      className="absolute rounded-full border"
+      style={{
+        width:       size,
+        height:      size,
+        borderColor: `rgba(${ring.color === TERRA
+          ? "192,98,74"
+          : ring.color === AMBER
+          ? "201,136,44"
+          : "107,143,110"},0.14)`,
+        borderStyle: "dashed",
+      }}
+      animate={disabled ? {} : { rotate: 360 }}
+      transition={{ duration: ring.duration * 1.8, repeat: Infinity, ease: "linear" }}
     />
   );
-});
+}
 
-/* ─────────────────────────────────────────────────────────────
-   Pulse rings — CSS animation via framer, no JS per-frame cost
-   ───────────────────────────────────────────────────────────── */
-const RINGS = [
-  { size: 150, opacity: 0.14, dur: 3.2, delay: 0   },
-  { size: 240, opacity: 0.10, dur: 3.9, delay: 0.5 },
-  { size: 330, opacity: 0.07, dur: 4.6, delay: 1.0 },
-];
-
-const PulseRings = memo(function PulseRings() {
+/* ── Morphing blob glow at center ─────────────── */
+function CenterBlob({ disabled }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-      {RINGS.map((r, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full border"
-          style={{
-            width:       r.size,
-            height:      r.size,
-            borderColor: `rgba(99,102,241,${r.opacity})`,
-            willChange:  "transform, opacity",
-          }}
-          animate={{ scale: [1, 1.055, 1], opacity: [r.opacity * 4, r.opacity * 7, r.opacity * 4] }}
-          transition={{ duration: r.dur, repeat: Infinity, delay: r.delay, ease: "easeInOut" }}
-        />
-      ))}
-    </div>
+    <motion.div
+      className="absolute"
+      style={{
+        width:  200,
+        height: 200,
+        background: `radial-gradient(ellipse at 40% 40%,
+          rgba(192,98,74,0.18) 0%,
+          rgba(201,136,44,0.12) 40%,
+          transparent 70%)`,
+        filter: "blur(28px)",
+      }}
+      animate={disabled ? {} : {
+        borderRadius: [
+          "60% 40% 30% 70% / 60% 30% 70% 40%",
+          "30% 60% 70% 40% / 50% 60% 30% 60%",
+          "50% 50% 20% 80% / 25% 80% 40% 50%",
+          "60% 40% 30% 70% / 60% 30% 70% 40%",
+        ],
+        scale: [1, 1.08, 0.96, 1],
+      }}
+      transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+    />
   );
-});
+}
 
-/* ─────────────────────────────────────────────────────────────
-   Main export — memoised so parent re-renders don't cascade
-   ───────────────────────────────────────────────────────────── */
+/* ── Main export ───────────────────────────────── */
 export default memo(function FloatingShape() {
   const shouldReduceMotion = useReducedMotion();
   const isMobile = typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
-  const disableHeavyFx = shouldReduceMotion || isMobile;
+  const disabled = shouldReduceMotion || isMobile;
 
   return (
-    <div className="relative w-full aspect-square max-w-[460px] mx-auto pointer-events-none">
+    <div className="relative w-full aspect-square max-w-[480px] mx-auto select-none pointer-events-none">
 
-      {/* Code rain — static frame on mobile */}
-      <div className="absolute inset-0 rounded-2xl overflow-hidden">
-        <CodeRain disableHeavyFx={disableHeavyFx} />
+      {/* ── Particle field background ── */}
+      <div className="absolute inset-0 rounded-3xl overflow-hidden">
+        <ParticleCanvas disabled={disabled} />
       </div>
 
-      {/* Vignette */}
+      {/* ── Soft radial vignette ── */}
       <div
-        className="absolute inset-0 rounded-2xl"
-        style={{ background: "radial-gradient(ellipse at center, transparent 30%, rgba(241,245,255,0.85) 100%)" }}
+        className="absolute inset-0 rounded-3xl"
+        style={{
+          background: "radial-gradient(ellipse at center, transparent 25%, rgba(250,248,245,0.92) 80%)",
+        }}
       />
 
-      {/* Rings + orbit tags */}
+      {/* ── Orbital system ── */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <PulseRings />
 
-        <div className="relative w-0 h-0">
-          {ORBIT_ITEMS.map((item) => (
-            <OrbitTag key={item.label} label={item.label} angle={item.angle} disableHeavyFx={disableHeavyFx} />
-          ))}
-        </div>
+        {/* Morphing blob */}
+        <CenterBlob disabled={disabled} />
 
-        {/* Centre badge */}
-        <div className="absolute flex flex-col items-center justify-center">
+        {/* Ring tracks + pills */}
+        {ALL_RINGS.map((ring, ri) => (
+          <React.Fragment key={ri}>
+            {/* Dashed track ring */}
+            <div className="absolute flex items-center justify-center">
+              <RingTrack ring={ring} disabled={disabled} />
+            </div>
+
+            {/* Pills */}
+            <div className="relative w-0 h-0">
+              {ring.items.map((label, i) => (
+                <OrbitPill
+                  key={label}
+                  label={label}
+                  angle={(360 / ring.items.length) * i}
+                  ring={ring}
+                  totalItems={ring.items.length}
+                  disabled={disabled}
+                />
+              ))}
+            </div>
+          </React.Fragment>
+        ))}
+
+        {/* ── Centre badge ── */}
+        <div className="absolute flex flex-col items-center justify-center z-10">
+          {/* Outer glow ring */}
           <motion.div
-            animate={disableHeavyFx ? {} : { scale: [1, 1.035, 1] }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute rounded-2xl"
             style={{
-              willChange:  "transform",
-              background:  "rgba(99,102,241,0.08)",
-              borderColor: "rgba(99,102,241,0.3)",
-              color:       "#6366f1",
-              boxShadow:   "0 0 28px rgba(99,102,241,0.18), 0 0 56px rgba(99,102,241,0.07)",
-              textShadow:  "0 0 18px rgba(99,102,241,0.4)",
+              width: 108, height: 108,
+              background: `conic-gradient(from 0deg, ${TERRA}, ${AMBER}, ${SAGE}, ${BLUE}, ${TERRA})`,
+              filter: "blur(3px)",
             }}
-            className="w-20 h-20 rounded-2xl flex items-center justify-center font-mono font-black text-2xl border"
+            animate={disabled ? {} : { rotate: 360 }}
+            transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+          />
+
+          {/* Inner badge */}
+          <motion.div
+            animate={disabled ? {} : {
+              scale: [1, 1.04, 1],
+              boxShadow: [
+                `0 0 20px rgba(192,98,74,0.22), 0 0 50px rgba(192,98,74,0.08)`,
+                `0 0 32px rgba(192,98,74,0.35), 0 0 70px rgba(192,98,74,0.14)`,
+                `0 0 20px rgba(192,98,74,0.22), 0 0 50px rgba(192,98,74,0.08)`,
+              ],
+            }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+            className="relative w-24 h-24 rounded-2xl flex flex-col items-center justify-center"
+            style={{
+              background: "white",
+              border: "2px solid rgba(192,98,74,0.2)",
+            }}
           >
-            VT
+            <span
+              className="font-black text-2xl tracking-tight leading-none"
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                background: `linear-gradient(135deg, ${TERRA}, ${AMBER})`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              VT
+            </span>
+            <span className="text-[8px] font-medium tracking-widest mt-0.5" style={{ color: "rgba(192,98,74,0.5)" }}>
+              PORTFOLIO
+            </span>
           </motion.div>
-          <motion.p
-            className="mt-2 text-[10px] font-mono tracking-widest"
-            style={{ color: "rgba(99,102,241,0.5)" }}
-            animate={disableHeavyFx ? {} : { opacity: [0.35, 0.8, 0.35] }}
-            transition={{ duration: 2.5, repeat: Infinity }}
+
+          {/* Floating badge below center */}
+          <motion.div
+            animate={disabled ? {} : { y: [0, -6, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="mt-3 px-3 py-1 rounded-full text-[9px] font-semibold tracking-wider border"
+            style={{
+              background:  "rgba(192,98,74,0.07)",
+              borderColor: "rgba(192,98,74,0.2)",
+              color:       TERRA,
+            }}
           >
-            &lt;vikas.dev/&gt;
-          </motion.p>
+            Full-Stack · AI · Cloud
+          </motion.div>
         </div>
       </div>
+
+      {/* ── Corner sparkles ── */}
+      {!disabled && [
+        { top: "12%", left: "10%",  size: 5,  color: TERRA, delay: 0    },
+        { top: "18%", right: "12%", size: 4,  color: AMBER, delay: 0.8  },
+        { top: "72%", left: "8%",  size: 3.5, color: SAGE,  delay: 1.6  },
+        { top: "78%", right: "9%", size: 4.5, color: BLUE,  delay: 0.4  },
+        { top: "45%", left: "5%",  size: 3,   color: AMBER, delay: 2.2  },
+        { top: "35%", right: "6%", size: 3.5, color: TERRA, delay: 1.2  },
+      ].map((s, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            width:      s.size,
+            height:     s.size,
+            top:        s.top,
+            left:       s.left,
+            right:      s.right,
+            background: s.color,
+            boxShadow:  `0 0 6px ${s.color}`,
+          }}
+          animate={{
+            scale:   [0, 1.4, 0],
+            opacity: [0, 0.8, 0],
+          }}
+          transition={{
+            duration: 2.2,
+            repeat:   Infinity,
+            delay:    s.delay,
+            ease:     "easeInOut",
+          }}
+        />
+      ))}
     </div>
   );
 });
