@@ -60,7 +60,7 @@ export const projects = [
     tech: ["Roboflow", "Flask", "AI/ML", "Forensics"],
     links: [{ label: "Cyber Cell Report", url: "https://tinyurl.com/cybernamakkal" }],
     featured: true,
-    category: "H",
+    category: "Hackathon",
     highlight: true,
     Icon: Cpu,
     accent: "#06b6d4",
@@ -116,17 +116,7 @@ export const projects = [
     category: "personal",
     accent: "#8b5cf6",
   },
-  {
-    title: "Time2Farm",
-    subtitle: "Farm Finance & Management Platform",
-    description:
-      "AI-powered finance tracking for farmers. Features income/expense tracking and intelligent insights via Gemini API integration.",
-    tech: ["AI", "Gemini API", "Finance"],
-    links: [{ label: "Live", url: "https://time2farm.pages.dev" }],
-    featured: false,
-    category: "personal",
-    accent: "#10b981",
-  },
+
   {
     title: "IPL Analysis",
     subtitle: "Power BI Dashboard",
