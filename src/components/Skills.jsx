@@ -41,7 +41,7 @@ const skillCategories = [
     label: "AI / ML",
     Icon: Cpu,
     accent: "#f472b6",
-    tags: ["Roboflow", "LangChain", "Gemini API", "GPT API"],
+    tags: ["Roboflow", "LangChain"],
   },
   {
     label: "Tools & Integrations",
