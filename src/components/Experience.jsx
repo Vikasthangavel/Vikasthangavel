@@ -9,11 +9,10 @@ export const experiences = [
     period: "Mar 2026 – Present",
     duration: "Intern",
     link: "https://gradixtech.com/",
-    projectLink: "https://vyuga.nexyuga.in/",
     points: [
-      "Engineered Vyuga (vyuga.nexyuga.in): a full-stack event management web app built with React and Supabase, handling real-time registrations under peak traffic spikes with zero downtime.",
-      "Integrated Razorpay payment gateway enabling secure transactions for 500+ event registrations in a live production environment.",
-      "Built 3+ production features for the Vyuga platform, serving 2,000+ registered users, collaborating with the team to deliver responsive, high-performance UI components.",
+      "Contributed to full-stack web development using React and Supabase in a collaborative team environment.",
+      "Integrated third-party payment gateways and ensured secure, reliable transaction flows in a live production environment.",
+      "Built and shipped multiple production features, focusing on responsive UI, performance optimization, and cross-device compatibility.",
     ],
   },
   {
