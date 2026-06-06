@@ -179,7 +179,7 @@ export const projects = [
     tech: ["jsQR", "JavaScript", "HTML5"],
     links: [{ label: "GitHub", url: "https://github.com/Vikasthangavel/assignQR" }],
     featured: true,
-    category: "personal",
+    category: "College Event",
     accent: "#6366f1",
   },
   {
