@@ -145,7 +145,7 @@ export const projects = [
     description:
       "Full-featured e-commerce platform for a house cleaning products brand. Smooth shopping experience, secure checkout, and product catalog.",
     tech: ["E-Commerce", "Web App", "Product Catalog"],
-    links: [{ label: "propic.in", url: "https://thepropic.pages.dev" }],
+    links: [{ label: "propic.in", url: "https://propic.in/" }],
     featured: true,
     category: "client",
     accent: "#f43f5e",
