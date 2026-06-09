@@ -270,7 +270,7 @@ export default function Hero() {
                 <p className="text-amber-800 text-sm font-semibold leading-snug">
                   Open to Full-Stack &amp; Backend Engineering roles
                 </p>
-                <p className="text-amber-700/60 text-xs mt-0.5">Available from July 2026 · Open to relocation</p>
+                <p className="text-amber-700/60 text-xs mt-0.5">Available from Jan 2027 · Open to relocation</p>
               </div>
             </motion.div>
 

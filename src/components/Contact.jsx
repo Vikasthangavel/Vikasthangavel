@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, ArrowUpRight, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowUpRight, MessageCircle, Eye, EyeOff } from "lucide-react";
 
 export default function Contact() {
+  const [phoneRevealed, setPhoneRevealed] = useState(false);
   const phoneNumber = "916381459911";
   const defaultMessage = "Hi Vikas! I came across your portfolio and would like to connect.";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
@@ -16,6 +17,7 @@ export default function Contact() {
       color: "#c0624a",
       bg: "rgba(192,98,74,0.08)",
       border: "rgba(192,98,74,0.18)",
+      isPhone: false,
     },
     {
       icon: <Phone size={20} />,
@@ -25,6 +27,7 @@ export default function Contact() {
       color: "#6b8f6e",
       bg: "rgba(107,143,110,0.08)",
       border: "rgba(107,143,110,0.18)",
+      isPhone: true,
     },
     {
       icon: <MapPin size={20} />,
@@ -34,6 +37,7 @@ export default function Contact() {
       color: "#4a7fa8",
       bg: "rgba(74,127,168,0.08)",
       border: "rgba(74,127,168,0.18)",
+      isPhone: false,
     },
   ];
 
@@ -104,7 +108,28 @@ export default function Contact() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-xs text-stone-400 mb-0.5 uppercase tracking-wider">{item.label}</p>
-                  {item.href ? (
+
+                  {/* Phone card — click-to-reveal */}
+                  {item.isPhone ? (
+                    phoneRevealed ? (
+                      <a
+                        href={item.href}
+                        className="text-stone-700 text-sm hover:text-amber-700 transition-colors flex items-center gap-1"
+                      >
+                        {item.value}
+                        <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => setPhoneRevealed(true)}
+                        className="flex items-center gap-1.5 text-sm text-stone-400 hover:text-amber-700 transition-colors cursor-pointer select-none"
+                        aria-label="Reveal phone number"
+                      >
+                        <span className="tracking-widest text-stone-300">••••• •••••</span>
+                        <Eye size={13} className="flex-shrink-0" />
+                      </button>
+                    )
+                  ) : item.href ? (
                     <a href={item.href} className="text-stone-700 text-sm hover:text-amber-700 transition-colors flex items-center gap-1 truncate">
                       {item.value}
                       <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />

@@ -162,7 +162,7 @@ export default function About() {
                   🚀 Open to Full-Stack &amp; Backend Engineering roles
                 </p>
                 <p className="text-amber-700/60 text-xs mt-1">
-                  Available from July 2026 &nbsp;·&nbsp; Open to relocation &nbsp;·&nbsp; Internship or FTE
+                  Available from Jan 2027 &nbsp;·&nbsp; Open to relocation &nbsp;·&nbsp; Internship or FTE
                 </p>
               </div>
             </motion.div>

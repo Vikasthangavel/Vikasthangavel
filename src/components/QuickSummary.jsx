@@ -6,7 +6,7 @@ const items = [
     emoji: "🎓",
     label: "Education",
     value: "B.Tech AI & DS, KSRCT",
-    detail: "Graduating Jul 2026",
+    detail: "Graduating Jun 2027",
     color: "amber",
     border: "rgba(245,158,11,0.25)",
     bg: "rgba(255,251,235,0.9)",
