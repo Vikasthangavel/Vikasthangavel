@@ -10,8 +10,15 @@ import {
   MapPin,
 } from "lucide-react";
 import { Link } from "react-scroll";
-import resume from "../VIKAS_T.pdf";
 import FloatingShape from "./FloatingShape";
+
+const resumeOptions = [
+  { label: "Full Stack Developer",   file: "/resume/VIKAS T_full stack.pdf",              icon: "🌐" },
+  { label: "AI Engineer",            file: "/resume/VIKAS T AI Engineer.pdf",             icon: "🤖" },
+  { label: "Data Science",           file: "/resume/VIKAS T data science.pdf",            icon: "📊" },
+  { label: "Python Developer",       file: "/resume/VIKAS_T python developer.pdf",        icon: "🐍" },
+  { label: "ERP Tech",               file: "/resume/VIKAS T ERP Tech.pdf",               icon: "⚙️" },
+];
 
 /* ── Typewriter hook ─────────────────────────────────────── */
 const roles = [
@@ -85,6 +92,7 @@ const PARTICLES = Array.from({ length: 10 }, (_, i) => ({
 export default function Hero() {
   const typed = useTypewriter(roles);
   const shouldReduceMotion = useReducedMotion();
+  const [showResumeModal, setShowResumeModal] = useState(false);
 
   const isMobile = typeof window !== "undefined" && window.matchMedia("(hover: none)").matches;
   const disableHeavyFx = shouldReduceMotion || isMobile;
@@ -289,13 +297,13 @@ export default function Hero() {
               </motion.div>
 
               <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
-                <a
-                  href={resume} download="Vikas_T_Resume.pdf"
+                <button
+                  onClick={() => setShowResumeModal(true)}
                   className="flex items-center gap-2.5 px-6 py-3 rounded-xl font-semibold text-sm border text-stone-700 hover:text-amber-800 transition-all bg-white shadow-sm"
                   style={{ borderColor: "rgba(192,98,74,0.18)" }}
                 >
                   <Download size={15} /> Resume
-                </a>
+                </button>
               </motion.div>
 
               <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
@@ -406,6 +414,68 @@ export default function Hero() {
         className="hidden lg:block absolute left-7 top-1/2 -translate-y-1/2 w-px"
         style={{ background: "linear-gradient(to bottom, transparent, rgba(192,98,74,0.2), transparent)" }}
       />
+      {/* Resume Picker Modal */}
+      {showResumeModal && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.55)", backdropFilter: "blur(6px)" }}
+          onClick={() => setShowResumeModal(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.88, opacity: 0, y: 24 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.88, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 320, damping: 26 }}
+            className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="px-6 pt-6 pb-4 border-b border-stone-100">
+              <h3
+                className="text-lg font-bold text-stone-900 mb-1"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                Download Resume
+              </h3>
+              <p className="text-xs text-stone-400">Choose the version that fits your need</p>
+            </div>
+
+            {/* Options */}
+            <div className="p-4 flex flex-col gap-2">
+              {resumeOptions.map((opt, i) => (
+                <motion.a
+                  key={i}
+                  href={opt.file}
+                  download
+                  whileHover={{ x: 4, backgroundColor: "#fdf6f0" }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => setShowResumeModal(false)}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl border border-stone-100 hover:border-amber-300 transition-all cursor-pointer group"
+                >
+                  <span className="text-xl">{opt.icon}</span>
+                  <span className="flex-1 text-sm font-medium text-stone-700 group-hover:text-amber-800 transition-colors">
+                    {opt.label}
+                  </span>
+                  <Download size={13} className="text-stone-300 group-hover:text-amber-500 transition-colors" />
+                </motion.a>
+              ))}
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 pb-5">
+              <button
+                onClick={() => setShowResumeModal(false)}
+                className="w-full py-2 rounded-xl text-sm text-stone-400 hover:text-stone-600 hover:bg-stone-50 transition-all border border-transparent hover:border-stone-200"
+              >
+                Cancel
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </section>
   );
 }
