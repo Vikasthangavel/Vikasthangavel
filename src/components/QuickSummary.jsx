@@ -115,7 +115,7 @@ export default function QuickSummary() {
                   {item.value}
                 </p>
                 <p
-                  className="text-[11px] font-mono mt-0.5 leading-snug"
+                  className="text-[11px] font-medium mt-0.5 leading-snug"
                   style={{ color: item.detailColor }}
                 >
                   {item.detail}

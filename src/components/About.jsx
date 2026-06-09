@@ -138,35 +138,6 @@ export default function About() {
               solutions that solve real-world problems. Currently pursuing B.Tech in AI &amp; DS.
             </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="relative flex items-start gap-3.5 px-4 py-3.5 rounded-xl border mb-8 overflow-hidden"
-              style={{
-                background: "rgba(201,136,44,0.05)",
-                borderColor: "rgba(201,136,44,0.25)",
-              }}
-            >
-              <div
-                className="absolute left-0 top-0 bottom-0 w-0.5"
-                style={{ background: "linear-gradient(to bottom, transparent, #c9882c, transparent)" }}
-              />
-              <span className="relative flex h-2.5 w-2.5 mt-1 flex-shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500" />
-              </span>
-              <div className="flex-1 min-w-0">
-                <p className="text-amber-800 font-semibold text-sm leading-snug">
-                  🚀 Open to Full-Stack &amp; Backend Engineering roles
-                </p>
-                <p className="text-amber-700/60 text-xs mt-1">
-                  Available from Jan 2027 &nbsp;·&nbsp; Open to relocation &nbsp;·&nbsp; Internship or FTE
-                </p>
-              </div>
-            </motion.div>
-
             {/* Highlight chips */}
             <div className="grid grid-cols-2 gap-3 mb-8">
               {highlights.map((item, i) => (

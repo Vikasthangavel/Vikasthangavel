@@ -1,42 +1,42 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Music, Sprout, Cpu, Headphones, TreePine, Lightbulb, Wrench } from "lucide-react";
+import { Music, Sprout, Cpu, Wrench } from "lucide-react";
 
-const hobbies = [
+const beyondCode = [
   {
-    icon: <Music size={28} />,
+    icon: <Music size={20} />,
     title: "Music",
-    description: "Passionate about music — it fuels creativity and keeps me energized while coding. From lo-fi beats to Tamil classics, music is my constant companion.",
-    gradient: "from-pink-500 to-rose-500",
-    iconBg: "bg-pink-500/10 text-pink-400",
-    borderColor: "hover:border-pink-500/30",
+    description: "Lo-fi beats to Tamil classics — music fuels focus and creativity during long coding sessions.",
+    color: "#c0624a",
+    bg: "rgba(192,98,74,0.08)",
+    border: "rgba(192,98,74,0.18)",
     emoji: "🎵",
   },
   {
-    icon: <Sprout size={28} />,
+    icon: <Sprout size={20} />,
     title: "Farming",
-    description: "Rooted in agriculture — I enjoy hands-on farming and understanding sustainable practices. It keeps me grounded and connected to nature.",
-    gradient: "from-green-500 to-emerald-500",
-    iconBg: "bg-green-500/10 text-green-400",
-    borderColor: "hover:border-green-500/30",
+    description: "Hands-on agriculture keeps me grounded — literally. Sustainable practices and patience.",
+    color: "#6b8f6e",
+    bg: "rgba(107,143,110,0.08)",
+    border: "rgba(107,143,110,0.18)",
     emoji: "🌱",
   },
   {
-    icon: <Cpu size={28} />,
+    icon: <Cpu size={20} />,
     title: "Tech-Driven Environments",
-    description: "I love creating technology-powered surroundings — from IoT-based smart setups to automation that makes everyday life smarter and more efficient.",
-    gradient: "from-green-500 to-rose-500",
-    iconBg: "bg-green-500/10 text-green-400",
-    borderColor: "hover:border-green-500/30",
+    description: "IoT setups and home automation — I like turning living spaces into smart, efficient systems.",
+    color: "#4a7fa8",
+    bg: "rgba(74,127,168,0.08)",
+    border: "rgba(74,127,168,0.18)",
     emoji: "⚡",
   },
   {
-    icon: <Wrench size={28} />,
+    icon: <Wrench size={20} />,
     title: "Fixer, Not a Replacer",
-    description: "Why toss it when you can fix it? I get a kick out of diagnosing what's broken and breathing new life into it — because real satisfaction comes from revival, not replacement.",
-    gradient: "from-amber-500 to-orange-500",
-    iconBg: "bg-amber-500/10 text-amber-400",
-    borderColor: "hover:border-amber-500/30",
+    description: "Real satisfaction comes from diagnosing and reviving — why toss it when you can fix it?",
+    color: "#c9882c",
+    bg: "rgba(201,136,44,0.08)",
+    border: "rgba(201,136,44,0.2)",
     emoji: "🛠️",
   },
 ];
@@ -44,14 +44,14 @@ const hobbies = [
 export default function Hobbies() {
   return (
     <section id="hobbies" className="py-24 relative">
-      <div className="section-divider mb-24"></div>
+      <div className="section-divider mb-24" />
       <div className="max-w-4xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <span
             className="text-xs uppercase tracking-[0.2em] mb-3 block font-medium"
@@ -63,57 +63,44 @@ export default function Hobbies() {
             className="text-3xl md:text-5xl font-bold mb-4 text-stone-900"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            Beyond <span className="gradient-text animate-gradient-text">Work</span>
+            Beyond <span className="gradient-text animate-gradient-text">Code</span>
           </h2>
+          <p className="text-stone-400 text-sm max-w-sm mx-auto">
+            A few things that shape how I think, build, and stay balanced outside of work.
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {hobbies.map((hobby, i) => (
+        <div className="grid sm:grid-cols-2 gap-4">
+          {beyondCode.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.5 }}
-              whileHover={{ y: -8, scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className={`warm-card cursor-default group border-transparent ${hobby.borderColor}`}
+              transition={{ delay: i * 0.1, duration: 0.45 }}
+              whileHover={{ y: -3, scale: 1.01 }}
+              className="flex items-start gap-4 p-5 rounded-xl bg-white border border-stone-200 hover:border-amber-300 hover:bg-amber-50/30 transition-all group cursor-default shadow-sm"
             >
-              {/* Gradient accent */}
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: i * 0.15 }}
-                className={`h-1 bg-gradient-to-r ${hobby.gradient}`}
-              ></motion.div>
+              {/* Icon */}
+              <div
+                className="p-2.5 rounded-xl flex-shrink-0 mt-0.5"
+                style={{ background: item.bg, color: item.color, border: `1px solid ${item.border}` }}
+              >
+                {item.icon}
+              </div>
 
-              <div className="p-6 flex flex-col items-center text-center">
-                {/* Animated icon */}
-                <motion.div
-                  whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.15 }}
-                  transition={{ duration: 0.5 }}
-                  className={`p-4 rounded-2xl ${hobby.iconBg} mb-5`}
-                >
-                  {hobby.icon}
-                </motion.div>
-
-                {/* Emoji + Title */}
-                <div className="flex items-center gap-2 mb-3">
-                  <motion.span
-                    whileHover={{ scale: 1.3, rotate: 15 }}
-                    className="text-xl"
+              {/* Text */}
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 mb-1">
+                  <span className="text-base">{item.emoji}</span>
+                  <h3
+                    className="text-sm font-bold text-stone-800 group-hover:text-amber-800 transition-colors"
+                    style={{ fontFamily: "'Playfair Display', serif" }}
                   >
-                    {hobby.emoji}
-                  </motion.span>
-                  <h3 className="text-lg font-bold text-stone-900 group-hover:text-amber-800 transition-colors">
-                    {hobby.title}
+                    {item.title}
                   </h3>
                 </div>
-
-                <p className="text-stone-500 text-sm leading-relaxed">
-                  {hobby.description}
-                </p>
+                <p className="text-stone-500 text-[13px] leading-relaxed">{item.description}</p>
               </div>
             </motion.div>
           ))}
