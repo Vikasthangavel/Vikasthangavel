@@ -172,18 +172,7 @@ export const projects = [
     category: "College Event",
     accent: "#6366f1",
   },
-  {
-    title: "Time2Bus",
-    subtitle: "Real-Time Bus Tracking — Web + IoT",
-    description:
-      "Smart transportation system combining a web app with IoT hardware. GPS coordinates auto-announce the next stop using predefined route data.",
-    tech: ["IoT", "GPS", "Web App", "Hardware"],
-    links: [],
-    featured: true,
-    underDev: true,
-    category: "personal",
-    accent: "#10b981",
-  },
+
   {
     title: "The Astro Technologies",
     subtitle: "RO System Portfolio & Product Catalog",
@@ -518,7 +507,7 @@ export default function Projects() {
             {showAll ? (
               <><ChevronUp size={15} /> Show Less</>
             ) : (
-              <><Folder size={14} /> View All {projects.length} Projects <ChevronDown size={15} /></>
+              <><Folder size={14} /> View All {displayedRemaining.length + displayedHighlights.length} Projects <ChevronDown size={15} /></>
             )}
           </motion.button>
         </div>
