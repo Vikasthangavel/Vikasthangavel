@@ -30,6 +30,13 @@ export default function Navbar() {
         scrolled ? "glass-nav py-3" : "bg-transparent py-5"
       }`}
     >
+      {/* Skip to main content — visible on focus for keyboard/screen-reader users */}
+      <a
+        href="#hero"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[999] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-white focus:text-amber-800 focus:font-semibold focus:shadow-lg focus:outline-none"
+      >
+        Skip to content
+      </a>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo — personal initials monogram */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
@@ -92,6 +99,8 @@ export default function Navbar() {
         <div className="md:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
             className="p-2 rounded-lg text-stone-500 hover:text-amber-700 hover:bg-amber-50 transition-all"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import {
   Github,
@@ -117,6 +117,31 @@ export default function Hero() {
     return () => window.removeEventListener("mousemove", fn);
   }, [rawX, rawY, disableHeavyFx]);
 
+  // Focus trap + Escape key for resume modal
+  const modalRef = useRef(null);
+  useEffect(() => {
+    if (!showResumeModal) return;
+    const modal = modalRef.current;
+    if (!modal) return;
+    const focusable = modal.querySelectorAll(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    first?.focus();
+    const trap = (e) => {
+      if (e.key === "Escape") { setShowResumeModal(false); return; }
+      if (e.key !== "Tab") return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last?.focus(); }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first?.focus(); }
+      }
+    };
+    document.addEventListener("keydown", trap);
+    return () => document.removeEventListener("keydown", trap);
+  }, [showResumeModal]);
+
 
   return (
     <section id="hero" className="min-h-screen flex items-center relative overflow-hidden hero-mesh">
@@ -127,14 +152,17 @@ export default function Hero() {
 
       {/* Mouse-reactive warm blobs */}
       <motion.div
+        aria-hidden="true"
         className="absolute top-[5%] left-[2%] w-[480px] h-[480px] rounded-full blur-[150px] hero-blob-1 z-0"
         style={{ background: "rgba(192,98,74,0.11)", x: disableHeavyFx ? 0 : blobX, y: disableHeavyFx ? 0 : blobY }}
       />
       <motion.div
+        aria-hidden="true"
         className="absolute bottom-[8%] right-[5%] w-[380px] h-[380px] rounded-full blur-[140px] hero-blob-2 z-0"
         style={{ background: "rgba(201,136,44,0.08)", x: disableHeavyFx ? 0 : blobX, y: disableHeavyFx ? 0 : blobY }}
       />
       <motion.div
+        aria-hidden="true"
         className="absolute top-[40%] right-[20%] w-[280px] h-[280px] rounded-full blur-[120px] z-0"
         style={{ background: "rgba(107,143,110,0.07)" }}
       />
@@ -143,6 +171,7 @@ export default function Hero() {
       {!disableHeavyFx && PARTICLES.map((p, i) => (
         <motion.div
           key={i}
+          aria-hidden="true"
           className="absolute rounded-full hidden md:block z-0"
           style={{
             width:      p.w,
@@ -332,12 +361,13 @@ export default function Hero() {
               <span className="text-[10px] text-stone-400 uppercase tracking-widest">Find me</span>
               <div className="w-6 h-px bg-stone-300" />
               {[
-                { href: "https://github.com/Vikasthangavel/",         icon: <Github   size={17} />, hover: "hover:text-stone-900 hover:border-stone-300" },
-                { href: "https://www.linkedin.com/in/vikasthangavel/", icon: <Linkedin size={17} />, hover: "hover:text-blue-600 hover:border-blue-300" },
-                { href: "mailto:vikasthangavel@gmail.com",             icon: <Mail     size={17} />, hover: "hover:text-amber-700 hover:border-amber-300" },
+                { href: "https://github.com/Vikasthangavel/",         label: "GitHub profile",   icon: <Github   size={17} />, hover: "hover:text-stone-900 hover:border-stone-300" },
+                { href: "https://www.linkedin.com/in/vikasthangavel/", label: "LinkedIn profile",  icon: <Linkedin size={17} />, hover: "hover:text-blue-600 hover:border-blue-300" },
+                { href: "mailto:vikasthangavel@gmail.com",             label: "Send me an email", icon: <Mail     size={17} />, hover: "hover:text-amber-700 hover:border-amber-300" },
               ].map((s, i) => (
                 <motion.a
                   key={i} href={s.href} target="_blank" rel="noopener noreferrer"
+                  aria-label={s.label}
                   initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1.1 + i * 0.1 }} whileHover={{ y: -3, scale: 1.12 }}
                   className={`p-2 rounded-lg text-stone-400 border border-stone-200 bg-white shadow-sm transition-all duration-300 ${s.hover}`}
@@ -434,6 +464,10 @@ export default function Hero() {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.88, opacity: 0 }}
             transition={{ type: "spring", stiffness: 320, damping: 26 }}
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Download Resume"
             className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden"
             onClick={e => e.stopPropagation()}
           >

@@ -77,7 +77,10 @@ export default function About() {
               >
                 <img
                   src={vikasImage}
-                  alt="Vikas T"
+                  alt="Vikas T — Software Engineer"
+                  width={340}
+                  height={420}
+                  loading="lazy"
                   className="w-full h-auto object-contain"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-900/20 via-transparent to-transparent group-hover:from-stone-900/10 transition-all duration-500" />

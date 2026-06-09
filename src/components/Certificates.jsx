@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Award, ExternalLink, Download, X, FileText, BookOpen, Code2, Wifi, Globe } from "lucide-react";
 
@@ -68,6 +68,14 @@ const certificates = [
 export default function Certificates() {
   const [selected, setSelected] = useState(null);
 
+  // Close modal on Escape key
+  useEffect(() => {
+    if (!selected) return;
+    const onKey = (e) => { if (e.key === "Escape") setSelected(null); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [selected]);
+
   return (
     <section id="certificates" className="py-24 relative">
       <div className="section-divider mb-24"></div>
@@ -108,8 +116,12 @@ export default function Certificates() {
               transition={{ delay: i * 0.1, duration: 0.5 }}
               whileHover={{ y: -6, scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
+              role="button"
+              tabIndex={0}
+              aria-label={`Open ${cert.title} certificate`}
               className="warm-card overflow-hidden group cursor-pointer relative"
               onClick={() => setSelected(cert)}
+              onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setSelected(cert)}
             >
               {/* Top gradient line */}
               <motion.div
@@ -117,6 +129,7 @@ export default function Certificates() {
                 whileInView={{ width: "100%" }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.12 }}
+                aria-hidden="true"
                 className={`h-1 bg-gradient-to-r ${cert.gradient}`}
               />
 
@@ -142,7 +155,7 @@ export default function Certificates() {
                 >
                   {cert.title}
                 </h3>
-                <p className="text-xs text-stone-400 leading-relaxed line-clamp-2 mb-4">
+                <p className="text-xs text-stone-600 leading-relaxed line-clamp-2 mb-4">
                   {cert.description}
                 </p>
 
@@ -152,6 +165,7 @@ export default function Certificates() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={(e) => { e.stopPropagation(); setSelected(cert); }}
+                    aria-label={`View ${cert.title}`}
                     className="flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold py-2 px-3 rounded-lg border border-stone-200 text-stone-600 hover:border-amber-400 hover:text-amber-700 hover:bg-amber-50 transition-all"
                   >
                     <ExternalLink size={12} />
@@ -231,6 +245,7 @@ export default function Certificates() {
                   </a>
                   <button
                     onClick={() => setSelected(null)}
+                    aria-label="Close certificate viewer"
                     className="p-2 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-all"
                   >
                     <X size={18} />
