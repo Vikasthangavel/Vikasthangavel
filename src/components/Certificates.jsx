@@ -5,7 +5,7 @@ import { Award, ExternalLink, Download, X, FileText, BookOpen, Code2, Wifi, Glob
 const certificates = [
   {
     title: "Advanced R Programming for Data Analytics in Business",
-    file: "/cerficatates/Advanced R Programming for Data Analytics in Business.pdf",
+    file: "/certificates/Advanced R Programming for Data Analytics in Business.pdf",
     category: "Data Science",
     icon: <BookOpen size={22} />,
     gradient: "from-[#c0624a] to-[#a04d37]",
@@ -17,7 +17,7 @@ const certificates = [
   },
   {
     title: "Data Analytics with Python",
-    file: "/cerficatates/Data Analytics with Python.pdf",
+    file: "/certificates/Data Analytics with Python.pdf",
     category: "Data Science",
     icon: <Code2 size={22} />,
     gradient: "from-[#4a7fa8] to-[#2d6a8c]",
@@ -29,7 +29,7 @@ const certificates = [
   },
   {
     title: "English Language for Competitive Exams",
-    file: "/cerficatates/English Language for Competitive Exams.pdf",
+    file: "/certificates/English Language for Competitive Exams.pdf",
     category: "Communication",
     icon: <Globe size={22} />,
     gradient: "from-[#6b8f6e] to-[#4a6d4c]",
@@ -41,7 +41,7 @@ const certificates = [
   },
   {
     title: "Internet of Things (IoT)",
-    file: "/cerficatates/IOT.pdf",
+    file: "/certificates/IOT.pdf",
     category: "Technology",
     icon: <Wifi size={22} />,
     gradient: "from-[#c9882c] to-[#a06a1a]",
@@ -53,7 +53,7 @@ const certificates = [
   },
   {
     title: "The Joy of Computing using Python",
-    file: "/cerficatates/The Joy of Computing using Python.pdf",
+    file: "/certificates/The Joy of Computing using Python.pdf",
     category: "Programming",
     icon: <FileText size={22} />,
     gradient: "from-[#d4765e] to-[#c0624a]",
