@@ -405,13 +405,17 @@ const ProjectCard = ({ project, index }) => (
 
 /* ── Stats Row ────────────────────────────────────────────────── */
 const StatsRow = () => {
-  const clientCount = projects.filter((p) => p.category === "client").length;
+  const clientCount   = projects.filter((p) => p.category === "client").length;
   const personalCount = projects.filter((p) => p.category === "personal").length;
+  const hackathonCount = projects.filter(
+    (p) => p.category === "Hackathon" || p.category === "College Event"
+  ).length;
 
   const stats = [
-    { label: "Total Projects", value: projects.length, icon: Code2 },
-    { label: "Client Projects", value: clientCount, icon: Users },
-    { label: "Personal Projects", value: personalCount, icon: Folder },
+    { label: "Total Projects",      value: projects.length, icon: Code2  },
+    { label: "Client Projects",     value: clientCount,      icon: Users  },
+    { label: "Personal Projects",   value: personalCount,    icon: Folder },
+    { label: "Hackathon / College", value: hackathonCount,   icon: Star   },
   ];
 
   return (
