@@ -45,34 +45,57 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="flex justify-center"
           >
-            <div className="relative group">
-              {/* Warm glow ring */}
-              <div className="absolute -inset-1 rounded-2xl blur-md opacity-20 group-hover:opacity-40 transition duration-700"
-                style={{ background: "linear-gradient(135deg, #c0624a, #c9882c, #6b8f6e)" }}
-              ></div>
+            {/* Floating wrapper */}
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="relative group"
+            >
+              {/* Slow spinning decorative ring */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                className="absolute -inset-2 rounded-2xl opacity-30"
+                style={{
+                  background: "conic-gradient(from 0deg, #c0624a, #c9882c, #6b8f6e, #c0624a)",
+                  borderRadius: "18px",
+                  filter: "blur(6px)",
+                }}
+              />
+
+              {/* Static soft glow */}
+              <div
+                className="absolute -inset-1 rounded-2xl opacity-15 group-hover:opacity-30 transition duration-700"
+                style={{ background: "linear-gradient(135deg, #c0624a, #c9882c)" }}
+              />
 
               {/* Image container */}
-              <div className="relative w-72 md:w-[340px] rounded-2xl overflow-hidden border-2 border-stone-200 group-hover:border-amber-400/50 transition-all duration-500 tilt-hover shadow-xl bg-stone-50">
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                className="relative w-72 md:w-[340px] rounded-2xl overflow-hidden border-2 border-stone-200 group-hover:border-amber-400/50 transition-colors duration-500 shadow-xl bg-stone-50"
+              >
                 <img
                   src={vikasImage}
                   alt="Vikas T"
-                  className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-auto object-contain"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-900/25 via-transparent to-transparent group-hover:from-stone-900/15 transition-all duration-500"></div>
-              </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-900/20 via-transparent to-transparent group-hover:from-stone-900/10 transition-all duration-500" />
+              </motion.div>
 
               {/* Floating badge */}
               <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                 className="absolute -bottom-4 -right-4 px-4 py-2.5 bg-white border border-amber-200 rounded-xl text-sm shadow-lg"
                 style={{ boxShadow: "0 4px 20px rgba(192,98,74,0.12)" }}
               >
                 <span className="text-stone-500 text-xs">Currently</span>
                 <span className="ml-1.5 font-semibold text-amber-700">Building 🚀</span>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
+
 
           {/* Content */}
           <motion.div
