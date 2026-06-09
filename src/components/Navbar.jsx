@@ -19,6 +19,7 @@ export default function Navbar() {
     { name: "Skills", to: "skills" },
     { name: "Projects", to: "projects" },
     { name: "Experience", to: "experience" },
+    { name: "Certificates", to: "certificates" },
     { name: "Hobbies", to: "hobbies" },
     { name: "Contact", to: "contact" },
   ];
