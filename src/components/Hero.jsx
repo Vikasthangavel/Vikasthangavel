@@ -8,16 +8,21 @@ import {
   ArrowDown,
   Briefcase,
   MapPin,
+  Globe,
+  Bot,
+  BarChart2,
+  Code2,
+  Settings2,
 } from "lucide-react";
 import { Link } from "react-scroll";
 import FloatingShape from "./FloatingShape";
 
 const resumeOptions = [
-  { label: "Full Stack Developer",   file: "/resume/VIKAS T_full stack.pdf",              icon: "🌐" },
-  { label: "AI Engineer",            file: "/resume/VIKAS T AI Engineer.pdf",             icon: "🤖" },
-  { label: "Data Science",           file: "/resume/VIKAS T data science.pdf",            icon: "📊" },
-  { label: "Python Developer",       file: "/resume/VIKAS_T python developer.pdf",        icon: "🐍" },
-  { label: "ERP Tech",               file: "/resume/VIKAS T ERP Tech.pdf",               icon: "⚙️" },
+  { label: "Full Stack Developer", file: "/resume/VIKAS T_full stack.pdf",       Icon: Globe,     color: "#6366f1" },
+  { label: "AI Engineer",          file: "/resume/VIKAS T AI Engineer.pdf",      Icon: Bot,       color: "#06b6d4" },
+  { label: "Data Science",         file: "/resume/VIKAS T data science.pdf",    Icon: BarChart2, color: "#8b5cf6" },
+  { label: "Python Developer",     file: "/resume/VIKAS_T python developer.pdf", Icon: Code2,     color: "#10b981" },
+  { label: "ERP Tech",             file: "/resume/VIKAS T ERP Tech.pdf",        Icon: Settings2, color: "#f59e0b" },
 ];
 
 /* ── Typewriter hook ─────────────────────────────────────── */
@@ -455,7 +460,12 @@ export default function Hero() {
                   onClick={() => setShowResumeModal(false)}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl border border-stone-100 hover:border-amber-300 transition-all cursor-pointer group"
                 >
-                  <span className="text-xl">{opt.icon}</span>
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ background: `${opt.color}15`, color: opt.color }}
+                  >
+                    <opt.Icon size={16} strokeWidth={2} />
+                  </div>
                   <span className="flex-1 text-sm font-medium text-stone-700 group-hover:text-amber-800 transition-colors">
                     {opt.label}
                   </span>
