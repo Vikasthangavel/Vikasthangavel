@@ -6,7 +6,7 @@ export const experiences = [
   {
     role: "Web Developer",
     company: "Gradix Technologies",
-    period: "Mar 2026 – Present",
+    period: "Mar 2026 – Jun 2026",
     duration: "Intern",
     link: "https://gradixtech.com/",
     points: [
