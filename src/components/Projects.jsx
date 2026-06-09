@@ -195,6 +195,17 @@ export const projects = [
     category: "client",
     accent: "#f59e0b",
   },
+  {
+    title: "Challengers Trust",
+    subtitle: "Blood Donor Registry Platform",
+    description:
+      "Built for Challengers Trust — a platform to securely store and manage blood donor details. Features Firebase Authentication, role-based access control (admin/viewer), and a real-time donor database to help the trust quickly find and connect with donors.",
+    tech: ["React", "Firebase", "Auth", "Role-Based Access"],
+    links: [{ label: "ctrust.pages.dev", url: "https://ctrust.pages.dev/" }],
+    featured: true,
+    category: "client",
+    accent: "#ef4444",
+  },
 ];
 
 const highlightProjects = projects.filter((p) => p.highlight);
