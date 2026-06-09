@@ -4,10 +4,10 @@ import { MapPin, Code, Cpu, Database, Cloud } from "lucide-react";
 import vikasImage from "../Vikas.jpg";
 
 const highlights = [
-  { icon: <Code size={20} />, label: "Full-Stack Apps",   color: "#c0624a" },
-  { icon: <Cpu  size={20} />, label: "AI / ML",            color: "#6b8f6e" },
+  { icon: <Code size={20} />, label: "Full-Stack Apps", color: "#c0624a" },
+  { icon: <Cpu size={20} />, label: "AI / ML", color: "#6b8f6e" },
   { icon: <Database size={20} />, label: "Database Design", color: "#4a7fa8" },
-  { icon: <Cloud size={20} />, label: "Cloud Deploy",      color: "#c9882c" },
+  { icon: <Cloud size={20} />, label: "Cloud Deploy", color: "#c9882c" },
 ];
 
 export default function About() {
@@ -52,11 +52,11 @@ export default function About() {
               ></div>
 
               {/* Image container */}
-              <div className="relative w-72 h-72 md:w-[340px] md:h-[340px] rounded-2xl overflow-hidden border-2 border-stone-200 group-hover:border-amber-400/50 transition-all duration-500 tilt-hover shadow-xl">
+              <div className="relative w-72 md:w-[340px] rounded-2xl overflow-hidden border-2 border-stone-200 group-hover:border-amber-400/50 transition-all duration-500 tilt-hover shadow-xl bg-stone-50">
                 <img
                   src={vikasImage}
                   alt="Vikas T"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-900/25 via-transparent to-transparent group-hover:from-stone-900/15 transition-all duration-500"></div>
               </div>
