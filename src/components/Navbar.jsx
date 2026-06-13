@@ -22,6 +22,7 @@ export default function Navbar() {
     { name: "Certificates", to: "certificates" },
     { name: "Hobbies", to: "hobbies" },
     { name: "Contact", to: "contact" },
+    { name: "Blog", href: "https://blog.vikast.me/" },
   ];
 
   return (
@@ -71,28 +72,40 @@ export default function Navbar() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="hidden md:flex items-center gap-1"
         >
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.to}
-              smooth={true}
-              duration={500}
-              spy={true}
-              offset={-70}
-              onSetActive={() => setActiveSection(link.to)}
-              className="relative px-4 py-2 text-sm text-stone-600 hover:text-amber-800 cursor-pointer transition-all font-medium rounded-lg hover:bg-amber-500/[0.07] group"
-            >
-              {link.name}
-              {activeSection === link.to && (
-                <motion.div
-                  layoutId="activeSection"
-                  className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full"
-                  style={{ background: "linear-gradient(to right, #c0624a, #c9882c)" }}
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
-              )}
-            </Link>
-          ))}
+          {navLinks.map((link) =>
+            link.href ? (
+              <a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative px-4 py-2 text-sm text-stone-600 hover:text-amber-800 cursor-pointer transition-all font-medium rounded-lg hover:bg-amber-500/[0.07] group"
+              >
+                {link.name}
+              </a>
+            ) : (
+              <Link
+                key={link.name}
+                to={link.to}
+                smooth={true}
+                duration={500}
+                spy={true}
+                offset={-70}
+                onSetActive={() => setActiveSection(link.to)}
+                className="relative px-4 py-2 text-sm text-stone-600 hover:text-amber-800 cursor-pointer transition-all font-medium rounded-lg hover:bg-amber-500/[0.07] group"
+              >
+                {link.name}
+                {activeSection === link.to && (
+                  <motion.div
+                    layoutId="activeSection"
+                    className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full"
+                    style={{ background: "linear-gradient(to right, #c0624a, #c9882c)" }}
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </Link>
+            )
+          )}
         </motion.div>
 
         {/* Mobile Toggle */}
@@ -126,21 +139,39 @@ export default function Navbar() {
                   transition={{ delay: i * 0.08 }}
                   whileHover={{ x: 5 }}
                 >
-                  <Link
-                    to={link.to}
-                    smooth={true}
-                    duration={500}
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-3 text-stone-600 hover:text-amber-800 font-medium text-base cursor-pointer py-3 px-4 rounded-lg hover:bg-amber-50 transition-all"
-                  >
-                    <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0"
-                      style={{ background: "linear-gradient(135deg, #c0624a, #c9882c)" }}
+                  {link.href ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center gap-3 text-stone-600 hover:text-amber-800 font-medium text-base cursor-pointer py-3 px-4 rounded-lg hover:bg-amber-50 transition-all"
                     >
-                      {i + 1}
-                    </span>
-                    {link.name}
-                  </Link>
+                      <span
+                        className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0"
+                        style={{ background: "linear-gradient(135deg, #c0624a, #c9882c)" }}
+                      >
+                        {i + 1}
+                      </span>
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.to}
+                      smooth={true}
+                      duration={500}
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center gap-3 text-stone-600 hover:text-amber-800 font-medium text-base cursor-pointer py-3 px-4 rounded-lg hover:bg-amber-50 transition-all"
+                    >
+                      <span
+                        className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0"
+                        style={{ background: "linear-gradient(135deg, #c0624a, #c9882c)" }}
+                      >
+                        {i + 1}
+                      </span>
+                      {link.name}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </div>
