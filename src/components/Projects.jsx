@@ -30,6 +30,7 @@ export const projects = [
     links: [
       { label: "time2orders.com", url: "https://time2orders.com" },
       { label: "time2orders.shop", url: "https://time2orders.shop" },
+      { label: "Read Article", url: "https://blog.vikast.me/post/time2order" },
     ],
     featured: true,
     category: "personal",
@@ -44,7 +45,10 @@ export const projects = [
     description:
       "Full-stack event management platform with React frontend, Express backend, Supabase Auth, and integrated payment processing.",
     tech: ["React", "Express", "Supabase", "Cloudflare"],
-    links: [{ label: "dakshaa.ksrct.ac.in", url: "https://dakshaa.ksrct.ac.in" }],
+    links: [
+      { label: "dakshaa.ksrct.ac.in", url: "https://dakshaa.ksrct.ac.in" },
+      { label: "Read Article", url: "https://blog.vikast.me/post/dakshaa-t26" },
+    ],
     featured: true,
     category: "College Event",
     highlight: true,
