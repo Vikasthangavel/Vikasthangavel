@@ -165,10 +165,26 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ delay: 0.8 }}
               whileHover={{ x: 5 }}
-              className="flex items-center gap-2 text-stone-500 text-sm cursor-default"
+              className="flex items-center gap-2 text-stone-500 text-sm cursor-default mb-8"
             >
               <MapPin size={16} className="animate-pulse" style={{ color: "#c0624a" }} />
-              <span>Open to relocation — True</span>
+              <span>Open to relocation across India · Available from Jan 2027</span>
+            </motion.div>
+
+            {/* GitHub Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.9 }}
+              className="w-full overflow-hidden rounded-xl border border-stone-800/10 shadow-sm"
+              style={{ background: "#0a0a10" }}
+            >
+              <img 
+                src="https://github-readme-streak-stats.herokuapp.com/?user=Vikasthangavel&theme=tokyonight&hide_border=true&background=0a0a10&ring=8b5cf6&fire=f472b6&currStreakLabel=22d3ee&sideLabels=e2e0f0&dates=6b6888" 
+                alt="GitHub Streak Stats" 
+                className="w-full h-auto"
+              />
             </motion.div>
           </motion.div>
         </div>
