@@ -16,6 +16,7 @@ import {
   Star,
   Users,
   Code2,
+  Sprout,
 } from "lucide-react";
 
 /* ── Project Data ─────────────────────────────────────────────── */
@@ -37,6 +38,23 @@ export const projects = [
     highlight: true,
     Icon: Zap,
     accent: "#6366f1",
+  },
+  {
+    title: "Time2Farm",
+    subtitle: "Farm Finance & Analytics Platform",
+    impact: "Field-specific income & expense tracking • Gemini AI chatbot insights",
+    description:
+      "A farm finance management platform that tracks crop-wise and field-specific income and expenses, featuring an AI chatbot using LangChain and Gemini API for automated financial reporting.",
+    tech: ["React", "Flask", "Gemini API", "LangChain", "SQL"],
+    links: [
+      { label: "time2farm.com", url: "https://time2farm.pages.dev" },
+      { label: "Read Article", url: "https://blog.vikast.me/post/time2farm" },
+    ],
+    featured: true,
+    category: "personal",
+    highlight: true,
+    Icon: Sprout,
+    accent: "#10b981",
   },
   {
     title: "Dakshaa T26",
