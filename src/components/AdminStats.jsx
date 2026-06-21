@@ -5,6 +5,7 @@ import { db } from "../firebase";
 const AdminStats = () => {
     const [stats, setStats] = useState([]);
     const [chatbotStats, setChatbotStats] = useState([]);
+    const [resumeDownloads, setResumeDownloads] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -55,14 +56,33 @@ const AdminStats = () => {
             }
         };
 
+        const fetchResumeDownloads = async () => {
+            try {
+                const q = query(collection(db, "resumeDownloads"), orderBy("timestamp", "desc"));
+                const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                    const data = querySnapshot.docs.map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+                    setResumeDownloads(data);
+                }, (error) => {
+                    console.error("Error fetching resume downloads:", error);
+                });
+                return () => unsubscribe();
+            } catch (err) {
+                console.error("Error fetching resume downloads:", err);
+            }
+        };
+
         const unsubStats = fetchStats();
         const unsubChatbot = fetchChatbotStats();
+        const unsubResume = fetchResumeDownloads();
 
-        // Cleanup both listeners on unmount
-        // Note: fetchStats/fetchChatbotStats are async and return promises of the unsubscribe functions
+        // Cleanup all listeners on unmount
         return () => {
             unsubStats.then(unsub => { if (unsub) unsub(); });
             unsubChatbot.then(unsub => { if (unsub) unsub(); });
+            unsubResume.then(unsub => { if (unsub) unsub(); });
         };
     }, []);
 
@@ -91,6 +111,25 @@ const AdminStats = () => {
             alert("Failed to clear chatbot queries.");
         }
     };
+
+    const clearResumeDownloads = async () => {
+        if (!window.confirm("Are you sure you want to clear ALL resume download records? This cannot be undone.")) return;
+
+        try {
+            const deletePromises = resumeDownloads.map(s => deleteDoc(doc(db, "resumeDownloads", s.id)));
+            await Promise.all(deletePromises);
+            alert("All resume download records cleared successfully!");
+        } catch (err) {
+            console.error("Error clearing resume downloads:", err);
+            alert("Failed to clear resume downloads.");
+        }
+    };
+
+    // Group downloads by resume label for summary
+    const downloadsByLabel = resumeDownloads.reduce((acc, s) => {
+        acc[s.label] = (acc[s.label] || 0) + 1;
+        return acc;
+    }, {});
 
     if (loading) return <div className="p-10 text-white">Loading stats...</div>;
 
@@ -127,6 +166,14 @@ const AdminStats = () => {
                                 ? Math.round(stats.reduce((acc, s) => acc + (s.totalTime || 0), 0) / stats.length)
                                 : 0}s
                         </h2>
+                    </div>
+                    <div className="p-6 bg-white/5 border border-white/10 rounded-xl">
+                        <p className="text-xs text-slate-500 uppercase tracking-widest mb-2 font-bold">Resume Downloads</p>
+                        <h2 className="text-4xl font-bold text-white">{resumeDownloads.length}</h2>
+                    </div>
+                    <div className="p-6 bg-white/5 border border-white/10 rounded-xl">
+                        <p className="text-xs text-slate-500 uppercase tracking-widest mb-2 font-bold">Chatbot Queries</p>
+                        <h2 className="text-4xl font-bold text-white">{chatbotStats.length}</h2>
                     </div>
                 </div>
 
@@ -168,6 +215,68 @@ const AdminStats = () => {
                             ))}
                             {stats.length === 0 && (
                                 <tr><td colSpan="6" className="p-8 text-center text-slate-500">No sessions recorded yet.</td></tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+
+                {/* Resume Downloads Section */}
+                <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden overflow-x-auto mb-12">
+                    <div className="flex justify-between items-center p-4 border-b border-white/10 bg-white/5">
+                        <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Resume Downloads
+                            <span className="ml-2 px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-xs rounded-full font-bold">{resumeDownloads.length} total</span>
+                        </h2>
+                        <button
+                            onClick={clearResumeDownloads}
+                            className="px-3 py-1.5 bg-red-600/10 hover:bg-red-600/20 text-red-400 border border-red-600/30 rounded-lg text-xs font-bold transition-all"
+                        >
+                            Clear Records
+                        </button>
+                    </div>
+
+                    {/* Per-resume summary badges */}
+                    {Object.keys(downloadsByLabel).length > 0 && (
+                        <div className="flex flex-wrap gap-2 p-4 border-b border-white/5 bg-white/[0.02]">
+                            {Object.entries(downloadsByLabel).map(([label, count]) => (
+                                <span key={label} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                    {label}
+                                    <span className="ml-1 px-1.5 py-0.5 bg-emerald-500/25 text-emerald-300 rounded-full text-[10px] font-bold">{count}</span>
+                                </span>
+                            ))}
+                        </div>
+                    )}
+
+                    <table className="w-full text-left text-sm">
+                        <thead className="bg-white/10 text-slate-400 font-bold">
+                            <tr>
+                                <th className="p-4 border-b border-white/10 whitespace-nowrap">#</th>
+                                <th className="p-4 border-b border-white/10 whitespace-nowrap">Resume Type</th>
+                                <th className="p-4 border-b border-white/10 whitespace-nowrap">File</th>
+                                <th className="p-4 border-b border-white/10 whitespace-nowrap">Downloaded At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {resumeDownloads.map((s, idx) => (
+                                <tr key={s.id} className="hover:bg-white/5 transition-colors group">
+                                    <td className="p-4 border-b border-white/5 text-slate-500 text-xs">{idx + 1}</td>
+                                    <td className="p-4 border-b border-white/5">
+                                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-300 text-xs font-semibold border border-emerald-500/20">
+                                            {s.label}
+                                        </span>
+                                    </td>
+                                    <td className="p-4 border-b border-white/5 text-slate-500 text-xs truncate max-w-[240px]" title={s.file}>
+                                        {s.file}
+                                    </td>
+                                    <td className="p-4 border-b border-white/5 text-slate-400 text-xs whitespace-nowrap">
+                                        {s.timestamp?.toDate ? s.timestamp.toDate().toLocaleString() : "Syncing..."}
+                                    </td>
+                                </tr>
+                            ))}
+                            {resumeDownloads.length === 0 && (
+                                <tr><td colSpan="4" className="p-8 text-center text-slate-500">No resume downloads recorded yet.</td></tr>
                             )}
                         </tbody>
                     </table>
