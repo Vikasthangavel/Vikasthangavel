@@ -16,6 +16,8 @@ import {
 } from "lucide-react";
 import { Link } from "react-scroll";
 import FloatingShape from "./FloatingShape";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
 
 const resumeOptions = [
   { label: "Full Stack Developer", file: "/resume/VIKAS T_full stack.pdf",       Icon: Globe,     color: "#6366f1" },
@@ -491,7 +493,18 @@ export default function Hero() {
                   download
                   whileHover={{ x: 4, backgroundColor: "#fdf6f0" }}
                   whileTap={{ scale: 0.97 }}
-                  onClick={() => setShowResumeModal(false)}
+                  onClick={async () => {
+                    setShowResumeModal(false);
+                    try {
+                      await addDoc(collection(db, "resumeDownloads"), {
+                        label: opt.label,
+                        file: opt.file,
+                        timestamp: serverTimestamp(),
+                      });
+                    } catch (e) {
+                      console.warn("Could not track resume download:", e);
+                    }
+                  }}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl border border-stone-100 hover:border-amber-300 transition-all cursor-pointer group"
                 >
                   <div
