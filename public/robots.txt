@@ -1,0 +1,8 @@
+# robots.txt — Vikas T Portfolio
+User-agent: *
+Allow: /
+
+# Block admin/stats view from indexing
+Disallow: /?view=stats
+
+Sitemap: https://vikasthangavel.pages.dev/sitemap.xml
