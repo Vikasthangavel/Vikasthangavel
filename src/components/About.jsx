@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, Code, Cpu, Database, Cloud } from "lucide-react";
+import { MapPin, Code, Cpu, Database, Cloud, FileText } from "lucide-react";
 import vikasImage from "../Vikas.jpg";
 
 const highlights = [
@@ -135,11 +135,48 @@ export default function About() {
               </div>
             </div>
 
-            <p className="text-stone-600 leading-relaxed mb-4 text-base">
-              I'm a hands-on engineer who loves turning ideas into real products.
-              From payment integrations to AI-powered dashboards, I build end-to-end
-              solutions that solve real-world problems. Currently pursuing B.Tech in AI &amp; DS.
-            </p>
+            {/* Professional Summary */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="relative warm-card overflow-hidden mb-8"
+            >
+              {/* left accent bar */}
+              <div
+                className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl"
+                style={{ background: "linear-gradient(to bottom, #c0624a, #c9882c)" }}
+              />
+              <div className="px-6 py-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <FileText size={15} style={{ color: "#c0624a" }} />
+                  <span
+                    className="text-xs font-semibold uppercase tracking-[0.18em]"
+                    style={{ color: "#c0624a" }}
+                  >
+                    Professional Summary
+                  </span>
+                </div>
+                <p className="text-stone-700 text-sm leading-[1.85] mb-0">
+                  Full-Stack Developer with{" "}
+                  <span className="font-semibold text-stone-900">2+ years of hands-on experience</span>{" "}
+                  designing and shipping production-grade web applications — from e-commerce platforms
+                  and real-time auction systems to AI-integrated dashboards and event management tools.
+                  Specialized in the{" "}
+                  <span className="font-semibold text-stone-900">React&nbsp;·&nbsp;Python&nbsp;/&nbsp;Flask&nbsp;·&nbsp;Firebase&nbsp;/&nbsp;Supabase</span>{" "}
+                  stack, with practical exposure to LangChain, REST APIs, and cloud deployments on
+                  Cloudflare and VPS. Delivered{" "}
+                  <span className="font-semibold text-stone-900">15+ live products</span>{" "}
+                  serving 10,000+ users across 4+ clients. Currently a final-year B.Tech AI &amp; DS
+                  student at KSRCT, seeking{" "}
+                  <span className="font-semibold" style={{ color: "#c0624a" }}>
+                    Full-Stack or Backend Engineering roles
+                  </span>{" "}
+                  starting Jan 2027.
+                </p>
+              </div>
+            </motion.div>
 
             {/* Highlight chips */}
             <div className="grid grid-cols-2 gap-3 mb-8">
