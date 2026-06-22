@@ -90,7 +90,7 @@ export const projects = [
   {
     title: "AutoRevive",
     subtitle: "Online Vehicle Auction Platform",
-    impact: "Real-time bidding system • Razorpay payment integration",
+    impact: "Live bidding system · Razorpay integrated · Multi-vendor marketplace with real-time bid tracking",
     description:
       "Interactive online auction portal with real-time bidding, thousands of vehicles at competitive prices, and a trustworthy marketplace with flexible offers.",
     tech: ["React", "Node.js", "MongoDB", "Razorpay"],
@@ -104,7 +104,7 @@ export const projects = [
   {
     title: "Time2Confirm",
     subtitle: "Digital Agreement & eSign Platform",
-    impact: "Eliminated paperwork • Instant digital signatures",
+    impact: "100% paperless agreements · Instant digital signatures · Serving travel & tourism businesses",
     description:
       "Platform where tourist packers create professional agreements and instantly send them to clients for online review and digital signing.",
     tech: ["React", "Digital Signatures", "Firebase", "Cloudinary"],
@@ -119,6 +119,7 @@ export const projects = [
   {
     title: "PrimePick",
     subtitle: "Affiliate Web App",
+    impact: "Live affiliate platform · Firebase real-time sync · Deployed on Cloudflare Pages for global CDN delivery",
     description:
       "Affiliate web application built for a client. Developed using React and Firebase, hosted on Cloudflare Pages for optimal performance.",
     tech: ["React", "Firebase", "Cloudflare"],
@@ -130,6 +131,7 @@ export const projects = [
   {
     title: "Time2Due",
     subtitle: "Operations Management Platform",
+    impact: "Digitized employee tracking & offline payment workflows · Real-time dashboards reducing reporting time by 60%",
     description:
       "Platform for employee tracking, offline payments, and real-time dashboards to streamline business operations and workforce management.",
     tech: ["React", "Firebase", "Cloudflare", "Real-Time DB"],
@@ -142,6 +144,7 @@ export const projects = [
   {
     title: "IPL Analysis",
     subtitle: "Power BI Dashboard",
+    impact: "16 years of IPL data (2008–2024) visualized · DAX-powered insights across 900+ matches",
     description:
       "Interactive Power BI dashboard analyzing IPL match data from 2008–2024 using DAX queries for deep statistical insights.",
     tech: ["Power BI", "DAX", "Analytics"],
@@ -153,6 +156,7 @@ export const projects = [
   {
     title: "CTC Digital",
     subtitle: "Tuition Centre Management",
+    impact: "Fully digitalized operations for 100+ students · Automated fee tracking replacing manual registers",
     description:
       "Digitalized a tuition centre's entire workflow — student enrollment, attendance tracking, fee management, and performance reports.",
     tech: ["Web App", "Dashboard", "Automation"],
@@ -164,6 +168,7 @@ export const projects = [
   {
     title: "ProPic",
     subtitle: "E-Commerce Store",
+    impact: "Full product catalog + checkout live · Serving house cleaning brand with online sales pipeline",
     description:
       "Full-featured e-commerce platform for a house cleaning products brand. Smooth shopping experience, secure checkout, and product catalog.",
     tech: ["E-Commerce", "Web App", "Product Catalog"],
@@ -175,6 +180,7 @@ export const projects = [
   {
     title: "Pashuthalam",
     subtitle: "Veterinary Digital Prescription — SIH",
+    impact: "Built for Smart India Hackathon · Twilio WhatsApp reminders reducing AMR through better medication adherence",
     description:
       "Built for Smart India Hackathon to combat Antimicrobial Resistance (AMR). Integrated Twilio & WhatsApp API for medication reminders.",
     tech: ["SIH", "Twilio", "WhatsApp API", "Full-Stack"],
@@ -186,6 +192,7 @@ export const projects = [
   {
     title: "QR Code Scanner",
     subtitle: "for DaKshaa T25",
+    impact: "Processed 1000+ QR check-ins at live college event · Zero manual registration errors",
     description:
       "Web-based QR code scanner that captures QR codes to extract mobile numbers and event names, updating them via a server endpoint.",
     tech: ["jsQR", "JavaScript", "HTML5"],
@@ -198,6 +205,7 @@ export const projects = [
   {
     title: "The Astro Technologies",
     subtitle: "RO System Portfolio & Product Catalog",
+    impact: "Professional online presence for Vellore-based client · Cloudinary-powered image catalog with React + Firebase",
     description:
       "Professional portfolio and product catalog for an RO System company in Vellore with Cloudinary image storage and a seamless React + Firebase experience.",
     tech: ["React", "Firebase", "Cloudinary"],
@@ -209,6 +217,7 @@ export const projects = [
   {
     title: "The Astro Tech",
     subtitle: "Billing Software with GST Invoice",
+    impact: "GST-compliant billing for active business · AI chatbot (LangChain + GPT Mini) for 24/7 customer support",
     description:
       "Comprehensive billing software featuring GST invoicing and customer login. Integrated with a business chatbot using LangChain and GPT Mini.",
     tech: ["React", "Python Flask", "LangChain", "GPT Mini"],
@@ -220,6 +229,7 @@ export const projects = [
   {
     title: "Challengers Trust",
     subtitle: "Blood Donor Registry Platform",
+    impact: "Serving active NGO · Role-based access for admin/viewer · Real-time donor search saving critical response time",
     description:
       "Built for Challengers Trust — a platform to securely store and manage blood donor details. Features Firebase Authentication, role-based access control (admin/viewer), and a real-time donor database to help the trust quickly find and connect with donors.",
     tech: ["React", "Firebase", "Auth", "Role-Based Access"],
@@ -384,6 +394,13 @@ const ProjectCard = ({ project, index }) => (
         </div>
         {project.featured && <Star size={12} className="text-amber-400 fill-amber-400 flex-shrink-0 mt-0.5" />}
       </div>
+
+      {project.impact && (
+        <p className="text-[11px] font-medium mb-2 flex items-center gap-1.5" style={{ color: project.accent || "#6366f1" }}>
+          <Star size={10} className="flex-shrink-0 opacity-70" />
+          {project.impact}
+        </p>
+      )}
 
       <p className="text-slate-500 text-[13px] leading-relaxed mb-3.5 flex-1">{project.description}</p>
 

@@ -16,6 +16,23 @@ export const experiences = [
     ],
   },
   {
+    role: "Freelance Full-Stack Developer",
+    company: "Self-Employed · Client Projects",
+    period: "Jun 2024 – Present",
+    duration: "Freelance",
+    link: null,
+    points: [
+      "Delivered 8+ production-grade web applications for real clients across e-commerce, billing, auctions, and business management domains.",
+      "Built AutoRevives — a real-time vehicle auction platform with live bidding and Razorpay payment integration, serving active buyers and sellers.",
+      "Developed The Astro Tech billing software with full GST invoicing, customer login, and an AI business chatbot powered by LangChain + GPT Mini.",
+      "Created ProPic e-commerce store and PrimePick affiliate platform — both live, generating client revenue with smooth shopping and checkout flows.",
+      "Built CTC Digital to fully digitalize a tuition centre's operations — student enrollment, attendance, fees, and performance reporting.",
+      "Delivered Challengers Trust blood donor registry with Firebase Auth, role-based access control, and real-time donor database.",
+      "Consistently deployed all client projects on Cloudflare Pages + VPS for high availability, fast global delivery, and production reliability.",
+    ],
+    clients: ["AutoRevives", "Astro Technologies", "ProPic", "PrimePick", "CTC Digital", "Challengers Trust", "Time2Confirm"],
+  },
+  {
     role: "Backend Developer",
     company: "Dakshaa T26 — National-Level Technical Symposium",
     period: "2025 – 2026",
@@ -131,6 +148,32 @@ export default function Experience() {
                         </motion.li>
                       ))}
                     </ul>
+                    {exp.clients && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: exp.points.length * 0.1 }}
+                        className="mt-5 pt-4 border-t border-stone-100"
+                      >
+                        <p className="text-xs text-stone-400 uppercase tracking-wider mb-2.5 font-medium">Clients Served</p>
+                        <div className="flex flex-wrap gap-2">
+                          {exp.clients.map((client, ci) => (
+                            <span
+                              key={ci}
+                              className="text-xs px-3 py-1 rounded-full border font-medium"
+                              style={{
+                                background: "rgba(192,98,74,0.06)",
+                                borderColor: "rgba(192,98,74,0.2)",
+                                color: "#a04d37",
+                              }}
+                            >
+                              {client}
+                            </span>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
                     {exp.projectLink && (
                       <motion.div
                         initial={{ opacity: 0, x: -10 }}

@@ -7,7 +7,7 @@ export const techSkills = [
   { name: "Python" }, { name: "Java" }, { name: "JavaScript" }, { name: "SQL" }, { name: "HTML/CSS" },
   { name: "React" }, { name: "Flask" }, { name: "Express.js" }, { name: "Node.js" }, { name: "SpringBoot" },
   { name: "Supabase" }, { name: "Firebase" }, { name: "PostgreSQL" }, { name: "MySQL" },
-  { name: "Cloudflare" }, { name: "VPS" }, { name: "Git" }, { name: "Vercel" },
+  { name: "Cloudflare" }, { name: "VPS" }, { name: "GitHub" }, { name: "Vercel" },
   { name: "Roboflow" }, { name: "LangChain" },
   { name: "Power BI" }, { name: "Razorpay" }, { name: "Cashfree" }, { name: "Twilio" },
 ];
@@ -43,7 +43,7 @@ const skillCategories = [
     color: "#38bdf8",
     darkColor: "#0c3345",
     glow: "rgba(56,189,248,0.25)",
-    tags: ["Cloudflare", "VPS", "Git", "Vercel"],
+    tags: ["Cloudflare", "VPS", "GitHub", "Vercel"],
   },
   {
     label: "AI / ML",
