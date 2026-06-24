@@ -160,7 +160,7 @@ export const projects = [
     description:
       "Digitalized a tuition centre's entire workflow — student enrollment, attendance tracking, fee management, and performance reports.",
     tech: ["Web App", "Dashboard", "Automation"],
-    links: [{ label: "Live", url: "https://tinyurl.com/2026ctc" }],
+    links: [{ label: "Live", url: "https://ctc.vikast.me/" }],
     featured: true,
     category: "client",
     accent: "#06b6d4",
