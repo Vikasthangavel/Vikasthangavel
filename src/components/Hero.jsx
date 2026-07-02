@@ -20,6 +20,7 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 
 const resumeOptions = [
+  { label: "Software Engineer (SDE)", file: "/resume/VIKAS T SDE.pdf",       Icon: Briefcase, color: "#ef4444" },
   { label: "Full Stack Developer", file: "/resume/VIKAS T_full stack.pdf",       Icon: Globe,     color: "#6366f1" },
   { label: "AI Engineer",          file: "/resume/VIKAS T AI Engineer.pdf",      Icon: Bot,       color: "#06b6d4" },
   { label: "Data Science",         file: "/resume/VIKAS T data science.pdf",    Icon: BarChart2, color: "#8b5cf6" },
