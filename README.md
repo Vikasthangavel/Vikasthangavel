@@ -119,7 +119,7 @@ vikas = {
 ---
 
 <div align="center">
-[![vikasthangavel's GitHub streak](https://github-readme-streak-stats.herokuapp.com/?user=vikasthangavel&theme=dark&hide_border=true&card_width=400)](https://www.codecard.dev/tools/github-coding-streak-calculator)
+[![vikasthangavel's GitHub streak](https://github-readme-streak-stats.herokuapp.com/?user=vikasthangavel&theme=dark&hide_border=true&card_width=400)]
     
 <img src="https://capsule-render.vercel.app/api?type=rounded&height=65&color=0:052e16,50:15803d,100:22c55e&text=Code%20%E2%80%A2%20Build%20%E2%80%A2%20Innovate%20%E2%80%A2%20Repeat&fontSize=15&fontColor=ffffff&animation=fadeIn" width="100%"/>
 
