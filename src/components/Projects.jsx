@@ -31,6 +31,7 @@ export const projects = [
     links: [
       { label: "time2orders.com", url: "https://time2orders.com" },
       { label: "time2orders.shop", url: "https://time2orders.shop" },
+      { label: "Play Store", url: "https://play.google.com/store/apps/details?id=com.time2order.app" },
       { label: "Read Article", url: "https://blog.vikast.me/post/time2order" },
     ],
     featured: true,
