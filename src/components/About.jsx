@@ -173,7 +173,6 @@ export default function About() {
                   <span className="font-semibold" style={{ color: "#c0624a" }}>
                     Full-Stack or Backend Engineering roles
                   </span>{" "}
-                  starting Jan 2027.
                 </p>
               </div>
             </motion.div>
