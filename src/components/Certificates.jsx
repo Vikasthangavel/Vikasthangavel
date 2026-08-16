@@ -63,6 +63,18 @@ const certificates = [
     tagColor: "bg-[#fdf0eb] text-[#a04d37]",
     description: "An exploration of computational thinking and problem-solving using Python programming language.",
   },
+  {
+    title: "Microsoft Certified: Fabric Analytics",
+    file: "/certificates/microsoft.pdf",
+    category: "Data Science",
+    icon: <Award size={22} />,
+    gradient: "from-[#0078d4] to-[#005a9e]",
+    glow: "shadow-[#0078d4]/20",
+    borderColor: "border-[#0078d4]/30",
+    iconBg: "bg-[#0078d4]/10 text-[#0078d4]",
+    tagColor: "bg-[#e5f1fb] text-[#005a9e]",
+    description: "Validation of expertise in implementing and managing data analytics solutions using Microsoft Fabric.",
+  },
 ];
 
 export default function Certificates() {
