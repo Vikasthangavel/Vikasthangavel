@@ -172,7 +172,7 @@ export default function About() {
                   student at KSRCT, seeking{" "}
                   <span className="font-semibold" style={{ color: "#c0624a" }}>
                     Full-Stack or Backend Engineering roles
-                  </span>{" "}
+                  </span>
                 </p>
               </div>
             </motion.div>
