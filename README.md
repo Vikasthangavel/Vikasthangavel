@@ -31,7 +31,7 @@
 ```python
 vikas = {
     "degree"    : "B.Tech AI & Data Science @ KSRCT",
-    "cgpa"      : 8.2,
+    "cgpa"      : 8.19,
     "location"  : "Erode, Tamil Nadu 🇮🇳",
     "shipped"   : "6+ live products (ML pipelines, REST APIs, full-stack UIs)",
     "passion"   : ["AI", "Product Engineering", "Real-world Impact"]
