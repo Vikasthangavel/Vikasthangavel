@@ -69,7 +69,7 @@ export default function About() {
                 style={{ background: "linear-gradient(135deg, #c0624a, #c9882c)" }}
               />
 
-              {/* Image container */}
+              {/* Image containers */}
               <motion.div
                 whileHover={{ scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
