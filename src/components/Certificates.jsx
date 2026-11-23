@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Award, ExternalLink, Download, X, FileText, BookOpen, Code2, Wifi, Globe } from "lucide-react";
+import { Award, ExternalLink, Download, X, FileText, BookOpen, Code2, Wifi, Globe, Github } from "lucide-react";
 
 const certificates = [
   {
@@ -74,6 +74,18 @@ const certificates = [
     iconBg: "bg-[#0078d4]/10 text-[#0078d4]",
     tagColor: "bg-[#e5f1fb] text-[#005a9e]",
     description: "Validation of expertise in implementing and managing data analytics solutions using Microsoft Fabric.",
+  },
+  {
+    title: "GitHub Foundations",
+    file: "/certificates/github_vikast.pdf",
+    category: "DevOps",
+    icon: <Github size={22} />,
+    gradient: "from-[#24292e] to-[#0d1117]",
+    glow: "shadow-[#24292e]/20",
+    borderColor: "border-[#24292e]/30",
+    iconBg: "bg-[#24292e]/10 text-[#24292e]",
+    tagColor: "bg-[#f0f0f0] text-[#24292e]",
+    description: "Demonstrates foundational knowledge of Git, GitHub repositories, collaboration workflows, and open source development.",
   },
 ];
 
